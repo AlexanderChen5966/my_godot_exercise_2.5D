@@ -1257,7 +1257,7 @@ Lv6 幾乎每一步都是「Claude 做第一版 → 作者看截圖 → 改一�
 |---|---|---|---|
 | 1 | 主角在 3D 是白色方塊 | 截圖 | 2D 的 SpriteFrames 指向法線貼圖用的 CanvasTexture，3D 不支援；另做 `player_frames_3d.tres` 指向 PNG |
 | 2 | Godot 自動把主角貼圖改成 VRAM 有損壓縮＋mipmap | `git status` 看到 `.import` 被改 | 改回無損、`detect_3d/compress_to=0`；比較圖重拍、網頁版重新匯出 |
-| 3 | 聚光燈往上照 | 讀 `.tscn` 的變換矩陣 | `3d_create_light` 的 rotation 正負號相反，改用 `rotation_degrees` |
+| 3 | ~~聚光燈往上照~~（誤判） | 讀 `.tscn` 的變換矩陣 | 當時以為 `3d_create_light` 的 rotation 正負號相反，改用 `rotation_degrees` 重設；B1-1 在遊戲裡讀燈的方向，才發現角度本來就是對的，是我讀錯矩陣，重設沒有改到東西 |
 | 4 | 柱子上有陰影條紋 | 截圖 | `shadow_bias` 0.08、`shadow_normal_bias` 2 |
 | 5 | 畫面上方露出黑色、主角位置比 2D 版高 | 截圖 | 牆和柱子加高；鏡頭距離與注視高度改成每種做法各一組，讓縱深帶中間的主角是 96px、腳在 y 690 |
 | 6 | 模糊的背景暈到主角頭上 | 截圖 | 取樣規則改成「比較遠的取樣點只用兩者中比較小的模糊程度」 |
@@ -1280,7 +1280,7 @@ Lv6 幾乎每一步都是「Claude 做第一版 → 作者看截圖 → 改一�
 | 觀察 | 說明 |
 |---|---|
 | Toolkit 的 3D 工具夠建灰盒 | 方塊、燈、鏡頭、環境一次一個節點；材質只能設顏色、粗糙度，貼圖要再用 `node_set_property` |
-| `3d_create_light` 的旋轉正負號相反 | 建完要讀 `.tscn` 的變換矩陣確認方向 |
+| ~~`3d_create_light` 的旋轉正負號相反~~ | B1-1 更正：角度是對的；`.tscn` 的矩陣不好直接看，要在遊戲裡讀 `-global_transform.basis.z` 確認方向 |
 | Toolkit 不能把屬性設成空值 | 要拿掉貼圖只能換一個新材質，或直接改 `.tscn` |
 | runtime 連線這次很不穩 | `GAME_NOT_RUNNING` 有時連續好幾次，隔十幾秒自己恢復；遊戲的 log 裡看不到指令，問題在 MCP 伺服器端 |
 | Pixelorama 小圖逐格 `import_image` 很穩 | 32×48、20 格都沒掉像素（以前掉像素的是大圖、稀疏線條、半透明） |

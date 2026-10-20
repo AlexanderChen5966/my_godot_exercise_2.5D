@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/guard_anim.png" id="1_ltn7l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7mes"]
+atlas = ExtResource("1_ltn7l")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twila"]
+atlas = ExtResource("1_ltn7l")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llntf"]
+atlas = ExtResource("1_ltn7l")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otcky"]
+atlas = ExtResource("1_ltn7l")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j26c"]
+atlas = ExtResource("1_ltn7l")
+region = Rect2(96, 0, 32, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7mes")
+}],
+"loop": 1,
+"name": &"event",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twila")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llntf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otcky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j26c")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 2.5
+}]

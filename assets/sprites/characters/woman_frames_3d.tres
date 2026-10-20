@@ -1,0 +1,70 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bmi6u0pten16d"]
+
+[ext_resource type="Texture2D" uid="uid://d2k8wo4gxygfc" path="res://assets/sprites/characters/woman_anim.png" id="1_uermu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2i37"]
+atlas = ExtResource("1_uermu")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wegm8"]
+atlas = ExtResource("1_uermu")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6mpm"]
+atlas = ExtResource("1_uermu")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwkg2"]
+atlas = ExtResource("1_uermu")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4udga"]
+atlas = ExtResource("1_uermu")
+region = Rect2(192, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uybg"]
+atlas = ExtResource("1_uermu")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t852u"]
+atlas = ExtResource("1_uermu")
+region = Rect2(64, 0, 32, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2i37")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wegm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6mpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwkg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4udga")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uybg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t852u")
+}],
+"loop": 1,
+"name": &"scream",
+"speed": 10.0
+}]

@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://bgv6ssqopi0hj"]
+
+[ext_resource type="Script" uid="uid://ci2qwrhv47jha" path="res://scripts/area_3d.gd" id="1_tepj4"]
+[ext_resource type="Script" uid="uid://d153untxdalpk" path="res://scripts/player_3d.gd" id="2_6nvc5"]
+[ext_resource type="SpriteFrames" uid="uid://cge5ysyymugt4" path="res://assets/sprites/player_frames_3d.tres" id="3_h65p7"]
+[ext_resource type="Shader" uid="uid://bmyyq5qx4hwvl" path="res://shaders/dof_3d.gdshader" id="4_xll74"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_814tw"]
+height = 1.4
+radius = 0.19
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rf4ww"]
+render_priority = -100
+shader = ExtResource("4_xll74")
+shader_parameter/enabled = true
+shader_parameter/focus_distance = 14.3
+shader_parameter/focus_range = 1.0
+shader_parameter/far_ramp = 3.0
+shader_parameter/near_ramp = 2.5
+shader_parameter/max_radius = 12.0
+shader_parameter/taps = 24
+
+[sub_resource type="QuadMesh" id="QuadMesh_tr2j4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qdq5u"]
+
+[sub_resource type="Sky" id="Sky_r43pw"]
+sky_material = SubResource("ProceduralSkyMaterial_qdq5u")
+
+[sub_resource type="Environment" id="Environment_pmidl"]
+background_mode = 1
+background_color = Color(0.03, 0.03, 0.04, 1)
+sky = SubResource("Sky_r43pw")
+ambient_light_source = 2
+ambient_light_color = Color(0.35, 0.38, 0.45, 1)
+ambient_light_energy = 1.2
+tonemap_mode = 2
+
+[node name="AreaBase3D" type="Node3D" unique_id=360359532]
+script = ExtResource("1_tepj4")
+
+[node name="Geometry" type="Node3D" parent="." unique_id=1849173240]
+
+[node name="Lights" type="Node3D" parent="." unique_id=285009602]
+
+[node name="Points" type="Node3D" parent="." unique_id=2077837389]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=178875130]
+motion_mode = 1
+script = ExtResource("2_6nvc5")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="Player" unique_id=1482773185]
+offset = Vector2(1.5, 24)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("3_h65p7")
+animation = &"idle_right"
+autoplay = "idle_right"
+
+[node name="Shape" type="CollisionShape3D" parent="Player" unique_id=1672724611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CylinderShape3D_814tw")
+
+[node name="Flashlight" type="OmniLight3D" parent="Player" unique_id=1193598062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.8)
+light_color = Color(1, 0.92, 0.8, 1)
+light_energy = 0.6
+omni_range = 6.0
+
+[node name="Camera" type="Camera3D" parent="." unique_id=777107298]
+current = true
+fov = 40.0
+
+[node name="Dof" type="MeshInstance3D" parent="Camera" unique_id=1128703522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+material_override = SubResource("ShaderMaterial_rf4ww")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_tr2j4")
+
+[node name="Environment" type="WorldEnvironment" parent="." unique_id=271570906]
+environment = SubResource("Environment_pmidl")

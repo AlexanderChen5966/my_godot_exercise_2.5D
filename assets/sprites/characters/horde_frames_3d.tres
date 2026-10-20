@@ -1,0 +1,72 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/horde_anim.png" id="1_xaea6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cdkl"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(0, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlt0x"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(96, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ktij"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(192, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75n2e"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(288, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg2ll"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(384, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apt36"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(480, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87ang"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(576, 0, 96, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g24k"]
+atlas = ExtResource("1_xaea6")
+region = Rect2(672, 0, 96, 44)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cdkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlt0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ktij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75n2e")
+}],
+"loop": 1,
+"name": &"eat",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg2ll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apt36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87ang")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g24k")
+}],
+"loop": 1,
+"name": &"look",
+"speed": 4.0
+}]
