@@ -10,6 +10,8 @@ var max_x := 35.5
 var min_z := -1.5  # 縱深帶（腳的 z 範圍），由 b0_test.gd 依做法設定
 var max_z := 1.5
 var facing := 1  # 1 = 右，-1 = 左
+## B0-3：面向哪一邊。"right"／"left"＝側面，"front"＝面向鏡頭（往畫面外走），"back"＝背對鏡頭（往畫面裡走）
+var view := "right"
 
 @onready var sprite: AnimatedSprite3D = $Sprite
 
@@ -20,9 +22,13 @@ func _physics_process(_delta: float) -> void:
 	velocity = Vector3(direction.x * SPEED, 0.0, direction.y * SPEED * DEPTH_SPEED_RATIO)
 	move_and_slide()
 	position = Vector3(clampf(position.x, min_x, max_x), 0.0, clampf(position.z, min_z, max_z))
+	# 有左右方向（含斜著走）用側面；只有前後時用正面／背面。停下來保持最後的方向
 	if direction.x != 0.0:
 		facing = 1 if direction.x > 0.0 else -1
+		view = "right" if facing > 0 else "left"
+	elif direction.y != 0.0:
+		view = "front" if direction.y > 0.0 else "back"
 	var moving := not position.is_equal_approx(old_position)
-	var anim := ("walk_" if moving else "idle_") + ("right" if facing > 0 else "left")
+	var anim := ("walk_" if moving else "idle_") + view
 	if sprite.animation != anim:
 		sprite.play(anim)
