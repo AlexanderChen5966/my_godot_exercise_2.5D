@@ -1,0 +1,206 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/characters/horde_frames_3d.tres" id="cv2"]
+[ext_resource type="Script" path="res://scripts/idle_variation_3d.gd" id="cv3"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/characters/wife_frames_3d.tres" id="cv4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/shelter_fence.png" id="cv5"]
+[ext_resource type="AudioStream" path="res://assets/sfx/loop_shelter.ogg" id="cv6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/sign_home.png" id="cv7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/ruins_near_charred.png" id="cv8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/ruins_near_sign.png" id="cv9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_rubble.png" id="cv10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/street_near_bricks.png" id="cv11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/ruins_barrier.png" id="cv12"]
+[ext_resource type="Script" path="res://scripts/flicker_light_3d.gd" id="cv13"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
+size = Vector3(2.5, 2, 3.529412)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv2"]
+size = Vector3(2.5, 2, 3.529412)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv3"]
+size = Vector3(1.25, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv4"]
+size = Vector3(2.03125, 2, 0.352941)
+
+[node name="Ruins3D" instance=ExtResource("1")]
+
+[node name="Near" type="Node3D" parent="."]
+
+[node name="Horde" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "horde"
+
+
+[node name="Shelter" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "shelter"
+
+
+[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "exit"
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Horde"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.764706)
+shape = SubResource("BoxShape3D_cv1")
+
+
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Horde"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.484375, 0.6875, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("cv2")
+animation = &"eat"
+script = ExtResource("cv3")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Shelter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.764706)
+shape = SubResource("BoxShape3D_cv2")
+
+
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Shelter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.609375, 0.75, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("cv4")
+animation = &"idle"
+autoplay = "idle"
+
+
+[node name="Fence" type="Sprite3D" parent="Points/Shelter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34375, 1.328125, 0.01)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv5")
+
+
+[node name="Voices" type="AudioStreamPlayer3D" parent="Points/Shelter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+stream = ExtResource("cv6")
+attenuation_model = 1
+unit_size = 3.515625
+max_distance = 14.0625
+autoplay = true
+bus = &"Ambient"
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv3")
+
+
+[node name="Prop" type="Sprite3D" parent="Points/Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv7")
+
+
+[node name="Barrier" type="StaticBody3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 0, 0.264706)
+
+
+[node name="Charred1" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46875, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 4.5)
+texture = ExtResource("cv8")
+
+
+[node name="Sign1" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6875, 0, 2.452941)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 5)
+texture = ExtResource("cv9")
+
+
+[node name="Rubble" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 6)
+texture = ExtResource("cv10")
+
+
+[node name="Bricks" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4375, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 5)
+texture = ExtResource("cv11")
+
+
+[node name="Charred2" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4375, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+flip_h = true
+offset = Vector2(0, 4.5)
+texture = ExtResource("cv8")
+
+
+[node name="Sign2" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.875, 0, 2.452941)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+flip_h = true
+offset = Vector2(0, 5)
+texture = ExtResource("cv9")
+
+
+[node name="Sprite" type="Sprite3D" parent="Near/Barrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53125, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv12")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Near/Barrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
+shape = SubResource("BoxShape3D_cv4")
+
+
+[node name="ShelterLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5625, 2.65625, 0)
+light_color = Color(1, 0.75, 0.45, 1)
+light_energy = 2.0
+omni_range = 12
+script = ExtResource("cv13")
+base_energy = 2.0
+pulse_speed = 0.4
+min_ratio = 0.85
+dropout_chance = 0.0

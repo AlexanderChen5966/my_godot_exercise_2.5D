@@ -1,0 +1,307 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/characters/scientist_frames_3d.tres" id="cv2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_records.png" id="cv3"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/characters/guard_frames_3d.tres" id="cv4"]
+[ext_resource type="Script" path="res://scripts/gun_torch_3d.gd" id="cv5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/exit_door_broken.png" id="cv6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_crates.png" id="cv7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_vent.png" id="cv8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/lab_near_vials.png" id="cv9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/lab_near_cable.png" id="cv10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_glass.png" id="cv11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/clinic_near_clipboard.png" id="cv12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_papers.png" id="cv13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_cart.png" id="cv14"]
+[ext_resource type="Script" path="res://scripts/flicker_light_3d.gd" id="cv15"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
+size = Vector3(2.5, 2, 3.529412)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv2"]
+size = Vector3(1.5625, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv3"]
+size = Vector3(2.5, 2, 3.529412)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv4"]
+size = Vector3(1.5625, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv5"]
+size = Vector3(2.65625, 2, 3.388235)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv6"]
+size = Vector3(1.71875, 2, 3.388235)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv7"]
+size = Vector3(0.9375, 2, 0.352941)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv8"]
+size = Vector3(1.25, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv9"]
+size = Vector3(2.1875, 2, 0.352941)
+
+[node name="Lab3D" instance=ExtResource("1")]
+
+[node name="Near" type="Node3D" parent="."]
+
+[node name="Scientist" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9375, 0, -0.017647)
+script = ExtResource("cv1")
+point_id = "scientist"
+
+
+[node name="Records" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "records"
+
+
+[node name="Guard" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.78125, 0, -0.017647)
+script = ExtResource("cv1")
+point_id = "guard"
+
+
+[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "exit"
+
+
+[node name="CartHide" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.84375, 0, 0.264706)
+script = ExtResource("cv1")
+point_id = "cart_hide"
+
+
+[node name="Crates" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, 0.264706)
+script = ExtResource("cv1")
+point_id = "crates"
+
+
+[node name="Vent" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.140625, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "vent"
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Scientist"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.070588)
+shape = SubResource("BoxShape3D_cv1")
+
+
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Scientist"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84375, 0.75, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("cv2")
+animation = &"idle"
+autoplay = "idle"
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Records"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv2")
+
+
+[node name="Prop" type="Sprite3D" parent="Points/Records"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15625, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv3")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Guard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.070588)
+shape = SubResource("BoxShape3D_cv3")
+
+
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Guard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.859375, 0.75, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("cv4")
+animation = &"idle"
+autoplay = "idle"
+
+
+[node name="Torch" type="SpotLight3D" parent="Points/Guard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+light_color = Color(1, 0.92, 0.75, 1)
+light_energy = 2.6
+spot_range = 6.0
+spot_angle = 25.0
+script = ExtResource("cv5")
+follow = NodePath("../Figure")
+idle_frames = PackedVector3Array(2.6, 29, 22, 3.6, 30.5, 28, 4.7, 31.8, 34, 3.6, 30.5, 28)
+event_frame = Vector3(1, 22.5, 0)
+floor_reach_px = 266.24
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv4")
+
+
+[node name="Prop" type="Sprite3D" parent="Points/Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1875, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv6")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/CartHide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.282353)
+shape = SubResource("BoxShape3D_cv5")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.282353)
+shape = SubResource("BoxShape3D_cv6")
+
+
+[node name="Prop" type="Sprite3D" parent="Points/Crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv7")
+
+
+[node name="Block" type="StaticBody3D" parent="Points/Crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Crates/Block"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
+shape = SubResource("BoxShape3D_cv7")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Vent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv8")
+
+
+[node name="Prop" type="Sprite3D" parent="Points/Vent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3125, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv8")
+
+
+[node name="Cart" type="StaticBody3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.84375, 0, 0.264706)
+
+
+[node name="Vials1" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.15625, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 4)
+texture = ExtResource("cv9")
+
+
+[node name="Cable" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.375, 0, 2.452941)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 3.5)
+texture = ExtResource("cv10")
+
+
+[node name="Glass" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.53125, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 2.5)
+texture = ExtResource("cv11")
+
+
+[node name="Clipboard" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+offset = Vector2(0, 5)
+texture = ExtResource("cv12")
+
+
+[node name="Papers" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.90625, 0, 2.311765)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+flip_h = true
+offset = Vector2(0, 3)
+texture = ExtResource("cv13")
+
+
+[node name="Vials2" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.03125, 0, 2.382353)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+flip_h = true
+offset = Vector2(0, 4)
+texture = ExtResource("cv9")
+
+
+[node name="VentExit" type="Sprite3D" parent="Near"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.46875, 0, -2.558824)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+flip_h = true
+texture = ExtResource("cv8")
+
+
+[node name="Sprite" type="Sprite3D" parent="Near/Cart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59375, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv14")
+
+
+[node name="Shape" type="CollisionShape3D" parent="Near/Cart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
+shape = SubResource("BoxShape3D_cv9")
+
+
+[node name="AlarmLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602)]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 7.03125, 0)
+light_color = Color(1, 0.15, 0.1, 1)
+light_energy = 3.0
+omni_range = 16
+script = ExtResource("cv15")
+base_energy = 3.0
+pulse_speed = 5.0
+min_ratio = 0.2
+dropout_chance = 0.0
