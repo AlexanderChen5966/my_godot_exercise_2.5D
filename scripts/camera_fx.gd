@@ -24,6 +24,8 @@ extends Node
 var sway := 0.0  # Main 每個畫面設定（衝動強度 0～1）
 
 var _camera: Camera2D
+## B1：3D 區域的鏡頭由 area_3d.gd 自己跟著主角，這裡只設定它的 camera_zoom（推近）與 camera_offset（震動、晃動，像素）
+var _area_3d: Node
 var _background: Control
 var _zoom_tween: Tween
 var _shake_left := 0.0
@@ -33,9 +35,13 @@ var _shake_wait := 0.0
 var _time := 0.0
 
 
-## 換區域時指定鏡頭（沒有區域時傳 null）；鏡頭回到原本大小、不震動
-func set_camera(camera: Camera2D) -> void:
-	_camera = camera
+## 換區域時指定鏡頭（沒有區域時傳 null）；鏡頭回到原本大小、不震動。3D 區域傳 Camera3D 和區域本身
+func set_camera(camera: Node, area: Node = null) -> void:
+	_camera = camera as Camera2D
+	_area_3d = area if camera is Camera3D else null
+	if is_instance_valid(_area_3d):
+		_area_3d.camera_zoom = 1.0
+		_area_3d.camera_offset = Vector2.ZERO
 	_shake_left = 0.0
 	_shake_offset = Vector2.ZERO
 	if _zoom_tween:
@@ -67,10 +73,14 @@ func shake(strength_scale := 1.0) -> void:
 
 
 func _zoom_to(value: float, time: float) -> void:
-	if not is_instance_valid(_camera):
-		return
 	if _zoom_tween:
 		_zoom_tween.kill()
+	if is_instance_valid(_area_3d):
+		_zoom_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		_zoom_tween.tween_property(_area_3d, "camera_zoom", value, time)
+		return
+	if not is_instance_valid(_camera):
+		return
 	_zoom_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	_zoom_tween.tween_property(_camera, "zoom", Vector2.ONE * value, time)
 
@@ -85,7 +95,9 @@ func _process(delta: float) -> void:
 		var t := _time * TAU * sway_speed
 		sway_offset = Vector2(sin(t) + 0.5 * sin(t * 2.3 + 1.0), 0.6 * sin(t * 1.7 + 2.0)) * sway_px * amount
 	var total := (_shake_offset + sway_offset).round()  # 整數像素，避免像素圖抖動時變模糊
-	if is_instance_valid(_camera):
+	if is_instance_valid(_area_3d):
+		_area_3d.camera_offset = total
+	elif is_instance_valid(_camera):
 		_camera.offset = _clamp_to_limits(total)
 		if is_instance_valid(_background):
 			_background.position = Vector2.ZERO

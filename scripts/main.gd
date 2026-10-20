@@ -49,7 +49,6 @@ const ENDING_LABEL := "— 結局 —"
 const BAD_ENDING_COLOR := Color(0.85, 0.35, 0.3)
 const CHOICE_GUARD_MS := 300  # 選項出現後這段時間內不接受選擇：避免想跳過打字時剛好選到第一個選項
 const BASE_SIZE := Vector2(1152, 768)
-const PLAYER_HEIGHT := 96.0  # 主角畫面上的高度（32×48 放大 2 倍）
 const PROMPT_GAP := 8.0  # 提示和頭頂的距離
 const LEAN_FROM := 0.5   # A3：衝動強度到這裡，主角站著時改成前傾
 
@@ -100,7 +99,10 @@ const LEAN_FROM := 0.5   # A3：衝動強度到這裡，主角站著時改成前
 
 var story := StoryData.new()
 var areas := AreaData.new()
-var _area: Node2D = null  # 目前在 World 底下的區域場景
+## B1：區域用 3D 版（scenes/areas3d/<名稱>3D.tscn），還沒做 3D 版的區域照舊用 2D。
+## 預設值在專案設定 game/areas_3d；遊玩測試在載入 Main 之前設定（2D／3D 兩種都要能跑）。
+var use_3d_areas: bool = ProjectSettings.get_setting("game/areas_3d", false)
+var _area: Node = null  # 目前在 World 底下的區域場景（2D 的 area.gd 或 3D 的 area_3d.gd，介面相同）
 var _area_id := ""
 var _nearby_point := ""      # 玩家目前所在範圍內、可按互動鍵的互動點
 var _closing_point := ""     # 目前顯示的區域文字屬於哪個互動點（開場文字為空字串）
@@ -284,18 +286,29 @@ func _start_game() -> void:
 	)
 
 
+## 區域資料的 scene（2D 場景）→ 實際要載入的場景：開 3D 時，有同名的 3D 版就用 3D 版
+## 例如 res://scenes/areas/ParkingLot.tscn → res://scenes/areas3d/ParkingLot3D.tscn
+func area_scene_path(area: Dictionary) -> String:
+	var path := str(area["scene"])
+	if use_3d_areas:
+		var path_3d := "res://scenes/areas3d/%s3D.tscn" % path.get_file().get_basename()
+		if ResourceLoader.exists(path_3d):
+			return path_3d
+	return path
+
+
 ## 把區域場景實例化到 World 底下（同時只會有一個區域）。
 ## from_area：從哪個區域走過來，用來決定出現位置（spawns）；從視覺小說進來時為空字串。
-func _instantiate_area(area_id: String, from_area := "") -> Node2D:
+func _instantiate_area(area_id: String, from_area := "") -> Node:
 	_free_area()
 	var area := areas.get_area(area_id)
-	_area = (load(area["scene"]) as PackedScene).instantiate()
+	_area = (load(area_scene_path(area)) as PackedScene).instantiate()
 	_area_id = area_id
 	_nearby_point = ""
 	world.add_child(_area)
 	_area.player.step_sounds = SoundLib.variants("step_" + str(area.get("floor", "concrete")))  # A4：地面材質決定腳步聲
 	impulse_fx.set_flashlight(_area.get_node_or_null("Player/Flashlight"), _area.flashlight_energy)
-	camera_fx.set_camera(_area.camera)
+	camera_fx.set_camera(_area.camera, _area)
 	_area.point_entered.connect(_on_point_entered)
 	_area.point_exited.connect(_on_point_exited)
 	var spawns: Dictionary = area.get("spawns", {})
@@ -392,7 +405,7 @@ func _area_point(point_id: String) -> Dictionary:
 func _point_active(point_id: String, point: Dictionary) -> bool:
 	if point.is_empty() or not AreaData.is_available(point, GameState):
 		return false
-	var done := GameState.has_flag(AreaData.done_key(_point_key(point_id), point))
+	var done: bool = GameState.has_flag(AreaData.done_key(_point_key(point_id), point))
 	return not (AreaData.is_once(point) and done)
 
 
@@ -425,8 +438,8 @@ func _update_prompt() -> void:
 func _place_prompt() -> void:
 	if _area == null or not prompt_label.visible:
 		return
-	var feet := (_area.get_node("Player") as Node2D).get_global_transform_with_canvas().origin
-	var pos := feet + Vector2(-prompt_label.size.x / 2.0, -PLAYER_HEIGHT - PROMPT_GAP - prompt_label.size.y)
+	var head: Vector2 = _area.player_head_screen()
+	var pos := head + Vector2(-prompt_label.size.x / 2.0, -PROMPT_GAP - prompt_label.size.y)
 	pos.x = clampf(pos.x, 0.0, BASE_SIZE.x - prompt_label.size.x)
 	prompt_label.position = pos
 
@@ -538,7 +551,7 @@ func _close_area_text() -> void:
 	for flag in point.get("set_flags", []):
 		GameState.set_flag(flag)
 	if _hides_when_done(point):
-		_area.consume_point(point_id, _area.player.global_position.x)  # 例如婦人尖叫、逃走後消失
+		_area.consume_point(point_id, _area.player_x())  # 例如婦人尖叫、逃走後消失
 		play_sound(point.get("done_sfx", ""))  # 例如婦人的尖叫
 	var chosen := _area_choice
 	_area_choice = {}
@@ -967,7 +980,7 @@ func _setup_patrols() -> void:
 	for point_id in points:
 		if not points[point_id].has("patrol"):
 			continue
-		var node: Node2D = _area.point_node(point_id)
+		var node: Node = _area.point_node(point_id)
 		if node == null or not node.has_node("Figure") or not node.has_node("Torch"):
 			continue
 		var patrol := GuardPatrol.new()
@@ -984,7 +997,7 @@ func _on_spotted(point_id: String) -> void:
 		return
 	GameState.set_flag(_point_key(point_id) + ".spotted")
 	_area.player.set_in_cover(false)
-	patrols[point_id].face_toward(_area.player.global_position.x)
+	patrols[point_id].face_toward(_area.player_x())
 	play_sound(SPOTTED_SFX)
 	camera_fx.shake()
 	_show_area_text(_area_point(point_id), point_id)
@@ -1033,7 +1046,7 @@ func _check_area_hint() -> void:
 	if state != State.EXPLORE or _area == null:
 		return
 	var hint_data: Dictionary = areas.get_area(_area_id).get("hint", {})
-	if hint_data.is_empty() or _area.player.position.x < float(hint_data.get("after_x", 0.0)):
+	if hint_data.is_empty() or _area.player_x() < float(hint_data.get("after_x", 0.0)):
 		return
 	var key := "hint.%s" % _area_id
 	if GameState.has_flag(key):
@@ -1123,7 +1136,7 @@ func gesture_target() -> String:
 		if not _point_active(point_id, point) or GameState.has_flag(_point_key(point_id) + ".gesture"):
 			continue
 		var x: float = _area.point_x(point_id)
-		var d := absf(x - _area.player.position.x)
+		var d := absf(x - _area.player_x())
 		if d <= float(point["gesture"].get("range", GESTURE_RANGE)) and d < best_d:
 			best = point_id
 			best_d = d
@@ -1423,7 +1436,7 @@ func _impulse_target() -> float:
 	if not _closing_point.is_empty() and _closing_view.has("impulse"):
 		_impulse_x = _area.point_x(_closing_point)
 		return 0.0 if _impulse_released else 1.0
-	var player_x: float = _area.player.position.x
+	var player_x: float = _area.player_x()
 	var best := 0.0
 	var points: Dictionary = areas.get_area(_area_id).get("points", {})
 	for point_id in points:

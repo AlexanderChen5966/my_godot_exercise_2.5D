@@ -31,6 +31,8 @@ signal point_exited(point_id: String)    # 玩家離開互動點範圍
 @export_range(0.0, 10.0, 0.1) var red_light_energy := 5.0
 @export_range(0.1, 6.0, 0.1) var red_light_speed := 1.6
 
+const PLAYER_HEIGHT := 96.0  # 主角畫面上的高度（32×48 放大 2 倍）
+
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Player/Camera2D
 
@@ -71,6 +73,20 @@ func _apply_lighting() -> void:
 	if has_node("RedLight"):
 		$RedLight.base_energy = red_light_energy
 		$RedLight.pulse_speed = red_light_speed
+
+
+## 主角的 x、y（像素）；3D 版 area_3d.gd 有同名的函式，Main 只透過這些讀主角的位置
+func player_x() -> float:
+	return player.position.x
+
+
+func player_y() -> float:
+	return player.position.y
+
+
+## 主角頭頂在畫面上的位置（像素），提示文字放在這上面
+func player_head_screen() -> Vector2:
+	return player.get_global_transform_with_canvas().origin - Vector2(0.0, PLAYER_HEIGHT)
 
 
 ## 換區域時的出現位置：放到 x（有給 y 時也放到 y，否則留在縱深帶中間），靠近右半邊時面向左（從右邊的出口進來）。

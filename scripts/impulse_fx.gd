@@ -39,7 +39,8 @@ signal beat  # A5：每次心跳（壓抑衝動時，量表被拉掉一點）
 var target := 0.0     # Main 設定的目標強度
 var intensity := 0.0  # 目前的強度（平滑後）
 
-var _light: PointLight2D
+var _light: Node  # 2D 的 PointLight2D 或 3D 的 Light3D
+var _energy_property := &"energy"
 var _light_energy := 1.0
 var _beat_wait := 0.0
 var _second_beat_at := -1.0
@@ -55,9 +56,11 @@ func _ready() -> void:
 
 
 ## 換區域時指定要閃爍的手電筒與它原本的亮度（沒有區域時傳 null）
-func set_flashlight(light: PointLight2D, base_energy: float) -> void:
+## B1：2D 是 PointLight2D（energy），3D 是 Light3D（light_energy）
+func set_flashlight(light: Node, base_energy: float) -> void:
 	_light = light
 	_light_energy = base_energy
+	_energy_property = &"light_energy" if light is Light3D else &"energy"
 
 
 ## 立即歸零（回標題、換場時）
@@ -113,11 +116,11 @@ func _update_flicker(delta: float) -> void:
 		return
 	if _flicker_left > 0.0:
 		_flicker_left -= delta
-		_light.energy = _light_energy * flicker_dim
+		_light.set(_energy_property, _light_energy * flicker_dim)
 		return
 	if intensity > 0.05 and randf() < flicker_per_second * intensity * intensity * delta:
 		_flicker_left = randf_range(0.04, 0.12)
-	_light.energy = _light_energy
+	_light.set(_energy_property, _light_energy)
 
 
 func _apply() -> void:

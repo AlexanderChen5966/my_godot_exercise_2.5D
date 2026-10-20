@@ -37,6 +37,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/godot_mcp_toolkit/plugin.cfg")
 
+[game]
+
+areas_3d=true
+
 [gui]
 
 theme/custom_font="res://assets/fonts/NotoSansTC-Regular.ttf"

@@ -22,6 +22,8 @@ func _initialize() -> void:
 	GameSettings.path = "user://settings_test.cfg"
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(GameSettings.path))
 	main = (load("res://scenes/Main.tscn") as PackedScene).instantiate()
+	# B1：預設在 2D 區域上測；AREAS_3D=1 時改用 3D 區域（還沒做 3D 版的區域照舊是 2D）
+	main.use_3d_areas = OS.get_environment("AREAS_3D") == "1"
 	root.add_child(main)
 	await frames(5)
 	await run_tests()
