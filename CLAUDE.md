@@ -4,6 +4,7 @@
 > 2.5D 的方案在 `docs/2.5D方案.md`，分步指令在 `PROMPTS.md` 的「2.5D B0 分步指令」；一次只做一步，B0-0 只規劃、不改檔案。
 > 下面的內容是從 A＋ 專案複製過來的，2.5D 做到哪裡再逐步改寫；與 2.5D 方案衝突時（例如「A＋ 完成前不要做 3D」）以 2.5D 方案為準。
 > 不要同時開著兩個專案的 Godot 編輯器：godot-mcp-toolkit 可能會連到另一個專案。
+> **2.5D 的坑（B0-1）**：①像素圖用在 3D 時，Godot 會自動把 `.import` 改成 VRAM 壓縮＋mipmap（`detect_3d`），要改回 `compress/mode=0`、`mipmaps/generate=false`，並把 `detect_3d/compress_to=0`；②2D 的 SpriteFrames 若指向 CanvasTexture（法線貼圖用，例如 `player_canvas.tres`），在 3D 會是白色方塊，3D 要另做指向 PNG 的版本（`player_frames_3d.tres`）；③Toolkit 的 `3d_create_light` 的 rotation 正負號相反，用 `node_set_property` 的 `rotation_degrees` 設定。B0 的檔案在 `scenes/b0/`、`scripts/b0/`，網頁版在副本上把主場景換成 B0 後匯出到 `build/web_b0/`。
 
 
 這份檔案是給 Claude Code 讀的專案說明。每次開新對話都會自動載入。
