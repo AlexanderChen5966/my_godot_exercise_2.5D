@@ -1214,3 +1214,81 @@ Lv6 幾乎每一步都是「Claude 做第一版 → 作者看截圖 → 改一�
 - **升級方案**：警衛巡邏走路、主角蹲下、被發現抓回去、手勢加數值、閃回舊底片效果、更多物品閃回、A1 的 7 張新遠景與 Bad End 圖。
 - **製作群**：作者名稱之後補在 `data/credits.json`。
 - **下一步**：照作者決定的順序進入 **真的 2.5D**（`docs/2.5D方案.md`，另開新專案，從 B0 技術驗證開始），之後是 HD-2D。
+
+---
+
+# 2.5D B0：技術驗證（2026-10-20）
+
+- 目標：在新專案 `失語者_2.5D` 確認「3D 場景＋像素人物＋側面透視鏡頭」在網頁版（Compatibility）做不做得下去。
+- MCP：**godot-mcp-toolkit**（`3d_tools` 群組建灰盒、`scene_create_node`／`node_set_property` 建主角與景深平面、執行、`input_simulate`、截圖、`execute_code` 讀投影大小）、**pixelorama**（主角正面／背面）；**Blender MCP** 已安裝設定（B2 才正式用）；**Playwright** 開網頁版量 FPS。
+- 成果（檔案都在 `scenes/b0/`、`scripts/b0/`、`shaders/b0_*`、`art/design/b0/`，A＋ 的程式不動）：
+  - **灰盒停車場**：地面、牆、柱子（含縱深帶裡能繞前繞後的一根、前景一根）、車、聚光燈陰影、燈管、紅燈；比例 1 公尺＝主角貼圖 32px。
+  - **縱深帶**：兩種做法實測（A 接受縮放 ±9%、B 縮小縱深帶 ±1%），作者看完歧路旅人的做法比較後**選 A**。
+  - **景深與霧**：自己寫的景深 shader（焦點跟著主角，強度接近歧路旅人）、A2 的霧改成 3D 半透明平面；網頁版開著也是 FPS 90～100。
+  - **主角正面／背面**：走路 6 格＋待機 4 格，照原圖 scene_18、scene_20 畫，四個方向自動切換。
+  - **人物受光**：作者選「受光＋調亮環境光」，環境光 0.35 → 1.2。
+- 狀態：B0 收尾完成，等作者確認是否進 B1。全部 240 項測試通過（B0 沒有新增自動測試，驗證靠 MCP 截圖與讀值）。
+
+## 1. 各步驟使用的工具
+
+| 步驟 | 內容 | MCP 工具 | 繞過 MCP 的部分（原因） |
+|---|---|---|---|
+| 準備 | Blender、Blender MCP | — | Blender 由作者用 brew 安裝；附加元件用 `uvx mcp-for-blender install-addon`，`claude mcp add`（user 範圍、關遙測）；Claude Desktop 設定檔直接編輯（先備份） |
+| B0-1 灰盒 | 場景、主角、鏡頭、兩種縱深帶 | `scene_create`、`3d_create_primitive`／`3d_create_light`／`3d_create_camera`／`3d_setup_environment`、`scene_create_node`（`NewResource` 建碰撞形狀）、`node_set_property`（batch）、`node_set_script`、`execute_code`（`unproject_position` 量人物在畫面上的高度） | 主角與鏡頭邏輯寫在 `b0_player.gd`／`b0_test.gd`；3D 用的 SpriteFrames 用 sed 從 2D 版複製（指向 PNG）；比較圖用 ImageMagick |
+| B0-1 網頁版 | 匯出、量 FPS | — | 在拿掉外掛的副本上把主場景換成 B0 再匯出（專案設定不動）；Playwright 用真的鍵盤輸入走動、讀畫面上的 FPS |
+| B0-2 景深與霧 | 兩個 shader、全螢幕平面 | `scene_create_node`（QuadMesh＋ShaderMaterial 一次建立）、`node_set_property`（`material_override:shader_parameter/…`、NoiseTexture2D＋FastNoiseLite 巢狀 `NewResource`） | shader 用一般檔案編輯；Toolkit 不能把屬性設成空值，牆面改回素面是給一個新的材質 |
+| B0-3 主角前後 | 設計、繪製、接進遊戲 | pixelorama `create_canvas`、`add_frame`×19、`switch_frame`＋`import_image`×20、`add_animation_tag`、`save_project`、`export_animation`；Toolkit `editor_refresh`、`input_simulate`（action）讀動畫名稱 | 設計腳本 `player_fb.py`（共用 `pix.py`）；`.import` 改無損；`player_frames_3d.tres` 直接加動畫（比 `spriteframes_edit` 逐格加快） |
+| B0-4 收尾 | 環境光 | `execute_code` 在執行中試三種亮度、`node_set_property` 寫進場景 | — |
+
+## 2. 作者回饋與調整
+
+| 項目 | 作者的回饋 | 調整 |
+|---|---|---|
+| 景深與霧 | 拆到 B0-2 | B0-1 只做灰盒、主角、鏡頭、效能、縱深截圖 |
+| 主角模型 | 「2.5D 的話主角模型要改嗎」 | 建議沿用像素圖（方案的做法、HD-2D 也是），改 3D 模型等於全部人物重做 |
+| 縱深帶 | 問歧路旅人的做法後選 A | 歧路旅人＝接受縮放＋強景深遮掉缺點＋多方向走路圖；景深焦點在主角上，所以主角自己的縮放遮不掉 |
+| 主角前後 | 補正面、背面走路，再補待機 | 第一版太方正挺直，改成駝背版；待機照側面的喘氣節奏 |
+| 人物受光 | 「人物的圖示中有受光嗎」→ 選受光＋調亮環境光 | 試 0.35／0.8／1.2，採用 1.2 |
+| 景深強度 | 先照目前，有問題再調 | 不改 |
+
+## 3. Claude 自己發現並修好的問題
+
+| # | 問題 | 怎麼發現 | 解法 |
+|---|---|---|---|
+| 1 | 主角在 3D 是白色方塊 | 截圖 | 2D 的 SpriteFrames 指向法線貼圖用的 CanvasTexture，3D 不支援；另做 `player_frames_3d.tres` 指向 PNG |
+| 2 | Godot 自動把主角貼圖改成 VRAM 有損壓縮＋mipmap | `git status` 看到 `.import` 被改 | 改回無損、`detect_3d/compress_to=0`；比較圖重拍、網頁版重新匯出 |
+| 3 | 聚光燈往上照 | 讀 `.tscn` 的變換矩陣 | `3d_create_light` 的 rotation 正負號相反，改用 `rotation_degrees` |
+| 4 | 柱子上有陰影條紋 | 截圖 | `shadow_bias` 0.08、`shadow_normal_bias` 2 |
+| 5 | 畫面上方露出黑色、主角位置比 2D 版高 | 截圖 | 牆和柱子加高；鏡頭距離與注視高度改成每種做法各一組，讓縱深帶中間的主角是 96px、腳在 y 690 |
+| 6 | 模糊的背景暈到主角頭上 | 截圖 | 取樣規則改成「比較遠的取樣點只用兩者中比較小的模糊程度」 |
+| 7 | 霧被景深蓋掉的風險 | 設計時想到（畫面拷貝只有不透明物件） | 景深平面 `render_priority` −100，霧畫在之後 |
+| 8 | 灰盒沒有紋路看不出模糊、霧在雜訊牆上看不出來 | 比較圖 | 地面加雜訊紋路、牆面維持素面、霧 0.3 → 0.4 |
+| 9 | 起點在前景柱子後面 | 網頁版截圖 | 起點 x 5 → 8 |
+| 10 | 模擬的 KeyboardEvent 收不到 | 網頁版截圖沒變 | 改用 Playwright 真的鍵盤輸入 |
+
+## 4. 自動驗證
+
+| 層級 | 內容 | 結果 |
+|---|---|---|
+| 遊玩測試 | A＋ 的全部測試（確認 B0 的新檔沒有影響） | 240 項通過（每一步都跑） |
+| 量測 | `unproject_position` 算主角頭腳在畫面上的位置；`input_simulate` 走動後讀座標、動畫名稱 | 速度、縱深速度、鏡頭邊界、四方向切換都符合 |
+| 像素 | 20 格主角正面／背面逐像素比對 | 全部 0 差異 |
+| 網頁版 | Chrome（ANGLE Metal、M2 Pro）走動、切換做法、開關陰影、景深、霧 | FPS 90～100（瀏覽器上限 100），draw calls 13～24 |
+
+## 5. MCP 的特性（B0 新發現）
+
+| 觀察 | 說明 |
+|---|---|
+| Toolkit 的 3D 工具夠建灰盒 | 方塊、燈、鏡頭、環境一次一個節點；材質只能設顏色、粗糙度，貼圖要再用 `node_set_property` |
+| `3d_create_light` 的旋轉正負號相反 | 建完要讀 `.tscn` 的變換矩陣確認方向 |
+| Toolkit 不能把屬性設成空值 | 要拿掉貼圖只能換一個新材質，或直接改 `.tscn` |
+| runtime 連線這次很不穩 | `GAME_NOT_RUNNING` 有時連續好幾次，隔十幾秒自己恢復；遊戲的 log 裡看不到指令，問題在 MCP 伺服器端 |
+| Pixelorama 小圖逐格 `import_image` 很穩 | 32×48、20 格都沒掉像素（以前掉像素的是大圖、稀疏線條、半透明） |
+| `execute_code` 很適合量 3D | 綁定鏡頭當 `self` 呼叫 `unproject_position`，直接得到人物在畫面上的像素高度 |
+
+## 6. B0 結論
+
+1. **網頁版 3D 做得下去**：灰盒＋陰影＋4 盞燈＋景深＋霧，Chrome 上都跑滿 100 fps；之後要注意的是燈和霧的數量、真的模型與貼圖進來之後的效能（B2 再量）。
+2. **像素人物在 3D 裡可以用**：要注意貼圖的匯入設定（3D 偵測會自動改成有損）、不能用 CanvasTexture、受光後偏暗（環境光調亮）。
+3. **縮放是最大的取捨**：選 A 之後主角在縱深帶前後會差 ±9%，像素粗細不均要靠景深、光暈等整體氛圍來接受，主角自己無法被景深遮住。
+4. **建議進 B1**：把區域系統改成 3D、接回劇本，先讓灰盒版的 7 區從頭玩到結局。

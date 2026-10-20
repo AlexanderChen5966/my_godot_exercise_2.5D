@@ -4,6 +4,7 @@
 > 2.5D 的方案在 `docs/2.5D方案.md`，分步指令在 `PROMPTS.md` 的「2.5D B0 分步指令」；一次只做一步，B0-0 只規劃、不改檔案。
 > 下面的內容是從 A＋ 專案複製過來的，2.5D 做到哪裡再逐步改寫；與 2.5D 方案衝突時（例如「A＋ 完成前不要做 3D」）以 2.5D 方案為準。
 > 不要同時開著兩個專案的 Godot 編輯器：godot-mcp-toolkit 可能會連到另一個專案。
+> **2.5D 進度**：B0 技術驗證完成（2026-10-20，經過見 `MCP實驗紀錄.md` 的「2.5D B0」、決定見 `docs/2.5D方案.md` 的「B0 的決定」）：縱深帶採用接受縮放（3 公尺）、主角有正面／背面走路與待機、人物受光＋環境光 1.2、景深與霧用 shader 模擬。下一步 B1（作者決定後才開始）。Blender MCP 已設定在 user 範圍（B2 才用）。
 > **2.5D 的坑（B0-1）**：①像素圖用在 3D 時，Godot 會自動把 `.import` 改成 VRAM 壓縮＋mipmap（`detect_3d`），要改回 `compress/mode=0`、`mipmaps/generate=false`，並把 `detect_3d/compress_to=0`；②2D 的 SpriteFrames 若指向 CanvasTexture（法線貼圖用，例如 `player_canvas.tres`），在 3D 會是白色方塊，3D 要另做指向 PNG 的版本（`player_frames_3d.tres`）；③Toolkit 的 `3d_create_light` 的 rotation 正負號相反，用 `node_set_property` 的 `rotation_degrees` 設定。B0 的檔案在 `scenes/b0/`、`scripts/b0/`，網頁版在副本上把主場景換成 B0 後匯出到 `build/web_b0/`。
 
 
