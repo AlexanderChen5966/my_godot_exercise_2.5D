@@ -1,11 +1,47 @@
 [gd_scene format=3 uid="uid://dmc88jlk7kcfr"]
 
 [ext_resource type="PackedScene" uid="uid://bgv6ssqopi0hj" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="Texture2D" uid="uid://djyfvveixpxij" path="res://assets/sprites/props/blood_pool.png" id="cv2"]
+[ext_resource type="Texture2D" uid="uid://cclfpnwmh2aoe" path="res://assets/sprites/props/photo.png" id="cv3"]
+[ext_resource type="Texture2D" uid="uid://bqior3i0taira" path="res://assets/sprites/props/lamp_mount.png" id="cv4"]
+[ext_resource type="Texture2D" uid="uid://brk0cd80wmvh8" path="res://assets/sprites/props/lamp_anim.png" id="cv5"]
+[ext_resource type="AudioStream" uid="uid://sbgjb8scnjb1" path="res://assets/sfx/loop_lamp.ogg" id="cv6"]
+[ext_resource type="AudioStream" uid="uid://csjbi4v6rnih3" path="res://assets/sfx/lamp_flicker.ogg" id="cv7"]
+[ext_resource type="Texture2D" uid="uid://cmqyrypoe4ri5" path="res://assets/sprites/props/debris.png" id="cv8"]
+[ext_resource type="SpriteFrames" uid="uid://bmi6u0pten16d" path="res://assets/sprites/characters/woman_frames_3d.tres" id="cv9"]
+[ext_resource type="Texture2D" uid="uid://k8a0kynwr1p8" path="res://assets/sprites/props/exit_door.png" id="cv10"]
+[ext_resource type="Texture2D" uid="uid://dgcn27mn37xss" path="res://assets/sprites/layers/parking_near_papers.png" id="cv11"]
+[ext_resource type="Texture2D" uid="uid://dgwrgnpcbrwmr" path="res://assets/sprites/layers/parking_near_glass.png" id="cv12"]
+[ext_resource type="Texture2D" uid="uid://m6cl7dq7a8c4" path="res://assets/sprites/layers/parking_near_rubble.png" id="cv13"]
+[ext_resource type="Texture2D" uid="uid://crn37tx015w4t" path="res://assets/sprites/layers/parking_near_cone.png" id="cv14"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
+size = Vector3(1.5625, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv2"]
+size = Vector3(2.5, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv3"]
+size = Vector3(1.5625, 2, 1.764706)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv4"]
+size = Vector3(1.25, 2, 3.529412)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv5"]
+size = Vector3(1.5625, 2, 1.764706)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp1fc"]
+albedo_color = Color(0.4, 0.4, 0.42, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_xutpd"]
+size = Vector3(3.2, 4, 2)
 
 [node name="ParkingLot3D" unique_id=1166238774 instance=ExtResource("1")]
 
 [node name="KeyLight" type="SpotLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=242196580]
-transform = Transform3D(1, 0, 0, 0, 0.42261824, 0.9063078, 0, -0.9063078, 0.42261824, 12, 6.5, 2.5)
+transform = Transform3D(1, 0, 0, 0, 0.42261824, 0.9063078, 0, -0.9063078, 0.42261824, 9.375, 6.5, 2.5)
 light_color = Color(0.85, 0.92, 1, 1)
 light_energy = 3.0
 shadow_enabled = true
@@ -15,7 +51,211 @@ spot_range = 12.0
 spot_angle = 50.0
 
 [node name="RedLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="1" unique_id=517660646]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 4, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59, 3, -1.4)
 light_color = Color(1, 0.15, 0.1, 1)
 light_energy = 2.5
 omni_range = 8.0
+
+[node name="Wake" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="0" unique_id=644779341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6875, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "wake"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Wake" index="0" unique_id=1225689713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv1")
+
+[node name="Blood" type="Sprite3D" parent="Points/Wake" index="1" unique_id=1174593412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1875, 0.125, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv2")
+
+[node name="Prop" type="Sprite3D" parent="Points/Wake" index="2" unique_id=969102408]
+transform = Transform3D(0.992809, -0.119712, 0, 0.119712, 0.992809, 0, 0, 0, 1, 0.125, 0.15625, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv3")
+
+[node name="Light" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=609722878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "light"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Light" index="0" unique_id=50511339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv2")
+
+[node name="Mount" type="Sprite3D" parent="Points/Light" index="1" unique_id=541257896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.5, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv4")
+
+[node name="Prop" type="Sprite3D" parent="Points/Light" index="2" unique_id=1904601525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.65625, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv5")
+hframes = 2
+
+[node name="Hum" type="AudioStreamPlayer3D" parent="Points/Light" index="3" unique_id=1592965558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5625, 0)
+stream = ExtResource("cv6")
+attenuation_model = 1
+volume_db = -2.0
+unit_size = 2.734375
+autoplay = true
+max_distance = 10.9375
+bus = &"Ambient"
+
+[node name="Flicker" type="AudioStreamPlayer3D" parent="Points/Light" index="4" unique_id=902368134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5625, 0)
+stream = ExtResource("cv7")
+attenuation_model = 1
+volume_db = -10.0
+unit_size = 3.515625
+max_distance = 14.0625
+bus = &"SFX"
+
+[node name="Debris" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="2" unique_id=1451889329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.625, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "debris"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Debris" index="0" unique_id=1158475676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv3")
+
+[node name="Prop" type="Sprite3D" parent="Points/Debris" index="1" unique_id=920883654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21875, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv8")
+
+[node name="Woman" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="3" unique_id=1514163576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4375, 0, -0.017647)
+script = ExtResource("cv1")
+point_id = "woman"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Woman" index="0" unique_id=261033032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1, -0.070588)
+shape = SubResource("BoxShape3D_cv4")
+
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Woman" index="1" unique_id=957394661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59375, 0.75, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("cv9")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="4" unique_id=699678665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "exit"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Exit" index="0" unique_id=1134793604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv5")
+
+[node name="Prop" type="Sprite3D" parent="Points/Exit" index="1" unique_id=268637582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1875, 0)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv10")
+
+[node name="Near" type="Node3D" parent="." index="6" unique_id=1853907329]
+
+[node name="Papers1" type="Sprite3D" parent="Near" index="0" unique_id=672137793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71875, 0, 2.1)
+offset = Vector2(0, 3)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv11")
+
+[node name="Glass1" type="Sprite3D" parent="Near" index="1" unique_id=1885707513]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09375, 0, 2.311765)
+offset = Vector2(0, 2.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv12")
+
+[node name="Rubble1" type="Sprite3D" parent="Near" index="2" unique_id=1489640382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8125, 0, 1.535294)
+offset = Vector2(0, 6)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv13")
+
+[node name="Cone" type="Sprite3D" parent="Near" index="3" unique_id=931885468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.25, 0, 1.111765)
+offset = Vector2(0, 6)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv14")
+
+[node name="Rubble2" type="Sprite3D" parent="Near" index="4" unique_id=84625544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3125, 0, 2.170588)
+offset = Vector2(0, 6)
+flip_h = true
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv13")
+
+[node name="Papers2" type="Sprite3D" parent="Near" index="5" unique_id=844929269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5625, 0, 2.029412)
+offset = Vector2(0, 3)
+flip_h = true
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv11")
+
+[node name="Rubble3" type="Sprite3D" parent="Near" index="6" unique_id=2050905952]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.875, 0, 1.747059)
+offset = Vector2(0, 6)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv13")
+
+[node name="Glass2" type="Sprite3D" parent="Near" index="7" unique_id=1993044702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.59375, 0, 2.276471)
+offset = Vector2(0, 2.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv12")
+
+[node name="ExitStair" type="MeshInstance3D" parent="." index="7" unique_id=916974590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59, 2, -3.05)
+material_override = SubResource("StandardMaterial3D_dp1fc")
+mesh = SubResource("BoxMesh_xutpd")

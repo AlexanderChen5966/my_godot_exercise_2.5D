@@ -56,6 +56,9 @@ func _ready() -> void:
 	if auto_graybox and has_node("Geometry") and $Geometry.get_child_count() == 0:
 		_build_graybox()
 	camera.make_current()
+	# 位置音效以主角為聽者（和 2D 版的鏡頭在主角身上一樣）；鏡頭離場景十幾公尺，用鏡頭當聽者會超出音效的範圍
+	if has_node("Player/Listener"):
+		$Player/Listener.make_current()
 	_update_camera()
 	if has_node("Points"):
 		for point in $Points.get_children():

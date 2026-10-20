@@ -86,7 +86,7 @@ docs/2.5D方案.md           真的 2.5D 方案（A＋ 之後、HD-2D 之前；3
 docs/HD-2D方案.md          HD-2D 方案（之後再決定，桌面版優先、另開專案；作者決定前不要做）
 art/player.pxo         主角的 Pixelorama 原始檔（含 .gdignore，不匯出）
 art/design/            A＋ 的設計腳本、每一格的設計圖（.txt）、GIF 預覽與 A／B 比較圖（暫存區會被清空，A3 起搬來這裡；說明見 art/design/README.md）
-art/tools/             像素素材的共用工具（A1-6 起放這裡，暫存區會被清空）：pix.py 畫布、verify.sh 逐像素比對、patch.py 算出要補的像素、dump_points.py 列出互動點、normal_map.py 由 sprite 產生法線貼圖、occluder_poly.py 由貼圖算出遮光多邊形
+art/tools/             像素素材的共用工具（A1-6 起放這裡，暫存區會被清空）：pix.py 畫布、verify.sh 逐像素比對、patch.py 算出要補的像素、dump_points.py 列出互動點、normal_map.py 由 sprite 產生法線貼圖、occluder_poly.py 由貼圖算出遮光多邊形、convert_area_3d.py 把 2D 區域的互動點與近景轉成 3D 區域場景（2.5D B1-3）
 assets/sprites/        主角 spritesheet 與 SpriteFrames；props/ 道具、characters/ 人物（Lv6，原始檔在 art/characters/*.pxo）
 data/areas/parking_lot.json  停車場區域資料（Lv4-3 起為 v1.5 格式，文字直接寫在資料裡）
 data/areas/street.json  街道區域資料（Lv4-4）
