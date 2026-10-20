@@ -2,16 +2,29 @@
 
 [ext_resource type="Script" uid="uid://buubbmdhx0a7b" path="res://scripts/b0/b0_test.gd" id="1_tk2pi"]
 [ext_resource type="Script" uid="uid://c0e7gf7tra4ne" path="res://scripts/b0/b0_player.gd" id="2_fnlym"]
+[ext_resource type="Shader" uid="uid://clx5bwq74a0qj" path="res://shaders/b0_dof.gdshader" id="2_qlwys"]
 [ext_resource type="SpriteFrames" uid="uid://cge5ysyymugt4" path="res://assets/sprites/player_frames_3d.tres" id="3_tk2pi"]
+[ext_resource type="Shader" uid="uid://fvqblmen82gr" path="res://shaders/b0_fog3d.gdshader" id="5_wj6ab"]
+[ext_resource type="Texture2D" uid="uid://daxysg6hfisqp" path="res://assets/fx/fog_noise.tres" id="6_8qghm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qlwys"]
+noise_type = 2
+frequency = 0.04
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wj6ab"]
+noise = SubResource("FastNoiseLite_qlwys")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlwys"]
 albedo_color = Color(0.42, 0.42, 0.44, 1)
+albedo_texture = SubResource("NoiseTexture2D_wj6ab")
 roughness = 0.9
+uv1_scale = Vector3(6, 2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wj6ab"]
 size = Vector3(44, 0.2, 16)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qghm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wj6ab"]
 albedo_color = Color(0.55, 0.55, 0.56, 1)
 roughness = 0.95
 
@@ -98,9 +111,38 @@ ambient_light_color = Color(0.35, 0.38, 0.45, 1)
 ambient_light_energy = 0.35
 tonemap_mode = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgnue"]
+render_priority = -100
+shader = ExtResource("2_qlwys")
+shader_parameter/enabled = true
+shader_parameter/focus_distance = 14.3
+shader_parameter/focus_range = 1.0
+shader_parameter/far_ramp = 3.0
+shader_parameter/near_ramp = 2.5
+shader_parameter/max_radius = 12.0
+shader_parameter/taps = 24
+
+[sub_resource type="QuadMesh" id="QuadMesh_1weuo"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hfhu7"]
 height = 1.4
 radius = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esxcd"]
+render_priority = 0
+shader = ExtResource("5_wj6ab")
+shader_parameter/noise_tex = ExtResource("6_8qghm")
+shader_parameter/fog_color = Color(0.75, 0.75, 0.8, 1)
+shader_parameter/density = 0.4
+shader_parameter/speed = Vector2(0.006, 0.0015)
+shader_parameter/noise_scale = Vector2(2, 1)
+shader_parameter/top_fade = 0.45
+shader_parameter/bottom_fade = 0.15
+shader_parameter/rect_size = Vector2(1280, 160)
+shader_parameter/pixel_size = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_xees1"]
+size = Vector2(40, 5)
 
 [node name="ParkingLot3D" type="Node3D" unique_id=546613595]
 script = ExtResource("1_tk2pi")
@@ -114,7 +156,7 @@ mesh = SubResource("BoxMesh_wj6ab")
 
 [node name="BackWall" type="MeshInstance3D" parent="Geometry" unique_id=1253648895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 8, -4.2)
-material_override = SubResource("StandardMaterial3D_8qghm")
+material_override = SubResource("StandardMaterial3D_wj6ab")
 mesh = SubResource("BoxMesh_rgnue")
 
 [node name="Car" type="MeshInstance3D" parent="Geometry" unique_id=74322031]
@@ -207,6 +249,13 @@ transform = Transform3D(1, 0, 0, 0, 0.9781476, 0.2079117, 0, -0.2079117, 0.97814
 current = true
 fov = 40.0
 
+[node name="Dof" type="MeshInstance3D" parent="Camera" unique_id=922584487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+material_override = SubResource("ShaderMaterial_rgnue")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_1weuo")
+
 [node name="Player" type="CharacterBody3D" parent="." unique_id=73777816]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 motion_mode = 1
@@ -235,3 +284,9 @@ offset_right = 1140.0
 offset_bottom = 64.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+
+[node name="Fog" type="MeshInstance3D" parent="." unique_id=2017694894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2.5, -2.6)
+material_override = SubResource("ShaderMaterial_esxcd")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_xees1")

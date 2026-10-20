@@ -1,5 +1,6 @@
 ## B0-1 技術驗證：灰盒停車場的鏡頭跟隨、兩種縱深帶做法切換、效能顯示。
 ## 按鍵：1 = 做法 A（接受縮放）、2 = 做法 B（縮小縱深帶）、3 = 陰影開關、4 = 人物受光開關
+## B0-2：5 = 景深開關、6 = 霧開關（參數在 Camera/Dof、Fog 的材質）
 extends Node3D
 
 const AREA_WIDTH := 36.0  # 2D 版 2304 螢幕像素 ÷ 64
@@ -18,6 +19,8 @@ var mode := 1
 @onready var camera: Camera3D = $Camera
 @onready var hud: Label = $Hud/Info
 @onready var shadow_light: Light3D = $Lights/KeyLight
+@onready var dof: ShaderMaterial = $Camera/Dof.material_override
+@onready var fog: MeshInstance3D = $Fog
 
 
 func _ready() -> void:
@@ -46,13 +49,21 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			shadow_light.shadow_enabled = not shadow_light.shadow_enabled
 		KEY_4:
 			player.sprite.shaded = not player.sprite.shaded
+		KEY_5:
+			dof.set_shader_parameter("enabled", not dof.get_shader_parameter("enabled"))
+		KEY_6:
+			fog.visible = not fog.visible
 
 
 func _process(_delta: float) -> void:
 	_update_camera()
-	hud.text = "FPS %d ｜ 做法 %s ｜ 陰影 %s ｜ 人物受光 %s ｜ draw calls %d\n主角 x %.2f z %.2f ｜ 1/2 切換做法、3 陰影、4 受光" % [
+	# 景深的焦點對在主角身上（鏡頭座標的深度）
+	var focus := -(camera.global_transform.affine_inverse() * (player.global_position + Vector3(0.0, 0.75, 0.0))).z
+	dof.set_shader_parameter("focus_distance", focus)
+	hud.text = "FPS %d ｜ 做法 %s ｜ 陰影 %s ｜ 人物受光 %s ｜ 景深 %s ｜ 霧 %s ｜ draw calls %d\n主角 x %.2f z %.2f ｜ 1/2 做法、3 陰影、4 受光、5 景深、6 霧" % [
 		Engine.get_frames_per_second(), MODES[mode].name,
 		"開" if shadow_light.shadow_enabled else "關", "開" if player.sprite.shaded else "關",
+		"開" if dof.get_shader_parameter("enabled") else "關", "開" if fog.visible else "關",
 		Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
 		player.position.x, player.position.z]
 
