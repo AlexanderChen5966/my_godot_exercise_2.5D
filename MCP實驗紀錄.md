@@ -1368,3 +1368,81 @@ Lv6 幾乎每一步都是「Claude 做第一版 → 作者看截圖 → 改一�
 3. **網頁版的效能還很寬鬆**：灰盒＋多盞燈＋景深在 Chrome 上跑滿 100 FPS；B2 放進真的模型與貼圖後要再量。
 4. **還沒做的**（照作者決定留給之後）：遠景插畫、中景與前景的圖、霧、粒子（灰塵、火星、灰燼）、中景的位置音效（警報、火桶）；人物精修留給 B4。
 5. **建議進 B2**：用 Blender MCP 做第一個區域（停車場）的模型，取代灰盒。
+
+---
+
+# 2.5D B2：停車場樣板（2026-10-21）
+
+- 目標：用 Blender MCP 做出完整的 3D 停車場（模型、貼圖、燈管、紅燈、陰影），練習三個 MCP 的配合，並把做法整理成 B3 其餘 6 區的樣板。
+- MCP：**Blender MCP**（建模、材質、UV、匯出、預覽）、**Pixelorama**（13 張像素貼圖的原始檔與匯出）、**godot-mcp-toolkit**（鏡頭比較、包裝場景、擺放模型、燈光、執行、截圖、讀值）；**Playwright** 量網頁版 FPS。
+- 成果：
+  - **鏡頭 B**（作者在 B2-1 從三種做法中選）：天花板真實 3 m，鏡頭在天花板下、距離 7.2 m、高 2.2 m、往下 5°，主角約 214 px；寫進 `area_3d.gd` 的預設值，7 區都換。
+  - **12 個低多邊形模型**：結構（地面、後牆、天花板、大樑、管線、停車格線、車擋）、柱子、翻倒的車與廢車、燈具（亮的與壞的）、紅色警示燈、出口樓梯間、門、血跡、照片、地面殘骸；`assets/models/parking/*.gltf`，原始檔 `art/models/parking/parking.blend`。
+  - **13 張像素貼圖**（32 px＝1 m）：`art/design/b2/textures.py` 設計 → Pixelorama 存 `.pxo`、匯出 PNG（`assets/textures/parking/`）→ Blender 接材質、程式算 UV。
+  - **燈光**：環境光 1.2 → 0.5（青綠），燈管聚光燈有陰影、熄滅時燈管換暗材質，x 17 的壞燈閃冷光，出口紅燈。
+  - 樣板流程文件 `docs/2.5D_區域樣板流程.md`；網頁版 `build/web_b2/`。
+- 作者的決定：低多邊形＋像素貼圖、可調查的小道具也建模、天花板真實 3 m＋降低鏡頭（選 B）、停車格＋第二排柱子、全部 Blender MCP 自建；「2.5D 版和原本的版本不一樣，做新的素材沒問題」。
+
+## 1. 各步驟使用的工具
+
+| 步驟 | 內容 | MCP 工具 | 繞過 MCP 的部分（原因） |
+|---|---|---|---|
+| B2-0 規劃 | 物件清單、配置 | — | 只讀檔；`AskUserQuestion` 問四個決定 |
+| B2-1 鏡頭比較與配置圖 | 3 m 天花板的灰盒、三種鏡頭 | Toolkit `scene_create_inherited`、`3d_create_primitive`×25、`node_set_property`、執行中 `execute_code` 改鏡頭參數＋`unproject_position` 量大小、`runtime_screenshot` | 配置圖用 ImageMagick MVG 畫（`layout.py`） |
+| B2-2 建模 | 12 個模型、鏡頭 B 預覽 | Blender `execute_blender_code`（bmesh 建模、合併、glTF 匯出）、`look`（camera／angles、rendered／material） | — |
+| B2-3 貼圖 | 13 張貼圖、材質、UV | Pixelorama `import_image`×13、`save_project`、`export_image`、`draw_pixels`（補像素）；Blender 接 Image Texture、bmesh 算 UV | 設計用 Python 腳本；逐像素比對用 ImageMagick |
+| B2-4 放進 Godot | 匯入、擺放、鏡頭 B | Toolkit `editor_refresh`（指定檔案）、`scene_create_inherited`×12（包裝場景）、`scene_instantiate`（batch）、`scene_delete_node`、`node_set_property`、`execute_code`（讀貼圖像素、燈管材質） | `.import` 用 sed 改；`area_3d.gd`、`flicker_light_3d.gd` 用一般檔案編輯 |
+| B2-5 燈光 | 環境光、壞燈 | Toolkit 執行中試數值、`node_set_property`（`NewResource` Environment）、`scene_create_node`＋`node_set_script` | — |
+| B2-6 收尾 | 測試、網頁版、文件 | — | 副本上匯出；Playwright 真的鍵盤 |
+
+## 2. 作者回饋與調整
+
+| 項目 | 作者的回饋 | 調整 |
+|---|---|---|
+| 天花板 | 選「真實 3 m＋降低鏡頭」 | 說明主角 96 px 時畫面約涵蓋 12 m 高，3 m 只佔 1/4；拍 A 平視／B 拉近／C 切掉前段天花板三種，作者選 B |
+| 素材 | 「2.5D 版和原本的版本不一樣，所以做新的素材沒問題」 | 人物照新大小重畫留給 B4；記進方案與記憶 |
+| 提示文字 | 「邊走邊看到提示文字的話字會模糊」 | 3D 投影位置是小數＋Main 用上一格的鏡頭：位置取整數、投影前先更新鏡頭 |
+| 其他場景 | 問其他場景的 3D 素材是不是 B3 做 | 是；B2-6 的樣板流程文件就是給 B3 用 |
+
+## 3. Claude 自己發現並修好的問題
+
+| # | 問題 | 怎麼發現 | 解法 |
+|---|---|---|---|
+| 1 | 清空 Blender 場景用了 `read_factory_settings`，MCP 連線斷掉 | 指令沒有回應 | 請作者重新 Start MCP Server；之後只刪物件、網格、材質（記進 CLAUDE.md） |
+| 2 | 前景柱子 x 32.5 擋住出口門 | Blender 預覽 | 前景柱子改到 x 12.5、19.5、28.5（離互動點 2 m 以上） |
+| 3 | 柱子的「B2」太小，看起來像「B:2」 | 貼圖預覽 | 改成 2×2 像素一格 |
+| 4 | Pixelorama 匯入出口牌時白色線段多延伸 13 格 | 逐像素比對 | `draw_pixels` 補回 |
+| 5 | `verify.sh` 回報 3115 格不同 | 和 PNG 比對結果不一致 | 色碼大小寫不同造成誤報，改成 PNG 對 PNG 比 |
+| 6 | Blender 執行中自己重開成預設場景 | 找不到物件 | 從 `parking.blend` 用 `libraries.load` 搬回；覆蓋存檔前先 `libraries.remove` |
+| 7 | 紅色警示燈擋住出口牌 | Blender 近看 | 警示燈改放 2.78 m |
+| 8 | `.glb` 匯入後貼圖被抽成 31 份複本、會被改成有損 | 看匯入產生的檔案 | 改匯出 `.gltf`，貼圖指向 `assets/textures/parking/` |
+| 9 | Toolkit 的 `scene_instantiate` 不能放 `.gltf` | 錯誤訊息 | 用 `scene_create_inherited` 做包裝 `.tscn` |
+| 10 | 新加的 `off_mesh` 屬性設不進去 | `node_set_property` 讀回是 null | 指定腳本 `editor_refresh` 後再設 |
+| 11 | 燈管只有 1～2 px，看不出來 | 遊戲截圖放大 | Blender 加粗、發光加倍 |
+
+## 4. 自動驗證
+
+| 層級 | 內容 | 結果 |
+|---|---|---|
+| 遊玩測試 | 2D、3D 各跑一次 | 2D 240 項、3D 239 項全部通過（B2-4、B2-5 各跑一次） |
+| 像素 | 13 張貼圖設計圖 vs Pixelorama 匯出；遊戲裡讀地面貼圖一個像素 | 全部 0 差異；(64,75,77) 和原圖相同 |
+| MCP 讀值 | 燈管材質、熄滅時換材質與嗡聲靜音、提示文字位置是整數 | 全部符合 |
+| 網頁版 | Chrome（ANGLE Metal、M2 Pro）走過燈下、壞燈 | 100 FPS；第一次走到燈下卡一次約 1 秒，來回第二次不會（shader 第一次編譯）；`index.pck` 33.0 MB（B1 32.9）；console 無錯誤 |
+
+## 5. MCP 的特性（B2 新發現）
+
+| 觀察 | 說明 |
+|---|---|
+| Blender MCP 適合用程式建模 | `execute_blender_code` 跑 bmesh，做低多邊形很快；`look` 的 camera 模式可以直接用和遊戲相同的鏡頭預覽 |
+| Blender MCP 的連線比較脆弱 | 重設 Blender、程式裡刪節點都斷過線；Blender 還自己重開過一次。步驟要切小、隨時存檔 |
+| 三個 MCP 的資料流 | Python 設計 → Pixelorama（原始檔＋匯出）→ Blender（材質、UV、匯出 `.gltf`）→ Toolkit（包裝場景、擺放、燈光），每一段都用檔案交接 |
+| Toolkit 處理 3D 模型的限制 | 只能放 `.tscn`；位置要帶型別、旋轉用弧度；匯入要指定檔案刷新 |
+| runtime 連線 | 測試或匯出剛跑完時常 `GAME_NOT_RUNNING`，呼叫一次 `debugger_get_log` 後再試通常就好 |
+
+## 6. B2 結論
+
+1. **三個 MCP 可以完整做出一個 3D 區域**：建模、貼圖、組場景、燈光、驗證都在 MCP 裡完成，只有設計與比對用 Python／ImageMagick。
+2. **鏡頭 B 讓 2.5D 有室內感**，但人物在畫面上變大一倍，原本的像素圖顆粒變粗，B4 要照新大小重畫。
+3. **網頁版效能還很寬鬆**：模型＋貼圖＋3 盞燈＋陰影＋景深仍是 100 FPS；要注意第一次編譯 shader 的卡頓（B5 可以預熱）。
+4. **待處理**：前景的地上小物（2D 像素圖）調暗後變成黑色剪影；其他 6 區還是灰盒。
+5. **建議進 B3**：照 `docs/2.5D_區域樣板流程.md` 一區一區做，依遊戲順序從街道開始。
