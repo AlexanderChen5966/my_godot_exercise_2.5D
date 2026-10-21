@@ -291,7 +291,7 @@ func _start_game() -> void:
 func area_scene_path(area: Dictionary) -> String:
 	var path := str(area["scene"])
 	if use_3d_areas:
-		var path_3d := "res://scenes/areas3d/%s3D.tscn" % path.get_file().get_basename()
+		var path_3d := AreaData.scene_path_3d(path)
 		if ResourceLoader.exists(path_3d):
 			return path_3d
 	return path

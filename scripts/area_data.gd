@@ -412,7 +412,12 @@ func _validate_reachable(story: StoryData) -> Array[String]:
 	return errors
 
 
-## 區域場景存在時，比對場景裡互動點的 point_id 與 JSON 的 points 是否一一對應。
+## B1：區域資料的 2D 場景（scenes/areas/X.tscn）對應的 3D 場景（scenes/areas3d/X3D.tscn）；Main 切換 2D／3D 與劇本檢查共用
+static func scene_path_3d(path: String) -> String:
+	return "res://scenes/areas3d/%s3D.tscn" % path.get_file().get_basename()
+
+
+## 區域場景存在時，比對場景裡互動點的 point_id 與 JSON 的 points 是否一一對應（B1 起 2D、3D 場景都比對；3D 還沒做時只提醒）。
 func _validate_scene_file(area: Dictionary, tag: String, warnings: Array[String]) -> Array[String]:
 	var errors: Array[String] = []
 	var path: String = area.get("scene", "")
@@ -422,6 +427,17 @@ func _validate_scene_file(area: Dictionary, tag: String, warnings: Array[String]
 	if not ResourceLoader.exists(path):
 		warnings.append("%s 的區域場景尚未建立：%s" % [tag, path])
 		return errors
+	errors.append_array(_validate_scene_points(path, area, tag))
+	var path_3d := scene_path_3d(path)
+	if ResourceLoader.exists(path_3d):
+		errors.append_array(_validate_scene_points(path_3d, area, tag + "（3D）"))
+	else:
+		warnings.append("%s 的 3D 區域場景尚未建立：%s" % [tag, path_3d])
+	return errors
+
+
+func _validate_scene_points(path: String, area: Dictionary, tag: String) -> Array[String]:
+	var errors: Array[String] = []
 	var instance := (load(path) as PackedScene).instantiate()
 	var in_scene: Array[String] = []
 	for node in instance.find_children("*", "", true, false):

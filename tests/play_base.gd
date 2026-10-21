@@ -53,7 +53,7 @@ func back_to_title() -> void:
 
 ## 主角走到 x（直接設定位置，再等物理更新讓互動點偵測到）
 func walk_to(x: float) -> void:
-	player().position.x = x
+	set_player(x)
 	await physics(4)
 	await wait_for(func(): return main.state != TRANSITION, 3.0)
 
@@ -182,8 +182,52 @@ func area() -> String:
 	return main.get("_area_id")
 
 
-func player() -> CharacterBody2D:
+## B1：主角是 CharacterBody2D（2D 區域）或 CharacterBody3D（3D 區域）；位置一律用下面的 px()／py()／set_player() 以像素讀寫
+func player() -> Node:
 	return main.get("_area").get_node("Player")
+
+
+## 目前的區域是不是 3D（AREAS_3D=1 而且這個區域有 3D 版）
+func is_3d() -> bool:
+	return main.get("_area") is Node3D
+
+
+## 主角的 x、y（像素；3D 由 area_3d.gd 換算，64 像素＝1 公尺、縱深帶 650～735 ↔ z −1.5～1.5）
+func px() -> float:
+	return main.get("_area").player_x()
+
+
+func py() -> float:
+	return main.get("_area").player_y()
+
+
+## 直接設定主角的位置（像素）；y 不給時不變。不經過 place_player（它會轉向、移動鏡頭）
+func set_player(x: float, y := NAN) -> void:
+	var p := player()
+	if is_3d():
+		p.position.x = x / 64.0
+		if not is_nan(y):
+			p.position.z = main.get("_area").y_to_z(y)
+	else:
+		p.position.x = x
+		if not is_nan(y):
+			p.position.y = y
+
+
+## 互動點原點的 y（像素）
+func point_y(point_name: String) -> float:
+	var node: Node = main.get("_area").get_node("Points/" + point_name)
+	return main.get("_area").z_to_y(node.position.z) if is_3d() else node.position.y
+
+
+## 燈的亮度（2D 的 energy、3D 的 light_energy）
+func energy(light: Node) -> float:
+	return light.get("light_energy") if light is Light3D else light.get("energy")
+
+
+## 位置音效聽得到的距離（像素；3D 的 max_distance 是公尺）
+func audio_range(player_node: Node) -> float:
+	return player_node.max_distance * (64.0 if player_node is Node3D else 1.0)
 
 
 func prompt() -> String:

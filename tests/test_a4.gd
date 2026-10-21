@@ -40,10 +40,10 @@ func run_parking() -> void:
 	ok(not (player().get_node("Steps") as AudioStreamPlayer).playing, "停下來：正在播的腳步聲很快淡出（A4-3）")
 
 	# 位置音效：燈管嗡聲，熄滅時靜音並播一次喀喀聲
-	var hum := main._area.get_node("Points/Light/Hum") as AudioStreamPlayer2D
-	var flicker := main._area.get_node("Points/Light/Flicker") as AudioStreamPlayer2D
+	var hum: Node = main._area.get_node("Points/Light/Hum")      # AudioStreamPlayer2D 或 3D
+	var flicker: Node = main._area.get_node("Points/Light/Flicker")
 	ok(hum.playing and hum.bus == &"Ambient", "燈管的嗡聲是位置音效、自動播放")
-	var lamp: Node = main._area.get_node("LampLight")
+	var lamp: Node = main._area.get_node("Lights/LampLight" if is_3d() else "LampLight")
 	var chance: float = lamp.get("dropout_chance")
 	lamp.set("_since_sound", 99.0)  # 遊戲剛開始時燈管可能已經自己熄滅過一次，喀喀聲還在冷卻；先歸零，測試才穩定
 	lamp.set("dropout_chance", 1.0)
@@ -79,8 +79,8 @@ func run_street_and_bad_end() -> void:
 	await enter("street")
 	ok(main.get("_amb_file") == "amb_street.ogg", "進入街道：環境音換成 amb_street")
 	ok(player().step_sounds[0].resource_path.contains("step_glass"), "街道的地面是碎玻璃")
-	var fire := main._area.get_node("Points/Car/Fire") as AudioStreamPlayer2D
-	ok(fire.playing and fire.max_distance >= 800.0, "燃燒的車：火聲是位置音效")
+	var fire: Node = main._area.get_node("Points/Car/Fire")
+	ok(fire.playing and audio_range(fire) >= 800.0, "燃燒的車：火聲是位置音效")
 	await go_exit(2150, "clinic")
 	ok(main.sound_log.back() == "door_wood", "走進診所：木門")
 	await walk_to(600); await interact()

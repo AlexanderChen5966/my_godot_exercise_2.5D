@@ -23,8 +23,8 @@ func run_a() -> void:
 	await walk_to(1460)                       # 婦人：走近自動觸發
 	await choose(0)                           # 強行壓制自己
 	ok(gs().stats["humanity"] == 4, "婦人選「強行壓制自己」：人性 +1")
-	var woman: AnimatedSprite2D = main.get("_area").get_node("Points/Woman/Figure")
-	var start_x := woman.position.x
+	var woman: Node = main.get("_area").get_node("Points/Woman/Figure")
+	var start_x: float = woman.position.x
 	ok(woman.visible and woman.animation == "scream", "婦人事件後先尖叫（A3），還沒消失")
 	await wait_for(func(): return woman.animation == "run", 2.0)
 	await physics(10)
@@ -32,14 +32,14 @@ func run_a() -> void:
 	await wait_for(func(): return not woman.visible, 6.0)
 	ok(not figure_visible("Woman"), "婦人跑出畫面後消失")
 	await go_exit(2150, "street")
-	ok(player().position.x == 220, "進街道出現在 x=220")
+	ok(is_equal_approx(px(), 220), "進街道出現在 x=220")
 	await walk_to(1450); await interact(); await read()
 	ok(gs().stats["memory"] == 2, "尋人啟事：記憶 +1")
 	await go_exit(2150, "clinic")
 	await walk_to(1750); await interact(); await read()
 	ok(gs().has_flag("clinic.chair") and not gs().has_flag("clinic.chair#0"), "沒錄音筆時坐診療椅：只有描述")
 	await go_exit(70, "street")
-	ok(player().position.x == 2100 and player().facing == -1, "回街道出現在右邊（x=2100）、面向左")
+	ok(is_equal_approx(px(), 2100) and player().facing == -1, "回街道出現在右邊（x=2100）、面向左")
 	await go_exit(2150, "clinic")
 	ok(main.get("_closing_point") == "" and main.state == EXPLORE, "第二次進診所：不再顯示開場")
 	await walk_to(2150); await interact(); await read(); await wait_for(func(): return main.current_id == 6, 6.0)

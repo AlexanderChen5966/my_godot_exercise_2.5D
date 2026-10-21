@@ -23,20 +23,25 @@ func run_movement() -> void:
 	print("\n== 上下左右移動")
 	await start_game()
 	ok(area() == "parking_lot" and main.state == EXPLORE, "開始遊戲 → 停車場可以走動")
-	ok(is_equal_approx(player().position.y, (TOP + BOTTOM) / 2.0), "進入區域時站在縱深帶中間")
+	ok(is_equal_approx(py(), (TOP + BOTTOM) / 2.0), "進入區域時站在縱深帶中間")
 	await hold("move_up", 120)
-	ok(is_equal_approx(player().position.y, TOP), "按住上：停在縱深帶上緣 %d" % TOP)
+	ok(is_equal_approx(py(), TOP), "按住上：停在縱深帶上緣 %d" % TOP)
 	await hold("move_down", 200)
-	ok(is_equal_approx(player().position.y, BOTTOM), "按住下：停在縱深帶下緣 %d" % BOTTOM)
-	var y0 := player().position.y
+	ok(is_equal_approx(py(), BOTTOM), "按住下：停在縱深帶下緣 %d" % BOTTOM)
+	# 速度比用自己的單位量：2D 是畫面像素，3D 是公尺（3D 的縱深帶 85 像素對應 3 公尺，換成像素比例會不同）
+	var y0: float = player().position.z if is_3d() else player().position.y
 	await hold("move_up", 30)
-	var dy := y0 - player().position.y
-	var x0 := player().position.x
+	var dy: float = y0 - (player().position.z if is_3d() else player().position.y)
+	var x0: float = player().position.x
 	await hold("move_right", 30)
-	var dx := player().position.x - x0
-	ok(dy > 0.0 and absf(dy / dx - 0.6) < 0.05, "上下速度約為左右的 0.6 倍（%.1f / %.1f）" % [dy, dx])
-	var shadow := player().get_node_or_null("Shadow")
-	ok(shadow != null and shadow.get_index() < player().get_node("Sprite").get_index(), "主角腳下有影子，畫在角色下面")
+	var dx: float = player().position.x - x0
+	ok(dy > 0.0 and absf(dy / dx - 0.6) < 0.05, "上下速度約為左右的 0.6 倍（%.2f / %.2f）" % [dy, dx])
+	if is_3d():
+		var sprite: GeometryInstance3D = player().get_node("Sprite")
+		ok(sprite.cast_shadow != GeometryInstance3D.SHADOW_CASTING_SETTING_OFF, "3D：主角會投出影子（燈的真陰影，不用 2D 的影子圖）")
+	else:
+		var shadow := player().get_node_or_null("Shadow")
+		ok(shadow != null and shadow.get_index() < player().get_node("Sprite").get_index(), "主角腳下有影子，畫在角色下面")
 
 
 ## 互動提示：要靠近物件、站在物件前面的地面才出現；提示浮在主角頭上
@@ -48,7 +53,7 @@ func run_prompt_and_depth() -> void:
 	await walk_xy(1060, 680)
 	ok(prompt().contains("地面殘骸"), "離地面殘骸 60：出現提示")
 	await frames(2)
-	var head_y: float = player().get_global_transform_with_canvas().origin.y - 96.0
+	var head_y: float = main.get("_area").player_head_screen().y
 	var label: Label = main.prompt_label
 	ok(label.position.y + label.size.y <= head_y and label.position.y > head_y - 80.0, "提示浮在主角頭上")
 	await walk_xy(1000, 712)
@@ -67,24 +72,29 @@ func run_prompt_and_depth() -> void:
 func run_sorting_and_spawn() -> void:
 	print("\n== 前後排序與出生點")
 	await start_game()
-	var a: Node2D = main.get("_area")
-	ok(a.y_sort_enabled and a.get_node("Points").y_sort_enabled and a.get_node("Near").y_sort_enabled, "區域、互動點、近景都依 y 排序")
-	ok((a.get_node("FrontLayer") as CanvasItem).z_index > 0, "前景層永遠畫在最前面")
-	var woman_y: float = a.get_node("Points/Woman").position.y
+	var a: Node = main.get("_area")
+	if is_3d():
+		# 3D 的前後由深度決定：婦人在縱深帶中間、近景在走道前面（鏡頭那一側）
+		var near_z: float = a.get_node("Near/Papers1").position.z
+		ok(near_z > a.get("depth") / 2.0, "3D：近景物件在走道前面（z %.2f）" % near_z)
+	else:
+		ok(a.y_sort_enabled and a.get_node("Points").y_sort_enabled and a.get_node("Near").y_sort_enabled, "區域、互動點、近景都依 y 排序")
+		ok((a.get_node("FrontLayer") as CanvasItem).z_index > 0, "前景層永遠畫在最前面")
+	var woman_y := point_y("Woman")
 	ok(woman_y > TOP and woman_y < BOTTOM, "婦人站在路中間（y %d）" % woman_y)
 	a.call("place_player", 500.0, 720.0)
-	ok(is_equal_approx(player().position.y, 720.0), "place_player(x, y)：放到指定的 y")
+	ok(is_equal_approx(py(), 720.0), "place_player(x, y)：放到指定的 y")
 	a.call("place_player", 500.0, 900.0)
-	ok(is_equal_approx(player().position.y, BOTTOM), "place_player 的 y 超出縱深帶：限制在邊緣")
+	ok(is_equal_approx(py(), BOTTOM), "place_player 的 y 超出縱深帶：限制在邊緣")
 	a.call("place_player", 600.0)
-	ok(is_equal_approx(player().position.y, BOTTOM) and is_equal_approx(player().position.x, 600.0), "place_player 只給 x：y 不變")
+	ok(is_equal_approx(py(), BOTTOM) and is_equal_approx(px(), 600.0), "place_player 只給 x：y 不變")
 
 
 ## A3：調查時轉向物件並伸手、文字關掉後恢復；衝動強度高時站著前傾
 func run_actions() -> void:
 	print("\n== 主角的新動作（A3）")
 	await start_game()
-	var sprite: AnimatedSprite2D = player().get_node("Sprite")
+	var sprite: Node = player().get_node("Sprite")
 	await walk_xy(1060, 660)
 	player().face(1)                                   # 先背對地面殘骸（殘骸在左邊 x 1000）
 	await interact()
@@ -129,7 +139,7 @@ func hold(action: String, physics_frames: int) -> void:
 
 
 func walk_xy(x: float, y: float) -> void:
-	player().position = Vector2(x, y)
+	set_player(x, y)
 	await physics(4)
 	await wait_for(func(): return main.state != TRANSITION, 3.0)
 

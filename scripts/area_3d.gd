@@ -98,10 +98,11 @@ func player_head_screen() -> Vector2:
 	return camera.unproject_position(player.global_position + Vector3(0.0, 1.5, 0.0))
 
 
-## 換區域時的出現位置：放到 x（有給 y 時也放到 y，否則留在縱深帶中間），靠近右半邊時面向左（從右邊的出口進來）。
+## 換區域時的出現位置：放到 x（有給 y 時也放到 y，否則前後不變；剛進區域時在縱深帶中間），靠近右半邊時面向左（從右邊的出口進來）。
 func place_player(x: float, y := NAN) -> void:
 	player.position.x = clampf(x / PX_PER_M, player.min_x, player.max_x)
-	player.position.z = 0.0 if is_nan(y) else clampf(y_to_z(y), player.min_z, player.max_z)
+	if not is_nan(y):
+		player.position.z = clampf(y_to_z(y), player.min_z, player.max_z)
 	player.face(-1 if x > area_width / 2.0 else 1)
 	_update_camera()  # 鏡頭直接跳到新位置
 

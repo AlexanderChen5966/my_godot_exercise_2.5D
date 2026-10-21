@@ -4,7 +4,7 @@
 > 2.5D 的方案在 `docs/2.5D方案.md`，分步指令在 `PROMPTS.md` 的「2.5D B0 分步指令」；一次只做一步，B0-0 只規劃、不改檔案。
 > 下面的內容是從 A＋ 專案複製過來的，2.5D 做到哪裡再逐步改寫；與 2.5D 方案衝突時（例如「A＋ 完成前不要做 3D」）以 2.5D 方案為準。
 > 不要同時開著兩個專案的 Godot 編輯器：godot-mcp-toolkit 可能會連到另一個專案。
-> **2.5D 進度**：B0 技術驗證完成（2026-10-20，經過見 `MCP實驗紀錄.md` 的「2.5D B0」、決定見 `docs/2.5D方案.md` 的「B0 的決定」）：縱深帶採用接受縮放（3 公尺）、主角有正面／背面走路與待機、人物受光＋環境光 1.2、景深與霧用 shader 模擬。下一步 B1（作者決定後才開始）。Blender MCP 已設定在 user 範圍（B2 才用）。
+> **2.5D 進度**：B0 技術驗證完成（2026-10-20，經過見 `MCP實驗紀錄.md` 的「2.5D B0」、決定見 `docs/2.5D方案.md` 的「B0 的決定」）：縱深帶採用接受縮放（3 公尺）、主角有正面／背面走路與待機、人物受光＋環境光 1.2、景深與霧用 shader 模擬。**B1 完成（2026-10-21）**：7 區都有 3D 灰盒場景（`scenes/areas3d/*3D.tscn`，範本 `AreaBase3D.tscn`，由 `art/tools/convert_area_3d.py` 從 2D 場景產生再用 Toolkit 調整），專案設定 `game/areas_3d` 切換 2D／3D（2D 保留）；**`run_tests.sh` 預設 2D、3D 各跑一次**（`AREAS_3D=0／1` 只跑一種），劇本檢查也比對 3D 場景；網頁版在副本上匯出到 `build/web_b1/`。經過見 `MCP實驗紀錄.md` 的「2.5D B1」。下一步 B2（作者決定後才開始）。Blender MCP 已設定在 user 範圍（B2 才用）。
 > **2.5D 的坑（B0-1）**：①像素圖用在 3D 時，Godot 會自動把 `.import` 改成 VRAM 壓縮＋mipmap（`detect_3d`），要改回 `compress/mode=0`、`mipmaps/generate=false`，並把 `detect_3d/compress_to=0`；②2D 的 SpriteFrames 若指向 CanvasTexture（法線貼圖用，例如 `player_canvas.tres`），在 3D 會是白色方塊，3D 要另做指向 PNG 的版本（`player_frames_3d.tres`）；③`3d_create_light` 的 rotation 是對的（B0 時誤判成正負號相反，B1-1 在遊戲裡讀燈的方向確認）；`.tscn` 的 Transform3D 矩陣不好直接看方向，要確認時在遊戲裡讀 `-global_transform.basis.z`。B0 的檔案在 `scenes/b0/`、`scripts/b0/`，網頁版在副本上把主場景換成 B0 後匯出到 `build/web_b0/`。
 
 
@@ -216,7 +216,7 @@ Main (Control, full rect)
 4. 修好之後 `game_stop`。
 
 - **自動測試放在專案的 `tests/`**（2026-10-06 作者決定；暫存區會被系統清空，Lv4 的測試因此遺失過一次）：`tests/test_*.gd`（`extends SceneTree`，載入真正的 `Main.tscn` 跑遊玩流程）。Web 匯出已排除 `tests/*`。
-  **執行一律用 `zsh tests/run_tests.sh`**（或 `zsh tests/run_tests.sh test_lv4` 只跑一個）：它會自動建立拿掉外掛的副本（`$TMPDIR/shiyuzhe_test_copy`），在副本上跑劇本檢查與所有測試，約 10 秒。新增測試時繼承 `tests/play_base.gd`（`extends "res://tests/play_base.gd"`，覆寫 `run_tests()`），照 `tests/test_lv5.gd` 的寫法。
+  **執行一律用 `zsh tests/run_tests.sh`**（或 `zsh tests/run_tests.sh test_lv4` 只跑一個）：它會自動建立拿掉外掛的副本（`$TMPDIR/shiyuzhe_test_copy`），在副本上跑劇本檢查與所有測試（B1 起 2D、3D 區域各跑一次）。新增測試時繼承 `tests/play_base.gd`（`extends "res://tests/play_base.gd"`，覆寫 `run_tests()`），照 `tests/test_lv5.gd` 的寫法。
   `run_tests.sh` 會把「輸出有 SCRIPT ERROR 或沒印出『共 N 項檢查』」算成失敗（A4-2：測試腳本 Parse Error 時 Godot 結束碼仍是 0，以前會誤判成全部通過）。
   **不要直接對本專案跑 headless**：外掛的 `MCPRuntimeServer` autoload 在 headless 也會啟動，會覆蓋 godot-mcp-toolkit 的 runtime 登錄（`~/Library/Application Support/godot-mcp-toolkit/`），導致正在執行的遊戲之後回報 `GAME_NOT_RUNNING`。
   做法：把專案 rsync 到暫存區（排除 `addons/`、`.mcp.json`、`build/`），刪掉副本 `project.godot` 裡的 `MCPRuntimeServer` autoload 與外掛啟用設定，再對副本執行 `Godot --headless --path <副本> --script <測試腳本>`。

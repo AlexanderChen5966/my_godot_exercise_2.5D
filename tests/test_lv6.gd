@@ -73,8 +73,8 @@ func run_impulse() -> void:
 	print("\n== 衝動機制（停車場的婦人）")
 	await start_game()
 	var fx: ColorRect = main.impulse_fx
-	var light := player().get_node("Flashlight") as PointLight2D
-	var base_energy := light.energy
+	var light: Node = player().get_node("Flashlight")   # PointLight2D 或 OmniLight3D
+	var base_energy := energy(light)
 	ok(target() == 0.0 and not fx.visible, "起點（離婦人很遠）：沒有感覺")
 	await walk_to(1150)
 	var mid := target()
@@ -95,7 +95,7 @@ func run_impulse() -> void:
 	await read()
 	await seconds(2.0)
 	ok(fx.intensity == 0.0 and not fx.visible, "淡出完畢")
-	ok(is_equal_approx(light.energy, base_energy), "手電筒回到原本的亮度")
+	ok(is_equal_approx(energy(light), base_energy), "手電筒回到原本的亮度")
 	await walk_to(1460)
 	ok(target() == 0.0, "婦人離開後，回到原地也不再有感覺")
 

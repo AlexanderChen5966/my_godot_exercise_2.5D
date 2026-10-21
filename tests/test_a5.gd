@@ -37,14 +37,14 @@ func run_gesture_alone() -> void:
 	await start_game()
 	ok(main.get("_gesture_hint").visible, "第一次可以走動：畫面下方顯示「G　比出手勢」")
 	var stats: Dictionary = gs().stats.duplicate()
-	var x := player().position.x
+	var x := px()
 	await gesture()
 	ok(main.state == GESTURE and String(player().get_node("Sprite").animation).begins_with("gesture_"), "按 G：主角比出手勢")
 	ok(main.sound_log.back() == "inspect_4.ogg", "比手勢時有布料聲")
 	Input.action_press("move_right")
 	await physics(30)
 	Input.action_release("move_right")
-	ok(is_equal_approx(player().position.x, x), "比手勢時不能移動")
+	ok(is_equal_approx(px(), x), "比手勢時不能移動")
 	await press_key(KEY_SPACE)
 	ok(main.state == GESTURE, "比手勢時按互動鍵沒有作用")
 	await wait_gesture_done()
@@ -225,7 +225,7 @@ func to_lab() -> void:
 
 ## 主角瞬移到 (x, y)，等物理更新讓互動點偵測到
 func place(x: float, y: float) -> void:
-	player().position = Vector2(x, y)
+	set_player(x, y)
 	await physics(4)
 
 
@@ -275,7 +275,7 @@ func run_hide() -> void:
 	await interact()
 	await read()
 	await wait_for(func(): return main.state in [TYPING, AREA_TEXT], 4.0)
-	ok(absf(player().position.x - 1950.0) < 1.0 and main.body.text.contains("另一頭爬出來"), "從通風管另一頭（x 1950）爬出來，顯示爬出來的文字")
+	ok(absf(px() - 1950.0) < 1.0 and main.body.text.contains("另一頭爬出來"), "從通風管另一頭（x 1950）爬出來，顯示爬出來的文字")
 	ok(gs().has_flag("lab.guard") and not figure_visible("Guard"), "警衛事件算結束：警衛走遠、消失")
 	await read()
 	ok(main.state == EXPLORE and not patrol.active, "可以繼續走，警衛不再巡視")

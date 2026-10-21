@@ -44,7 +44,7 @@ func run_best() -> void:
 	ok(gs().stats == { "memory": 7, "humanity": 7 }, "設施走廊～廢墟：記憶 7、人性 7")
 	await walk_to(600); await interact(); await read()          # 牆上的蠟筆字 記憶 +1
 	await walk_to(1650)
-	var girl: AnimatedSprite2D = main.get("_area").get_node("Points/Daughter/Figure")
+	var girl: Node = main.get("_area").get_node("Points/Daughter/Figure")
 	await wait_choices(); await select(0)                       # 比出手勢 記憶 +1、人性 +1
 	ok(girl.animation == "wave", "比出手勢：女兒舉起小手比出同樣的手勢（A3）")
 	await read()
@@ -74,16 +74,16 @@ func run_normal() -> void:
 	await choose(1); await to_scene(7)                          # 拼命掙脫
 	await choose(2); await enter("lab")                         # 拼命掙扎
 	await walk_to(700)
-	var sci: AnimatedSprite2D = main.get("_area").get_node("Points/Scientist/Figure")
+	var sci: Node = main.get("_area").get_node("Points/Scientist/Figure")
 	ok(sci.animation == "event", "女科學家：事件開始時遞出筆記本（A3 event 動畫）")
 	await choose(1)                                             # 撲向科學家 人性 −2
 	await physics(2)
 	ok(sci.animation == "run" and sci.visible, "撲向科學家後她直接逃跑（沒有尖叫），還沒消失")
 	ok(not gs().has_item("notebook"), "撲向科學家：沒有筆記本")
 	await walk_to(1650)
-	var guard: AnimatedSprite2D = main.get("_area").get_node("Points/Guard/Figure")
-	var torch: PointLight2D = main.get("_area").get_node("Points/Guard/Torch")
-	ok(guard.animation == "event" and is_equal_approx(torch.rotation, PI), "警衛：事件開始時舉槍瞄準，手電筒的光水平照過來（A3）")
+	var guard: Node = main.get("_area").get_node("Points/Guard/Figure")
+	var torch: Node = main.get("_area").get_node("Points/Guard/Torch")
+	ok(guard.animation == "event" and torch_level_left(torch), "警衛：事件開始時舉槍瞄準，手電筒的光水平照過來（A3）")
 	await choose(1)                                             # 撲向警衛 人性 −1
 	await go_exit(2150, "ruins")
 	await walk_to(800); await choose(2)                         # 躲起來
@@ -164,3 +164,11 @@ func run_bad_ends() -> void:
 	ok(main.state == TITLE, "Bad End 選回到標題 → 標題畫面")
 	await start_game()
 	ok(gs().stats == INITIAL and gs().items.is_empty() and gs().flags.is_empty(), "重新開始：數值、物品、旗標都重設")
+
+
+## 警衛的手電筒水平往左照（2D：PointLight2D 轉 180 度；3D：聚光燈的 −Z 朝 −X）
+func torch_level_left(torch: Node) -> bool:
+	if torch is Node3D:
+		var dir: Vector3 = -torch.global_transform.basis.z
+		return dir.x < -0.99 and absf(dir.y) < 0.01
+	return is_equal_approx(torch.rotation, PI)
