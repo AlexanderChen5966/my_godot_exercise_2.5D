@@ -20,10 +20,12 @@ const SCREEN_HEIGHT := 768.0
 @export var depth := 3.0
 
 @export_group("鏡頭")
+## B2 起用鏡頭 B（作者 2026-10-21）：天花板真實 3 公尺，鏡頭在天花板下面、拉近；主角在畫面上約 214 像素、腳約在 y 612。
+## B0 的舊鏡頭是 14.3／4.55／12（主角 96 像素，從 7.5 公尺高往下看，3 公尺天花板會擋住畫面）
 @export var camera_fov := 40.0
-@export var camera_distance := 14.3  # 公尺：縱深帶中間的主角在畫面上 96 像素高（和 2D 版一樣）
-@export var camera_look := 4.55      # 鏡頭看的高度（公尺），讓主角的腳約在畫面 y 690
-@export var camera_tilt := 12.0      # 往下看的角度
+@export var camera_distance := 7.2   # 公尺
+@export var camera_look := 1.6       # 鏡頭看的高度（公尺）
+@export var camera_tilt := 5.0       # 往下看的角度
 
 @export_group("光影")
 ## 主角身上的光（手電筒）的亮度與範圍；衝動機制的閃爍以 flashlight_energy 為基準（Main 傳給 impulse_fx）
@@ -93,8 +95,10 @@ func player_y() -> float:
 	return z_to_y(player.position.z)
 
 
-## 主角頭頂在畫面上的位置（像素），提示文字放在這上面
+## 主角頭頂在畫面上的位置（像素），提示文字放在這上面。
+## Main 比區域先執行 _process，先把鏡頭更新到這一格的位置，提示才不會慢一格跟著主角抖
 func player_head_screen() -> Vector2:
+	_update_camera()
 	return camera.unproject_position(player.global_position + Vector3(0.0, 1.5, 0.0))
 
 

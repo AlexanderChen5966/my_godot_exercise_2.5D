@@ -1,5 +1,5 @@
 # B1：把 2D 區域場景的互動點（Points）與近景（Near）轉成 3D 區域場景的初稿，之後再用 Toolkit 檢查與修改。
-# 用法：python3 convert_area_3d.py 專案根目錄 區域名稱（例如 ParkingLot）[--lights]
+# 用法：python3 convert_area_3d.py 專案根目錄 區域名稱（例如 Street）[--lights] [--force]
 #   讀 scenes/areas/<名稱>.tscn，寫入 scenes/areas3d/<名稱>3D.tscn（沒有就建立，繼承 AreaBase3D）。
 #   3D 場景裡 Points／Near 底下的節點每次都重新產生（手動加在那裡的會被蓋掉）；Lights、Geometry 等其他節點保留。
 #   區域的燈只在第一次產生；加 --lights 時重新產生（會蓋掉用 Toolkit 調整過的燈）。
@@ -30,6 +30,10 @@ SCRIPTS_3D = {
 
 root, name = sys.argv[1], sys.argv[2]
 regen_lights = "--lights" in sys.argv[3:]
+# B2 起換成模型、改用 Toolkit 手動維護的區域：重跑會把 2D 時期的道具像素圖加回來，所以預設不轉（要轉加 --force）
+MANUAL = {"ParkingLot"}
+if name in MANUAL and "--force" not in sys.argv[3:]:
+    sys.exit(f"{name} 已經換成模型（B2），改用 Toolkit 手動維護；確定要重新產生互動點與近景時加 --force")
 src = open(f"{root}/scenes/areas/{name}.tscn", encoding="utf-8").read()
 dst_path = f"{root}/scenes/areas3d/{name}3D.tscn"
 

@@ -13,6 +13,9 @@ extends Light3D
 @export var frame_strength := PackedFloat32Array()
 ## A3：燈突然熄滅時，把這個 Sprite3D（hframes 2：0 亮、1 熄）切到熄滅那格，例如停車場的燈管
 @export var off_sprite: NodePath
+## B2：燈管是模型時，熄滅的瞬間把這個 MeshInstance3D 的第 off_surface 個面換成不發光的材質（停車場的燈管）
+@export var off_mesh: NodePath
+@export var off_surface := 1
 ## A4：燈的嗡聲（AudioStreamPlayer3D）熄滅時靜音；熄滅的瞬間播放 dropout_sound（例如燈管啟動器的喀喀聲，最少間隔 sound_cooldown 秒）
 @export var hum: NodePath
 @export var dropout_sound: NodePath
@@ -26,6 +29,9 @@ var _hum: AudioStreamPlayer3D
 var _dropout_sound: AudioStreamPlayer3D
 var _hum_db := 0.0
 var _since_sound := 99.0
+var _off_mesh: MeshInstance3D
+var _off_material: Material  # 熄滅時的燈管材質（原本的材質複製一份、關掉發光、調暗）
+var _is_off := false
 
 
 func _ready() -> void:
@@ -39,6 +45,15 @@ func _ready() -> void:
 			_hum_db = _hum.volume_db
 	if not dropout_sound.is_empty():
 		_dropout_sound = get_node_or_null(dropout_sound) as AudioStreamPlayer3D
+	if not off_mesh.is_empty():
+		_off_mesh = get_node_or_null(off_mesh) as MeshInstance3D
+		if _off_mesh and off_surface < _off_mesh.get_surface_override_material_count():
+			var lit := _off_mesh.get_active_material(off_surface) as BaseMaterial3D
+			if lit:
+				var off := lit.duplicate() as BaseMaterial3D
+				off.emission_enabled = false
+				off.albedo_color = lit.albedo_color.darkened(0.6)
+				_off_material = off
 
 
 func _process(delta: float) -> void:
@@ -48,6 +63,9 @@ func _process(delta: float) -> void:
 		_hum.volume_db = -80.0 if _dropout_left > 0.0 else _hum_db
 	if _off_sprite:
 		_off_sprite.frame = 1 if _dropout_left > 0.0 else 0
+	if _off_material and (_dropout_left > 0.0) != _is_off:
+		_is_off = _dropout_left > 0.0
+		_off_mesh.set_surface_override_material(off_surface, _off_material if _is_off else null)
 	if _dropout_left > 0.0:
 		_dropout_left -= delta
 		light_energy = base_energy * dropout_ratio

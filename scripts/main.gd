@@ -441,7 +441,7 @@ func _place_prompt() -> void:
 	var head: Vector2 = _area.player_head_screen()
 	var pos := head + Vector2(-prompt_label.size.x / 2.0, -PROMPT_GAP - prompt_label.size.y)
 	pos.x = clampf(pos.x, 0.0, BASE_SIZE.x - prompt_label.size.x)
-	prompt_label.position = pos
+	prompt_label.position = pos.round()  # B2：3D 的投影位置是小數，字畫在像素之間會糊，取整數像素
 
 
 func _on_point_entered(point_id: String) -> void:
