@@ -38,6 +38,14 @@ size = Vector3(1.25, 2, 3.529412)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv5"]
 size = Vector3(1.5625, 2, 1.764706)
 
+[sub_resource type="Environment" id="Environment_jv2wf"]
+background_mode = 1
+background_color = Color(0.02, 0.03, 0.035, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.26, 0.38, 0.42, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+
 [node name="ParkingLot3D" unique_id=1166238774 instance=ExtResource("1")]
 
 [node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=1968131040 instance=ExtResource("2_jv2wf")]
@@ -137,6 +145,18 @@ light_energy = 2.5
 script = ExtResource("2_xutpd")
 base_energy = 2.5
 
+[node name="BrokenLampLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="2" unique_id=1259495515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 2.35, -1)
+light_color = Color(0.7, 0.85, 1, 1)
+light_energy = 0.9
+omni_range = 4.5
+script = ExtResource("2_xutpd")
+base_energy = 0.9
+pulse_speed = 0.0
+min_ratio = 1.0
+dropout_chance = 0.02
+dropout_ratio = 0.0
+
 [node name="Wake" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="0" unique_id=557810791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6875, 0, -1.852941)
 script = ExtResource("cv1")
@@ -221,6 +241,9 @@ shape = SubResource("BoxShape3D_cv5")
 
 [node name="Door" type="Node3D" parent="Points/Exit" index="1" unique_id=449782285 instance=ExtResource("18_1kpvb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, -0.35)
+
+[node name="Environment" parent="." index="5" unique_id=271570906]
+environment = SubResource("Environment_jv2wf")
 
 [node name="Near" type="Node3D" parent="." index="6" unique_id=65759552]
 
