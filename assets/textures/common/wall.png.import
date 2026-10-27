@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du6qjde6liefr"
-path="res://.godot/imported/carpaint.png-7affd307381fa0d0d38ac4553adfae2a.ctex"
+uid="uid://dmiq3w775mg76"
+path="res://.godot/imported/wall.png-70847ed30741149ebcd34adfbf4b9667.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/carpaint.png"
-dest_files=["res://.godot/imported/carpaint.png-7affd307381fa0d0d38ac4553adfae2a.ctex"]
+source_file="res://assets/textures/common/wall.png"
+dest_files=["res://.godot/imported/wall.png-70847ed30741149ebcd34adfbf4b9667.ctex"]
 
 [params]
 

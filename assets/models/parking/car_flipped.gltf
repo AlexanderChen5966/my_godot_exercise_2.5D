@@ -161,22 +161,22 @@
 		{
 			"mimeType":"image/png",
 			"name":"carpaint",
-			"uri":"../../textures/parking/carpaint.png"
+			"uri":"../../textures/common/carpaint.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"metal",
-			"uri":"../../textures/parking/metal.png"
+			"uri":"../../textures/common/metal.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"glass",
-			"uri":"../../textures/parking/glass.png"
+			"uri":"../../textures/common/glass.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"tire",
-			"uri":"../../textures/parking/tire.png"
+			"uri":"../../textures/common/tire.png"
 		}
 	],
 	"accessors":[

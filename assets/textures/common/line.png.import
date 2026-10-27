@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdo2h65s0e377"
-path="res://.godot/imported/blood.png-9a3afcb16c3ecb18717d14fe3afa26c2.ctex"
+uid="uid://chy0hddx2lxxj"
+path="res://.godot/imported/line.png-185ffa00a2d2dc5813b89e9d5adbbd1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/blood.png"
-dest_files=["res://.godot/imported/blood.png-9a3afcb16c3ecb18717d14fe3afa26c2.ctex"]
+source_file="res://assets/textures/common/line.png"
+dest_files=["res://.godot/imported/line.png-185ffa00a2d2dc5813b89e9d5adbbd1b.ctex"]
 
 [params]
 

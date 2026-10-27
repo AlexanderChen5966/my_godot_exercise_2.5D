@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gwnmqvh2ld3a"
-path="res://.godot/imported/metal.png-1f6c620e15ea9cf338be6c46707ac943.ctex"
+uid="uid://ch40c7ppahkk6"
+path="res://.godot/imported/floor.png-de9b6ec35c890424536922842d135e44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/metal.png"
-dest_files=["res://.godot/imported/metal.png-1f6c620e15ea9cf338be6c46707ac943.ctex"]
+source_file="res://assets/textures/common/floor.png"
+dest_files=["res://.godot/imported/floor.png-de9b6ec35c890424536922842d135e44.ctex"]
 
 [params]
 

@@ -201,27 +201,27 @@
 		{
 			"mimeType":"image/png",
 			"name":"floor",
-			"uri":"../../textures/parking/floor.png"
+			"uri":"../../textures/common/floor.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"wall",
-			"uri":"../../textures/parking/wall.png"
+			"uri":"../../textures/common/wall.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"hazard",
-			"uri":"../../textures/parking/hazard.png"
+			"uri":"../../textures/common/hazard.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"metal",
-			"uri":"../../textures/parking/metal.png"
+			"uri":"../../textures/common/metal.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"line",
-			"uri":"../../textures/parking/line.png"
+			"uri":"../../textures/common/line.png"
 		}
 	],
 	"accessors":[

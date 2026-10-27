@@ -48,75 +48,75 @@ tonemap_mode = 2
 
 [node name="ParkingLot3D" unique_id=1166238774 instance=ExtResource("1")]
 
-[node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=1968131040 instance=ExtResource("2_jv2wf")]
+[node name="Shell" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=1968131040 instance=ExtResource("2_jv2wf")]
 
-[node name="CarFlipped" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=1786641158 instance=ExtResource("3_p67mw")]
+[node name="CarFlipped" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=1786641158 instance=ExtResource("3_p67mw")]
 transform = Transform3D(0.9781558, 0, 0.20787305, 0, 1, 0, -0.20787305, 0, 0.9781558, 13.5, 0, -4.8)
 
-[node name="PillarA1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=2094440255 instance=ExtResource("4_um0eq")]
+[node name="PillarA1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=2094440255 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2.2)
 
-[node name="PillarA2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1625074668 instance=ExtResource("4_um0eq")]
+[node name="PillarA2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1625074668 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2.2)
 
-[node name="PillarA3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=665788120 instance=ExtResource("4_um0eq")]
+[node name="PillarA3" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=665788120 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -2.2)
 
-[node name="PillarA4" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=191914163 instance=ExtResource("4_um0eq")]
+[node name="PillarA4" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=191914163 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2.2)
 
-[node name="PillarA5" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=802465661 instance=ExtResource("4_um0eq")]
+[node name="PillarA5" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=802465661 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -2.2)
 
-[node name="PillarB1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=229851252 instance=ExtResource("4_um0eq")]
+[node name="PillarB1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=229851252 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -8)
 
-[node name="PillarB2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=87743436 instance=ExtResource("4_um0eq")]
+[node name="PillarB2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=87743436 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -8)
 
-[node name="PillarB3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="9" unique_id=737063531 instance=ExtResource("4_um0eq")]
+[node name="PillarB3" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="9" unique_id=737063531 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -8)
 
-[node name="PillarB4" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="10" unique_id=753144057 instance=ExtResource("4_um0eq")]
+[node name="PillarB4" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="10" unique_id=753144057 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -8)
 
-[node name="PillarB5" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="11" unique_id=666292679 instance=ExtResource("4_um0eq")]
+[node name="PillarB5" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="11" unique_id=666292679 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -8)
 
-[node name="FrontPillar1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="12" unique_id=2125451859 instance=ExtResource("4_um0eq")]
+[node name="FrontPillar1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="12" unique_id=2125451859 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 3.5)
 
-[node name="FrontPillar2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="13" unique_id=669511902 instance=ExtResource("4_um0eq")]
+[node name="FrontPillar2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="13" unique_id=669511902 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 3.5)
 
-[node name="FrontPillar3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="14" unique_id=1576620043 instance=ExtResource("4_um0eq")]
+[node name="FrontPillar3" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="14" unique_id=1576620043 instance=ExtResource("4_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 3.5)
 
-[node name="CarWreck1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="15" unique_id=325466618 instance=ExtResource("5_aayy4")]
+[node name="CarWreck1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="15" unique_id=325466618 instance=ExtResource("5_aayy4")]
 transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 5.5, 0, -5.2)
 
-[node name="CarWreck2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="16" unique_id=1581218059 instance=ExtResource("5_aayy4")]
+[node name="CarWreck2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="16" unique_id=1581218059 instance=ExtResource("5_aayy4")]
 transform = Transform3D(0.034889247, 0, -0.9993912, 0, 1, 0, 0.9993912, 0, 0.034889247, 22, 0, -5.2)
 
-[node name="LampBroken1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="17" unique_id=1702345639 instance=ExtResource("6_hf7xo")]
+[node name="LampBroken1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="17" unique_id=1702345639 instance=ExtResource("6_hf7xo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, -1)
 
-[node name="LampBroken2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="18" unique_id=315984205 instance=ExtResource("6_hf7xo")]
+[node name="LampBroken2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="18" unique_id=315984205 instance=ExtResource("6_hf7xo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, -1)
 
-[node name="LampBroken3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="19" unique_id=1468973366 instance=ExtResource("6_hf7xo")]
+[node name="LampBroken3" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="19" unique_id=1468973366 instance=ExtResource("6_hf7xo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3, -1)
 
-[node name="LampBroken4" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="20" unique_id=503652599 instance=ExtResource("6_hf7xo")]
+[node name="LampBroken4" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="20" unique_id=503652599 instance=ExtResource("6_hf7xo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 3, -1)
 
-[node name="LampOn" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="21" unique_id=258087243 instance=ExtResource("7_17hf8")]
+[node name="LampOn" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="21" unique_id=258087243 instance=ExtResource("7_17hf8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.375, 3, -1)
 
-[node name="StairCore" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="22" unique_id=1638373531 instance=ExtResource("8_v4jy8")]
+[node name="StairCore" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="22" unique_id=1638373531 instance=ExtResource("8_v4jy8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.6, 0, -3.6)
 
-[node name="WarningLight" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="23" unique_id=329529625 instance=ExtResource("9_oy188")]
+[node name="WarningLight" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="23" unique_id=329529625 instance=ExtResource("9_oy188")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.6, 2.78, -2.1)
 
 [node name="LampLight" type="SpotLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=242196580]
@@ -166,10 +166,10 @@ point_id = "wake"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv1")
 
-[node name="Blood" type="Node3D" parent="Points/Wake" index="1" unique_id=2058408353 instance=ExtResource("12_6vv07")]
+[node name="Blood" parent="Points/Wake" index="1" unique_id=2058408353 instance=ExtResource("12_6vv07")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19, 0, 0)
 
-[node name="Photo" type="Node3D" parent="Points/Wake" index="2" unique_id=1116764527 instance=ExtResource("13_orsve")]
+[node name="Photo" parent="Points/Wake" index="2" unique_id=1116764527 instance=ExtResource("13_orsve")]
 transform = Transform3D(0.93971515, 0, 0.34195828, 0, 1, 0, -0.34195828, 0, 0.93971515, 0.16, 0, 0.15)
 
 [node name="Light" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=740655605]
@@ -209,7 +209,7 @@ point_id = "debris"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv3")
 
-[node name="Debris" type="Node3D" parent="Points/Debris" index="1" unique_id=187811773 instance=ExtResource("16_bv0ly")]
+[node name="Debris" parent="Points/Debris" index="1" unique_id=187811773 instance=ExtResource("16_bv0ly")]
 
 [node name="Woman" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="3" unique_id=474880915]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4375, 0, -0.017647)
@@ -239,7 +239,7 @@ point_id = "exit"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv5")
 
-[node name="Door" type="Node3D" parent="Points/Exit" index="1" unique_id=449782285 instance=ExtResource("18_1kpvb")]
+[node name="Door" parent="Points/Exit" index="1" unique_id=449782285 instance=ExtResource("18_1kpvb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, -0.35)
 
 [node name="Environment" parent="." index="5" unique_id=271570906]

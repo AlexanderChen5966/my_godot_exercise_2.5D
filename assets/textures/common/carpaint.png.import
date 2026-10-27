@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1ivy1lqtni63"
-path="res://.godot/imported/hazard.png-893d357b54f01ffb74b095742b15be92.ctex"
+uid="uid://du6qjde6liefr"
+path="res://.godot/imported/carpaint.png-4364c38a11cf462f3cc97e7973a57acf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/hazard.png"
-dest_files=["res://.godot/imported/hazard.png-893d357b54f01ffb74b095742b15be92.ctex"]
+source_file="res://assets/textures/common/carpaint.png"
+dest_files=["res://.godot/imported/carpaint.png-4364c38a11cf462f3cc97e7973a57acf.ctex"]
 
 [params]
 

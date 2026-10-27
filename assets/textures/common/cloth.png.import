@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chy0hddx2lxxj"
-path="res://.godot/imported/line.png-6fdf20ebf42836a5a2395808bd295789.ctex"
+uid="uid://brutunln3jsy0"
+path="res://.godot/imported/cloth.png-4ed8481baaab3e06d490b75f450a52aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/line.png"
-dest_files=["res://.godot/imported/line.png-6fdf20ebf42836a5a2395808bd295789.ctex"]
+source_file="res://assets/textures/common/cloth.png"
+dest_files=["res://.godot/imported/cloth.png-4ed8481baaab3e06d490b75f450a52aa.ctex"]
 
 [params]
 

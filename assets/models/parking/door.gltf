@@ -110,12 +110,12 @@
 		{
 			"mimeType":"image/png",
 			"name":"glass",
-			"uri":"../../textures/parking/glass.png"
+			"uri":"../../textures/common/glass.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"metal",
-			"uri":"../../textures/parking/metal.png"
+			"uri":"../../textures/common/metal.png"
 		}
 	],
 	"accessors":[

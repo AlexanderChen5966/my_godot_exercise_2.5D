@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brutunln3jsy0"
-path="res://.godot/imported/cloth.png-c02d3341dc0571778e3e1750b612d990.ctex"
+uid="uid://bqe2kdue2qkd1"
+path="res://.godot/imported/glass.png-f911e5c2025293e3b3fee293b9a70cf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/cloth.png"
-dest_files=["res://.godot/imported/cloth.png-c02d3341dc0571778e3e1750b612d990.ctex"]
+source_file="res://assets/textures/common/glass.png"
+dest_files=["res://.godot/imported/glass.png-f911e5c2025293e3b3fee293b9a70cf6.ctex"]
 
 [params]
 

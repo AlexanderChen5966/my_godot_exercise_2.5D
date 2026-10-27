@@ -104,12 +104,12 @@
 		{
 			"mimeType":"image/png",
 			"name":"floor",
-			"uri":"../../textures/parking/floor.png"
+			"uri":"../../textures/common/floor.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"cloth",
-			"uri":"../../textures/parking/cloth.png"
+			"uri":"../../textures/common/cloth.png"
 		}
 	],
 	"accessors":[

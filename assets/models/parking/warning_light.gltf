@@ -85,7 +85,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"metal",
-			"uri":"../../textures/parking/metal.png"
+			"uri":"../../textures/common/metal.png"
 		}
 	],
 	"accessors":[

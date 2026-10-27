@@ -57,7 +57,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"blood",
-			"uri":"../../textures/parking/blood.png"
+			"uri":"../../textures/common/blood.png"
 		}
 	],
 	"accessors":[

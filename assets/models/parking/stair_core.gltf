@@ -152,17 +152,17 @@
 		{
 			"mimeType":"image/png",
 			"name":"wall",
-			"uri":"../../textures/parking/wall.png"
+			"uri":"../../textures/common/wall.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"metal",
-			"uri":"../../textures/parking/metal.png"
+			"uri":"../../textures/common/metal.png"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"hazard",
-			"uri":"../../textures/parking/hazard.png"
+			"uri":"../../textures/common/hazard.png"
 		},
 		{
 			"mimeType":"image/png",

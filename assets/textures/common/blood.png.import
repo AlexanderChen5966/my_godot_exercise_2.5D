@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqe2kdue2qkd1"
-path="res://.godot/imported/glass.png-ddcadc120c35eef532f85e8b4d1df0bc.ctex"
+uid="uid://bdo2h65s0e377"
+path="res://.godot/imported/blood.png-621f619b6bb64e1ce9ec39ae6b7f9c9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/glass.png"
-dest_files=["res://.godot/imported/glass.png-ddcadc120c35eef532f85e8b4d1df0bc.ctex"]
+source_file="res://assets/textures/common/blood.png"
+dest_files=["res://.godot/imported/blood.png-621f619b6bb64e1ce9ec39ae6b7f9c9c.ctex"]
 
 [params]
 

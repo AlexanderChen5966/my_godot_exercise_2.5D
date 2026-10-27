@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch40c7ppahkk6"
-path="res://.godot/imported/floor.png-755e53d2c2fdd4a7c1cd8a56a6841a37.ctex"
+uid="uid://psj6qjenbmyo"
+path="res://.godot/imported/tire.png-49ca3b7a2d4323a7faf68ee18317b8f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parking/floor.png"
-dest_files=["res://.godot/imported/floor.png-755e53d2c2fdd4a7c1cd8a56a6841a37.ctex"]
+source_file="res://assets/textures/common/tire.png"
+dest_files=["res://.godot/imported/tire.png-49ca3b7a2d4323a7faf68ee18317b8f2.ctex"]
 
 [params]
 
