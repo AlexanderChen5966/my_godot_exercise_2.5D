@@ -14,14 +14,14 @@
 [ext_resource type="PackedScene" path="res://assets/models/parking/photo.tscn" id="13_orsve"]
 [ext_resource type="PackedScene" path="res://assets/models/parking/debris.tscn" id="16_bv0ly"]
 [ext_resource type="PackedScene" path="res://assets/models/parking/door.tscn" id="18_1kpvb"]
+[ext_resource type="PackedScene" path="res://assets/models/common/papers.tscn" id="19_jv2wf"]
+[ext_resource type="PackedScene" path="res://assets/models/common/glass_shards.tscn" id="20_p67mw"]
+[ext_resource type="PackedScene" path="res://assets/models/common/rubble.tscn" id="21_um0eq"]
+[ext_resource type="PackedScene" path="res://assets/models/common/cone.tscn" id="22_aayy4"]
 [ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
 [ext_resource type="AudioStream" uid="uid://sbgjb8scnjb1" path="res://assets/sfx/loop_lamp.ogg" id="cv6"]
 [ext_resource type="AudioStream" uid="uid://csjbi4v6rnih3" path="res://assets/sfx/lamp_flicker.ogg" id="cv7"]
 [ext_resource type="SpriteFrames" uid="uid://bmi6u0pten16d" path="res://assets/sprites/characters/woman_frames_3d.tres" id="cv9"]
-[ext_resource type="Texture2D" uid="uid://dgcn27mn37xss" path="res://assets/sprites/layers/parking_near_papers.png" id="cv11"]
-[ext_resource type="Texture2D" uid="uid://dgwrgnpcbrwmr" path="res://assets/sprites/layers/parking_near_glass.png" id="cv12"]
-[ext_resource type="Texture2D" uid="uid://m6cl7dq7a8c4" path="res://assets/sprites/layers/parking_near_rubble.png" id="cv13"]
-[ext_resource type="Texture2D" uid="uid://crn37tx015w4t" path="res://assets/sprites/layers/parking_near_cone.png" id="cv14"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
 size = Vector3(1.5625, 2, 1.764706)
@@ -247,76 +247,26 @@ environment = SubResource("Environment_jv2wf")
 
 [node name="Near" type="Node3D" parent="." index="6" unique_id=65759552]
 
-[node name="Papers1" type="Sprite3D" parent="Near" index="0" unique_id=558790284]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71875, 0, 2.1)
-offset = Vector2(0, 3)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv11")
+[node name="Papers1" type="Node3D" parent="Near" index="0" unique_id=389476669 instance=ExtResource("19_jv2wf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72, 0, 2.1)
 
-[node name="Glass1" type="Sprite3D" parent="Near" index="1" unique_id=416421947]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09375, 0, 2.311765)
-offset = Vector2(0, 2.5)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv12")
+[node name="Papers2" type="Node3D" parent="Near" index="1" unique_id=989688631 instance=ExtResource("19_jv2wf")]
+transform = Transform3D(-0.58850116, 0, 0.80849636, 0, 1, 0, -0.80849636, 0, -0.58850116, 21.56, 0, 2.03)
 
-[node name="Rubble1" type="Sprite3D" parent="Near" index="2" unique_id=632126906]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8125, 0, 1.535294)
-offset = Vector2(0, 6)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv13")
+[node name="Glass1" type="Node3D" parent="Near" index="2" unique_id=489793612 instance=ExtResource("20_p67mw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09, 0, 2.31)
 
-[node name="Cone" type="Sprite3D" parent="Near" index="3" unique_id=551591826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.25, 0, 1.111765)
-offset = Vector2(0, 6)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv14")
+[node name="Glass2" type="Node3D" parent="Near" index="3" unique_id=1050480055 instance=ExtResource("20_p67mw")]
+transform = Transform3D(0.26749888, 0, 0.9635582, 0, 1, 0, -0.9635582, 0, 0.26749888, 28.59, 0, 2.28)
 
-[node name="Rubble2" type="Sprite3D" parent="Near" index="4" unique_id=1596515927]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3125, 0, 2.170588)
-offset = Vector2(0, 6)
-flip_h = true
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv13")
+[node name="Rubble1" type="Node3D" parent="Near" index="4" unique_id=1169332827 instance=ExtResource("21_um0eq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.81, 0, 1.85)
 
-[node name="Papers2" type="Sprite3D" parent="Near" index="5" unique_id=320168479]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5625, 0, 2.029412)
-offset = Vector2(0, 3)
-flip_h = true
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv11")
+[node name="Rubble2" type="Node3D" parent="Near" index="5" unique_id=575824382 instance=ExtResource("21_um0eq")]
+transform = Transform3D(-0.8568887, 0, 0.51550144, 0, 1, 0, -0.51550144, 0, -0.8568887, 16.31, 0, 2.17)
 
-[node name="Rubble3" type="Sprite3D" parent="Near" index="6" unique_id=2088602141]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.875, 0, 1.747059)
-offset = Vector2(0, 6)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv13")
+[node name="Rubble3" type="Node3D" parent="Near" index="6" unique_id=76658950 instance=ExtResource("21_um0eq")]
+transform = Transform3D(0.4535961, 0, 0.8912074, 0, 1, 0, -0.8912074, 0, 0.4535961, 26.88, 0, 1.85)
 
-[node name="Glass2" type="Sprite3D" parent="Near" index="7" unique_id=1086391595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.59375, 0, 2.276471)
-offset = Vector2(0, 2.5)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv12")
+[node name="Cone" type="Node3D" parent="Near" index="7" unique_id=1828522935 instance=ExtResource("22_aayy4")]
+transform = Transform3D(0.921061, 0, 0.38941833, 0, 1, 0, -0.38941833, 0, 0.921061, 12.25, 0, 1.75)

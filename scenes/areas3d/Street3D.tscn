@@ -1,19 +1,26 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cn5ahe1umtw6p"]
 
-[ext_resource type="PackedScene" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
-[ext_resource type="Script" path="res://scripts/interact_point_3d.gd" id="cv1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/sign_parking.png" id="cv2"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/props/burnt_car_frames.tres" id="cv3"]
-[ext_resource type="AudioStream" path="res://assets/sfx/loop_fire.ogg" id="cv4"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/utility_pole.png" id="cv5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/poster.png" id="cv6"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/sign_clinic.png" id="cv7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/street_near_bricks.png" id="cv8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/street_near_tire.png" id="cv9"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/street_near_plank.png" id="cv10"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_glass.png" id="cv11"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_papers.png" id="cv12"]
-[ext_resource type="Script" path="res://scripts/flicker_light_3d.gd" id="cv13"]
+[ext_resource type="PackedScene" uid="uid://bgv6ssqopi0hj" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/street/shell.tscn" id="2_318qr"]
+[ext_resource type="PackedScene" path="res://assets/models/street/far.tscn" id="3_0piwy"]
+[ext_resource type="PackedScene" path="res://assets/models/parking/car_wreck.tscn" id="4_at4iy"]
+[ext_resource type="PackedScene" path="res://assets/models/street/bus_stop.tscn" id="5_s3g3f"]
+[ext_resource type="PackedScene" path="res://assets/models/street/utility_pole.tscn" id="6_k4kvk"]
+[ext_resource type="PackedScene" path="res://assets/models/street/street_lamp.tscn" id="7_0xrr4"]
+[ext_resource type="SpriteFrames" uid="uid://c03p4m87yek3f" path="res://assets/sprites/props/fire_big_frames.tres" id="10_t35j7"]
+[ext_resource type="SpriteFrames" uid="uid://ds4g1dlj3nex1" path="res://assets/sprites/props/fire_small_frames.tres" id="12_yi236"]
+[ext_resource type="PackedScene" path="res://assets/models/street/burnt_car.tscn" id="13_qsau1"]
+[ext_resource type="PackedScene" path="res://assets/models/street/poster.tscn" id="14_076l2"]
+[ext_resource type="PackedScene" path="res://assets/models/common/bricks.tscn" id="15_w72le"]
+[ext_resource type="PackedScene" path="res://assets/models/common/tire.tscn" id="16_ihcvo"]
+[ext_resource type="PackedScene" path="res://assets/models/common/plank.tscn" id="17_ph4ut"]
+[ext_resource type="PackedScene" path="res://assets/models/common/glass_shards.tscn" id="18_eu5e1"]
+[ext_resource type="PackedScene" path="res://assets/models/common/papers.tscn" id="19_ai8vp"]
+[ext_resource type="PackedScene" path="res://assets/models/common/rubble.tscn" id="20_st0oq"]
+[ext_resource type="PackedScene" path="res://assets/models/common/cone.tscn" id="21_xufts"]
+[ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="AudioStream" uid="uid://de00sk256w1tk" path="res://assets/sfx/loop_fire.ogg" id="cv4"]
+[ext_resource type="Script" uid="uid://40fswadoecy6" path="res://scripts/flicker_light_3d.gd" id="cv13"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
 size = Vector3(0.9375, 2, 1.764706)
@@ -21,8 +28,8 @@ size = Vector3(0.9375, 2, 1.764706)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv2"]
 size = Vector3(4.375, 2, 3.388235)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cv3"]
-size = Vector3(3.125, 2, 0.352941)
+[sub_resource type="BoxShape3D" id="BoxShape3D_674te"]
+size = Vector3(4.2, 2, 1.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv4"]
 size = Vector3(0.9375, 2, 1.764706)
@@ -30,189 +37,186 @@ size = Vector3(0.9375, 2, 1.764706)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv5"]
 size = Vector3(1.25, 2, 1.764706)
 
-[node name="Street3D" instance=ExtResource("1")]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6nnt7"]
+sky_top_color = Color(0.43, 0.235, 0.14, 1)
+sky_horizon_color = Color(0.82, 0.5, 0.23, 1)
+sky_curve = 0.25
+ground_bottom_color = Color(0.2, 0.12, 0.08, 1)
+ground_horizon_color = Color(0.82, 0.5, 0.23, 1)
+sun_angle_max = 0.0
+use_debanding = false
 
-[node name="Near" type="Node3D" parent="."]
+[sub_resource type="Sky" id="Sky_u15uo"]
+sky_material = SubResource("ProceduralSkyMaterial_6nnt7")
 
-[node name="Back" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09375, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "back"
+[sub_resource type="Environment" id="Environment_5nd6u"]
+background_mode = 2
+sky = SubResource("Sky_u15uo")
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.38, 0.3, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 2
 
+[node name="Street3D" unique_id=322634366 instance=ExtResource("1")]
 
-[node name="Car" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.28125, 0, 0.088235)
-script = ExtResource("cv1")
-point_id = "car"
+[node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=812284124 instance=ExtResource("2_318qr")]
 
+[node name="Far" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=1901375809 instance=ExtResource("3_0piwy")]
 
-[node name="Poster" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "poster"
+[node name="Wreck1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=1876888199 instance=ExtResource("4_at4iy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0, -2.6)
 
+[node name="Wreck2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1514941096 instance=ExtResource("4_at4iy")]
+transform = Transform3D(-0.9950034, 0, -0.09984076, 0, 1, 0, 0.09984076, 0, -0.9950034, 26, 0, -2.6)
 
-[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "exit"
+[node name="BusStop1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=687780432 instance=ExtResource("5_s3g3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0.15, -4.4)
 
+[node name="BusStop2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=1247915219 instance=ExtResource("5_s3g3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1, 0.15, -4.4)
 
-[node name="Shape" type="CollisionShape3D" parent="Points/Back"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
-shape = SubResource("BoxShape3D_cv1")
+[node name="PoleTilted" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=1755616614 instance=ExtResource("6_k4kvk")]
+transform = Transform3D(0.990216, -0.13954312, 0, 0.13954312, 0.990216, 0, 0, 0, 1, 7.3, 0.15, -3.5)
 
+[node name="Lamp1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=1864155048 instance=ExtResource("7_0xrr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0.15, 3.3)
 
-[node name="Prop" type="Sprite3D" parent="Points/Back"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv2")
+[node name="Lamp2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=1056952662 instance=ExtResource("7_0xrr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0.15, 3.3)
 
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.105882)
-shape = SubResource("BoxShape3D_cv2")
-
-
-[node name="Prop" type="AnimatedSprite3D" parent="Points/Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6875, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-sprite_frames = ExtResource("cv3")
-animation = &"burn"
-autoplay = "burn"
-
-
-[node name="Block" type="StaticBody3D" parent="Points/Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Car/Block"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
-shape = SubResource("BoxShape3D_cv3")
-
-
-[node name="Fire" type="AudioStreamPlayer3D" parent="Points/Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9375, 0)
-stream = ExtResource("cv4")
-attenuation_model = 1
-unit_size = 3.90625
-max_distance = 15.625
-autoplay = true
-bus = &"Ambient"
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Poster"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015625, 1, 0.882353)
-shape = SubResource("BoxShape3D_cv4")
-
-
-[node name="Pole" type="Sprite3D" parent="Points/Poster"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015625, 2.1875, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv5")
-
-
-[node name="Prop" type="Sprite3D" parent="Points/Poster"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84375, 0.01)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv6")
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Exit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
-shape = SubResource("BoxShape3D_cv5")
-
-
-[node name="Prop" type="Sprite3D" parent="Points/Exit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv7")
-
-
-[node name="Bricks1" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6875, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 5)
-texture = ExtResource("cv8")
-
-
-[node name="Tire" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 2.452941)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 6)
-texture = ExtResource("cv9")
-
-
-[node name="Plank" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9375, 0, 2.523529)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 3.5)
-texture = ExtResource("cv10")
-
-
-[node name="Glass" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.375, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 2.5)
-texture = ExtResource("cv11")
-
-
-[node name="Papers" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5625, 0, 2.311765)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 3)
-texture = ExtResource("cv12")
-
-
-[node name="Bricks2" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6875, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-flip_h = true
-offset = Vector2(0, 5)
-texture = ExtResource("cv8")
-
-
-[node name="FireLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602)]
+[node name="FireLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=2048193616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.28125, 0.546875, 0.688235)
 light_color = Color(1, 0.55, 0.2, 1)
 light_energy = 2.5
-omni_range = 10
+omni_range = 10.0
 script = ExtResource("cv13")
 base_energy = 2.5
 pulse_speed = 4.0
 min_ratio = 0.6
 dropout_chance = 0.0
 follow = NodePath("../../Points/Car/Prop")
+
+[node name="Sun" type="DirectionalLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="1" unique_id=1508449637]
+transform = Transform3D(-0.9396926, -0.14454399, 0.30997556, 0, 0.90630776, 0.42261827, -0.3420202, 0.39713126, -0.8516507, 0, 0, 0)
+light_color = Color(1, 0.62, 0.35, 1)
+shadow_enabled = true
+
+[node name="Back" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="0" unique_id=2115498073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "back"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Back" index="0" unique_id=390703834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv1")
+
+[node name="Car" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=89824413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.28125, 0, 0.088235)
+script = ExtResource("cv1")
+point_id = "car"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Car" index="0" unique_id=1585672552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.105882)
+shape = SubResource("BoxShape3D_cv2")
+
+[node name="Prop" type="AnimatedSprite3D" parent="Points/Car" index="1" unique_id=481617923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.9, 0)
+pixel_size = 0.0625
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("10_t35j7")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="Block" type="StaticBody3D" parent="Points/Car" index="2" unique_id=1174795332]
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Car/Block" index="0" unique_id=1117641446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_674te")
+
+[node name="Fire" type="AudioStreamPlayer3D" parent="Points/Car" index="3" unique_id=1389630503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9375, 0)
+stream = ExtResource("cv4")
+attenuation_model = 1
+unit_size = 3.90625
+autoplay = true
+max_distance = 15.625
+bus = &"Ambient"
+
+[node name="FireSmall" type="AnimatedSprite3D" parent="Points/Car" index="4" unique_id=975259035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.35, 0.2)
+pixel_size = 0.0625
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("12_yi236")
+animation = &"burn"
+autoplay = "burn"
+frame = 2
+
+[node name="Wreck" type="Node3D" parent="Points/Car" index="5" unique_id=382285846 instance=ExtResource("13_qsau1")]
+transform = Transform3D(0.99820054, 0, 0.059964005, 0, 1, 0, -0.059964005, 0, 0.99820054, 0, 0, 0)
+
+[node name="Poster" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="2" unique_id=223586094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "poster"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Poster" index="0" unique_id=274881200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015625, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv4")
+
+[node name="Pole" type="Node3D" parent="Points/Poster" index="1" unique_id=58884620 instance=ExtResource("6_k4kvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, 0.15, -1.65)
+
+[node name="Prop" type="Node3D" parent="Points/Poster" index="2" unique_id=381915504 instance=ExtResource("14_076l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, 2.15, -1.49)
+
+[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="3" unique_id=1720561461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "exit"
+
+[node name="Shape" type="CollisionShape3D" parent="Points/Exit" index="0" unique_id=797795629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv5")
+
+[node name="Environment" parent="." index="5" unique_id=271570906]
+environment = SubResource("Environment_5nd6u")
+
+[node name="Near" type="Node3D" parent="." index="6" unique_id=2119926162]
+
+[node name="Bricks1" type="Node3D" parent="Near" index="0" unique_id=134874988 instance=ExtResource("15_w72le")]
+transform = Transform3D(0.921061, 0, 0.38941833, 0, 1, 0, -0.38941833, 0, 0.921061, 4.7, 0, 2.2)
+
+[node name="Bricks2" type="Node3D" parent="Near" index="1" unique_id=868280067 instance=ExtResource("15_w72le")]
+transform = Transform3D(-0.50484604, 0, 0.8632094, 0, 1, 0, -0.8632094, 0, -0.50484604, 29.7, 0, 2.2)
+
+[node name="Tire" type="Node3D" parent="Near" index="2" unique_id=1885618882 instance=ExtResource("16_ihcvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 2.2)
+
+[node name="Plank" type="Node3D" parent="Near" index="3" unique_id=211900797 instance=ExtResource("17_ph4ut")]
+transform = Transform3D(0.9553365, 0, 0.29552022, 0, 1, 0, -0.29552022, 0, 0.9553365, 15.9, 0, 2.2)
+
+[node name="Glass" type="Node3D" parent="Near" index="4" unique_id=130595353 instance=ExtResource("18_eu5e1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, 0, 2.2)
+
+[node name="Papers" type="Node3D" parent="Near" index="5" unique_id=361149456 instance=ExtResource("19_ai8vp")]
+transform = Transform3D(0.5403023, 0, 0.84147096, 0, 1, 0, -0.84147096, 0, 0.5403023, 26.6, 0, 2.2)
+
+[node name="Rubble1" type="Node3D" parent="Near" index="6" unique_id=2054732964 instance=ExtResource("20_st0oq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0.15, 3.8)
+
+[node name="Rubble2" type="Node3D" parent="Near" index="7" unique_id=141197537 instance=ExtResource("20_st0oq")]
+transform = Transform3D(-0.12884454, 0, 0.9916648, 0, 1, 0, -0.9916648, 0, -0.12884454, 28, 0.15, 3.8)
+
+[node name="HoleRubble1" type="Node3D" parent="Near" index="8" unique_id=1038827977 instance=ExtResource("20_st0oq")]
+transform = Transform3D(0.87758255, 0, 0.47942555, 0, 1, 0, -0.47942555, 0, 0.87758255, 16.2, 0, -1.65)
+
+[node name="HoleRubble2" type="Node3D" parent="Near" index="9" unique_id=1321798233 instance=ExtResource("20_st0oq")]
+transform = Transform3D(-0.666276, 0, 0.74570525, 0, 1, 0, -0.74570525, 0, -0.666276, 19.3, 0, -1.75)
+
+[node name="Cone1" type="Node3D" parent="Near" index="10" unique_id=1107334972 instance=ExtResource("21_xufts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 0, -2)
+
+[node name="Cone2" type="Node3D" parent="Near" index="11" unique_id=1152274773 instance=ExtResource("21_xufts")]
+transform = Transform3D(0.87758255, 0, 0.47942555, 0, 1, 0, -0.47942555, 0, 0.87758255, 20.3, 0, -2.2)

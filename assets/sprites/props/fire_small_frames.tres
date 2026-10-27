@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ds4g1dlj3nex1"]
+
+[ext_resource type="Texture2D" uid="uid://cut7asfghnyqt" path="res://assets/sprites/props/fire_small.png" id="1_h3jco"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4s3c"]
+atlas = ExtResource("1_h3jco")
+region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pfyt"]
+atlas = ExtResource("1_h3jco")
+region = Rect2(16, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id57v"]
+atlas = ExtResource("1_h3jco")
+region = Rect2(32, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtnu2"]
+atlas = ExtResource("1_h3jco")
+region = Rect2(48, 0, 16, 18)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4s3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pfyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id57v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtnu2")
+}],
+"loop": 1,
+"name": &"burn",
+"speed": 8.0
+}]

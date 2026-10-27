@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/common/glass_shards.gltf" id="1"]
+
+[node name="GlassShards" instance=ExtResource("1")]
