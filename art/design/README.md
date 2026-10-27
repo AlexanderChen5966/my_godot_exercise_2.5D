@@ -9,6 +9,7 @@
 | `b0/` | 2.5D B0 的比較圖（縱深兩種做法、人物受光、景深與霧、網頁版）；主角正面／背面設計腳本 `player_fb.py`（輸出到 `player_fb/`：每一格的 `.txt`、PNG、GIF 預覽、Pixelorama 逐格匯出 `export/` 與 spritesheet `sheet/`） |
 | `b1/` | 2.5D B1 的截圖（3D 主角與互動點、接上 Main、停車場、景深比較、其餘 6 區、網頁版） |
 | `b2/` | 2.5D B2 的停車場樣板：鏡頭比較 `b2-1_鏡頭比較.png`、配置圖與配色 `b2-1_配置圖.png`（由 `layout.py` 產生：`python3 art/design/b2/layout.py 輸出.png`）、模型 `b2-2_模型.png`、貼圖 `b2-3_貼圖.png`（設計腳本 `textures.py`：`python3 art/design/b2/textures.py art/design/b2/tex`，輸出每張的 `.txt`／`.png` 與 `preview.png`；Pixelorama 原始檔在 `art/textures/parking/*.pxo`，遊戲用 `assets/textures/parking/*.png`） |
+| `b3/` | 2.5D B3 其餘 6 區：各區的配置圖與配色（`<區域>_layout.py` 產生，例如 `python3 art/design/b3/street_layout.py 輸出.png`）與每一步的比較圖 |
 | `a3/` | 火焰 `fire.py`、燈管 `lamp.py`、婦人 `woman.py` 的設計腳本與每一格的設計圖、GIF 動態預覽、遊戲中的截圖 |
 
 - 設計腳本的用法：`python3 腳本.py 輸出資料夾`，會輸出每一格的 `.txt`；`magick x.txt PNG32:x.png` 轉成 PNG 匯入 Pixelorama。
