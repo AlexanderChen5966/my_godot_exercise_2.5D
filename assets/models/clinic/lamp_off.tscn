@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/clinic/lamp.gltf" id="1"]
+[ext_resource type="Material" path="res://assets/models/clinic/tube_off.tres" id="2"]
+
+[node name="LampOff" instance=ExtResource("1")]
+
+[node name="lamp" parent="." index="0"]
+surface_material_override/1 = ExtResource("2")

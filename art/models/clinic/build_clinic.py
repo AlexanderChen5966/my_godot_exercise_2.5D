@@ -126,6 +126,16 @@ class MB:
     def gquad(self, bl, br, tr, tl, mname, px=None, tile=1.0):
         return self.quad(G(*bl), G(*br), G(*tr), G(*tl), mname, px, tile)
 
+    def stain(self, cx, cy, z, rx, ry, mname="M_Blood", seg=14, seed=0):
+        """地上（朝上）的一灘血：不規則的橢圓多邊形，UV 只取 blood.png 中間的橢圓（貼圖四角是深紅的底色，不能整張貼）"""
+        pts, uvs = [], []
+        for i in range(seg):
+            a = 2 * math.pi * i / seg
+            k = 0.75 + 0.25 * abs(math.sin(a * 3 + seed) * math.cos(a * 2 + seed * 1.7))
+            pts.append((cx + math.cos(a) * rx * k, cy + math.sin(a) * ry * k, z))
+            uvs.append((0.5 + math.cos(a) * 0.34 * k, 0.5 + math.sin(a) * 0.32 * k))
+        return self.face(pts, mname, uvs=uvs)
+
     def box(self, x0, x1, y0, y1, z0, z1, mname, tile=1.0, fit=None, skip=()):
         """Blender 座標的方塊；fit＝{面: (材質, 像素範圍)} 給要貼整張圖的面（'-y' 是朝鏡頭的那面）"""
         F = {"-y": ((x0, y0, z0), (x1, y0, z0), (x1, y0, z1), (x0, y0, z1)),
@@ -289,7 +299,7 @@ def build_shell():
     mb.gquad((21.3, 1.3, z + 0.02), (22.3, 1.3, z + 0.02), (22.3, 2.0, z + 0.02), (21.3, 2.0, z + 0.02), "M_Posters", px=(32, 0, 96, 45))
     for x0, y0 in ((2.4, 1.45), (5.6, 1.6), (13.8, 1.7), (25.0, 1.55), (31.0, 1.5)):
         mb.gquad((x0, y0, z + 0.03), (x0 + 2.0, y0, z + 0.03), (x0 + 2.0, y0 + 1.5, z + 0.03), (x0, y0 + 1.5, z + 0.03), "M_IvyWall", px="all")
-    mb.gquad((1.8, 0.004, -2.5), (3.2, 0.004, -2.5), (3.2, 0.004, -3.0), (1.8, 0.004, -3.0), "M_Blood", px="all")
+    mb.stain(*G(2.5, 0.004, -2.75), 0.7, 0.28, seed=1)
     return mb.finish()
 
 
@@ -508,7 +518,8 @@ def build_gurney():
             mb.cyl((x, y, 0.07), 'Y', 0.07, 0.04, "M_Tire", seg=8)
     mb.box(-0.9, 0.9, -0.28, 0.28, 0.3, 0.32, "M_Metal")
     m = mb.mark()
-    mb.box(-0.95, 0.95, -0.3, 0.3, 0.74, 0.84, "M_Cloth", fit={"+z": ("M_Blood", "all")})
+    mb.box(-0.95, 0.95, -0.3, 0.3, 0.74, 0.84, "M_Cloth")
+    mb.stain(-0.15, 0.02, 0.842, 0.5, 0.22, seed=2)
     mb.box(0.62, 0.92, -0.22, 0.22, 0.84, 0.9, "M_Cloth")
     mb.xform(m, R('Z', 3))
     for x in (-0.6, 0.0, 0.6):
@@ -612,9 +623,9 @@ BUILDERS = [build_shell, build_bench, build_plant, build_counter, build_files, b
 PLACE = {
     "bench": [(4.0, 0, -4.4, 0), (23.7, 0, -4.4, 0)], "plant": [(6.4, 0, -4.5, 0)], "counter": [(11.9, 0, -3.4, 0)],
     "files": [(11.9, 0, -4.8, 0)], "wheelchair": [(15.4, 0, -3.0, 25), (29.4, 0, -3.6, -30)], "iv_stand": [(16.7, 0, -3.2, 0), (25.6, 0, -3.7, 0)],
-    "cart_boxes": [(31.3, 0, -4.55, 0)], "curtain": [(7.3, 0, -2.6, 0), (18.0, 0, -2.6, 0), (6.4, 0, 3.5, 0), (23.6, 0, 3.5, 0)],
+    "cart_boxes": [(31.3, 0, -4.55, 0)], "curtain": [(7.3, 0, -2.6, 0), (18.0, 0, -2.6, 0), (6.4, 0, 3.5, 0), (23.6, 0, 3.5, 0)],   # B3-2c：前景兩片改成 (x, 1.36, 3.3)、縮放 (0.8, 0.55, 1)，只從天花板垂下一半
     "cabinet": [(9.4, 0, -2.5, 0)], "clinic_chair": [(27.25, 0, -2.55, 0)], "stool": [(28.2, 0, -2.5, 0)], "gurney": [(14.8, 0, 0.3, -8)],
     "room_props": [(20.3, 0, -7.9, 0)], "lamp": [(5.0, 3.0, -1.0, 0), (12.0, 3.0, 0.5, 0), (18.0, 3.0, -1.0, 0), (30.0, 3.0, -1.0, 0)],
     "lamp_hang": [(22.5, 3.0, -1.0, 0)], "pills": [(4.7, 0, 2.2, 0), (31.7, 0, 2.2, 40)], "leaves": [(10.0, 0, 2.2, 0), (29.7, 0, 2.2, 70)],
-    "clipboard": [(17.2, 0, 2.2, 0)], "ivy_hang": [(13.0, 1.0, 3.5, 0), (16.8, 1.0, 3.5, 30)],
+    "clipboard": [(17.2, 0, 2.2, 0)], "ivy_hang": [(13.0, 1.0, 3.5, 0), (16.8, 1.0, 3.5, 30)],   # B3-2c：爬藤改成 (x, 1.9, 3.2)、縮放 0.6；lamp 在 Godot 用 lamp_off.tscn（燈管換 tube_off.tres），只有 lamp_hang 會閃
 }
