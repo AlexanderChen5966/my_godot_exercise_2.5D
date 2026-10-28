@@ -1,91 +1,127 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cfliq60ifiij2"]
 
-[ext_resource type="PackedScene" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
-[ext_resource type="Script" path="res://scripts/interact_point_3d.gd" id="cv1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/wall_plaster.png" id="cv2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/wall_near_plaster.png" id="cv3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/wall_near_charcoal.png" id="cv4"]
-[ext_resource type="Script" path="res://scripts/flicker_light_3d.gd" id="cv5"]
+[ext_resource type="PackedScene" uid="uid://bgv6ssqopi0hj" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/wall/shell.tscn" id="2_fo1tr"]
+[ext_resource type="PackedScene" path="res://assets/models/wall/chair.tscn" id="3_j036r"]
+[ext_resource type="PackedScene" path="res://assets/models/common/plank.tscn" id="4_nvclv"]
+[ext_resource type="PackedScene" path="res://assets/models/ruins/front_wall.tscn" id="8_kmxxw"]
+[ext_resource type="PackedScene" path="res://assets/models/home/doorframe.tscn" id="9_iigod"]
+[ext_resource type="Texture2D" uid="uid://ck0wyqxn23qfc" path="res://assets/sprites/layers/home_near_bear.png" id="10_imri0"]
+[ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="Texture2D" uid="uid://dkgqbb7dpljdj" path="res://assets/sprites/layers/wall_near_plaster.png" id="cv3"]
+[ext_resource type="Texture2D" uid="uid://bye128l41ipjt" path="res://assets/sprites/layers/wall_near_charcoal.png" id="cv4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
 size = Vector3(2.5, 2, 1.764706)
 
-[node name="Wall3D" instance=ExtResource("1")]
+[sub_resource type="Environment" id="Environment_k52lh"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.025, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.42, 0.5, 1)
+ambient_light_energy = 0.35
+tonemap_mode = 2
 
-[node name="Near" type="Node3D" parent="."]
+[node name="Wall3D" unique_id=1912072081 instance=ExtResource("1")]
+dof_focus_range = 4.0
 
-[node name="Wall" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+[node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=164315388 instance=ExtResource("2_fo1tr")]
+
+[node name="Chair" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=259577364 instance=ExtResource("3_j036r")]
+transform = Transform3D(0.9659257, 0, -0.25881964, 0, 1, 0, 0.25881964, 0, 0.9659257, 11, 0, -2.6)
+
+[node name="Plank1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=847131809 instance=ExtResource("4_nvclv")]
+transform = Transform3D(0.93971515, 0, 0.34195828, 0, 1, 0, -0.34195828, 0, 0.93971515, 16.5, 0, -2.7)
+
+[node name="Plank2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1763255108 instance=ExtResource("4_nvclv")]
+transform = Transform3D(0.9064482, 0, -0.42231706, 0, 1, 0, 0.42231706, 0, 0.9064482, 33, 0, -2.6)
+
+[node name="Moonlight" type="SpotLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=188224276]
+transform = Transform3D(1, 0, 0, 0, 0.6547081, 0.75588185, 0, -0.75588185, 0.6547081, 23.44, 5, -1)
+light_color = Color(0.75, 0.82, 1, 1)
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 9.0
+spot_angle = 24.0
+
+[node name="RoomGlow" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="1" unique_id=1038326815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2, 1.4, -6.8)
+light_color = Color(1, 0.7, 0.42, 1)
+light_energy = 1.6
+shadow_enabled = true
+omni_range = 4.5
+
+[node name="DoorSpill" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="2" unique_id=1878089616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.1, 1, -4.3)
+light_color = Color(1, 0.7, 0.42, 1)
+light_energy = 0.8
+omni_range = 3.0
+
+[node name="Wall" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="0" unique_id=1794761740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4375, 0, -1.852941)
 script = ExtResource("cv1")
 point_id = "wall"
 
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Wall"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Wall" index="0" unique_id=142951682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv1")
 
+[node name="Environment" parent="." index="5" unique_id=271570906]
+environment = SubResource("Environment_k52lh")
 
-[node name="Plaster" type="Sprite3D" parent="Points/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.046875, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv2")
+[node name="Near" type="Node3D" parent="." index="6" unique_id=257872842]
 
-
-[node name="Words" type="Label3D" parent="Points/Wall"]
-transform = Transform3D(0.9992, 0.039989, 0, -0.039989, 0.9992, 0, 0, 0, 1, 0, 3.359375, 0.03)
-pixel_size = 0.015625
-modulate = Color(0.35, 0.1, 0.08, 1)
-outline_size = 0
-shaded = true
-text = "I'm still here."
-font_size = 40
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-width = 300
-
-
-[node name="Plaster1" type="Sprite3D" parent="Near"]
+[node name="Plaster1" type="Sprite3D" parent="Near" index="0" unique_id=1918795414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 2.382353)
+offset = Vector2(0, 4.5)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-offset = Vector2(0, 4.5)
 texture = ExtResource("cv3")
 
-
-[node name="Charcoal" type="Sprite3D" parent="Near"]
+[node name="Charcoal" type="Sprite3D" parent="Near" index="1" unique_id=1252642864]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1875, 0, 2.452941)
+offset = Vector2(0, 2.5)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-offset = Vector2(0, 2.5)
 texture = ExtResource("cv4")
 
-
-[node name="Plaster2" type="Sprite3D" parent="Near"]
+[node name="Plaster2" type="Sprite3D" parent="Near" index="2" unique_id=924201199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6875, 0, 2.382353)
+offset = Vector2(0, 4.5)
+flip_h = true
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-flip_h = true
-offset = Vector2(0, 4.5)
 texture = ExtResource("cv3")
 
+[node name="FrontWall1" type="Node3D" parent="Near" index="3" unique_id=168713156 instance=ExtResource("8_kmxxw")]
+transform = Transform3D(0.8, 0, 0, 0, 0.45, 0, 0, 0, 1, 7.2, 0, 3.5)
 
-[node name="WallLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4375, 4.21875, 0)
-light_color = Color(0.8, 0.86, 1, 1)
-light_energy = 0.8
-omni_range = 12
-script = ExtResource("cv5")
-base_energy = 0.8
-pulse_speed = 0.2
-min_ratio = 0.8
-dropout_chance = 0.0
+[node name="FrontWall2" type="Node3D" parent="Near" index="4" unique_id=661532930 instance=ExtResource("8_kmxxw")]
+transform = Transform3D(-0.8, 0, -7.2399803e-06, 0, 0.45, 0, 5.791984e-06, 0, -1, 34.5, 0, 3.5)
+
+[node name="Doorframe" type="Node3D" parent="Near" index="5" unique_id=158506362 instance=ExtResource("9_iigod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 3.3)
+
+[node name="Bear" type="Sprite3D" parent="Near" index="6" unique_id=879338551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9, 0, -5.2)
+offset = Vector2(0, 7)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("10_imri0")
+
+[node name="CharcoalWall" type="Sprite3D" parent="Near" index="7" unique_id=1369630015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.9, 0, -3.35)
+offset = Vector2(0, 2.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("cv4")
