@@ -1,21 +1,29 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cm3y3wiscq7wg"]
 
-[ext_resource type="PackedScene" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
-[ext_resource type="Script" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="PackedScene" uid="uid://bgv6ssqopi0hj" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/shell.tscn" id="2_r5hqj"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/rack.tscn" id="3_xo73o"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/alarm.tscn" id="4_2d15f"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/lab_bench.tscn" id="5_bvqh1"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/bench_burnt.tscn" id="6_85ixu"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/hanging_cable.tscn" id="7_ay0gh"]
+[ext_resource type="SpriteFrames" uid="uid://c03p4m87yek3f" path="res://assets/sprites/props/fire_big_frames.tres" id="8_fftkl"]
+[ext_resource type="SpriteFrames" uid="uid://ds4g1dlj3nex1" path="res://assets/sprites/props/fire_small_frames.tres" id="9_k62uo"]
+[ext_resource type="AudioStream" uid="uid://de00sk256w1tk" path="res://assets/sfx/loop_fire.ogg" id="10_pj7u4"]
+[ext_resource type="AudioStream" uid="uid://u4ang0f2boi4" path="res://assets/sfx/loop_alarm.ogg" id="12_5n5ks"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/records.tscn" id="15_t2esw"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/crates.tscn" id="18_xcuk4"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/cart.tscn" id="19_abmdl"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/vials.tscn" id="20_f20oc"]
+[ext_resource type="PackedScene" path="res://assets/models/lab/floor_cable.tscn" id="21_cjbfa"]
+[ext_resource type="PackedScene" path="res://assets/models/common/glass_shards.tscn" id="22_2x30e"]
+[ext_resource type="PackedScene" path="res://assets/models/clinic/clipboard.tscn" id="23_cjgd1"]
+[ext_resource type="PackedScene" path="res://assets/models/common/papers.tscn" id="24_y6uw3"]
+[ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/characters/scientist_frames_3d.tres" id="cv2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_records.png" id="cv3"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/characters/guard_frames_3d.tres" id="cv4"]
-[ext_resource type="Script" path="res://scripts/gun_torch_3d.gd" id="cv5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/exit_door_broken.png" id="cv6"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_crates.png" id="cv7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_vent.png" id="cv8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/lab_near_vials.png" id="cv9"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/lab_near_cable.png" id="cv10"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_glass.png" id="cv11"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/clinic_near_clipboard.png" id="cv12"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_papers.png" id="cv13"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/lab_cart.png" id="cv14"]
-[ext_resource type="Script" path="res://scripts/flicker_light_3d.gd" id="cv15"]
+[ext_resource type="Script" uid="uid://0r4vbk1nw00" path="res://scripts/gun_torch_3d.gd" id="cv5"]
+[ext_resource type="Script" uid="uid://40fswadoecy6" path="res://scripts/flicker_light_3d.gd" id="cv15"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
 size = Vector3(2.5, 2, 3.529412)
@@ -35,67 +43,194 @@ size = Vector3(2.65625, 2, 3.388235)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv6"]
 size = Vector3(1.71875, 2, 3.388235)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cv7"]
-size = Vector3(0.9375, 2, 0.352941)
+[sub_resource type="BoxShape3D" id="BoxShape3D_guxx6"]
+size = Vector3(1.5, 2, 0.75)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv8"]
 size = Vector3(1.25, 2, 1.764706)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cv9"]
-size = Vector3(2.1875, 2, 0.352941)
+[sub_resource type="Environment" id="Environment_2vgsc"]
+background_mode = 1
+background_color = Color(0.02, 0.015, 0.015, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.34, 0.3, 1)
+ambient_light_energy = 0.3
+tonemap_mode = 2
 
-[node name="Lab3D" instance=ExtResource("1")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ureae"]
+size = Vector3(1.3, 2, 0.6)
 
-[node name="Near" type="Node3D" parent="."]
+[node name="Lab3D" unique_id=1116277923 instance=ExtResource("1")]
 
-[node name="Scientist" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+[node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=304875917 instance=ExtResource("2_r5hqj")]
+
+[node name="Rack1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=788629793 instance=ExtResource("3_xo73o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, -3.35)
+
+[node name="Rack2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=536635045 instance=ExtResource("3_xo73o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8, 0, -3.35)
+
+[node name="Rack3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1551574663 instance=ExtResource("3_xo73o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6, 0, -3.35)
+
+[node name="Alarm1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=1555094683 instance=ExtResource("4_2d15f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 2.5, -3.6)
+
+[node name="Alarm2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=31760799 instance=ExtResource("4_2d15f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 2.5, -3.6)
+
+[node name="Alarm3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=1070694027 instance=ExtResource("4_2d15f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6, 2.5, -3.6)
+
+[node name="Bench1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=68636594 instance=ExtResource("5_bvqh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5.3)
+
+[node name="Bench2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=2146617782 instance=ExtResource("5_bvqh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -5.4)
+
+[node name="Bench3" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="9" unique_id=930146286 instance=ExtResource("5_bvqh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6, 0, -5)
+
+[node name="Bench4" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="10" unique_id=1903709468 instance=ExtResource("5_bvqh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, 0, -5.3)
+
+[node name="BenchBurnt" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="11" unique_id=21156375 instance=ExtResource("6_85ixu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 0, -5.2)
+
+[node name="HangingCable1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="12" unique_id=819070632 instance=ExtResource("7_ay0gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 3.1)
+
+[node name="HangingCable2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="13" unique_id=1381098455 instance=ExtResource("7_ay0gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 3, 3.1)
+
+[node name="Fire" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="14" unique_id=293640165]
+
+[node name="Door" type="AnimatedSprite3D" parent="Geometry/Fire" index="0" unique_id=702985577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0.68, -3.75)
+pixel_size = 0.0625
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("8_fftkl")
+animation = &"burn"
+autoplay = "burn"
+
+[node name="Room" type="AnimatedSprite3D" parent="Geometry/Fire" index="1" unique_id=1415069834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 1.3, -4.6)
+pixel_size = 0.0625
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("8_fftkl")
+animation = &"burn"
+autoplay = "burn"
+frame = 2
+
+[node name="Floor" type="AnimatedSprite3D" parent="Geometry/Fire" index="2" unique_id=500366438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3, 0.56, -3.3)
+pixel_size = 0.0625
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("9_k62uo")
+animation = &"burn"
+autoplay = "burn"
+frame = 1
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="Geometry/Fire" index="3" unique_id=1353290899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0.9, -3.6)
+stream = ExtResource("10_pj7u4")
+attenuation_model = 1
+unit_size = 3.9
+autoplay = true
+max_distance = 15.6
+bus = &"Ambient"
+
+[node name="FireLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=822446469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 1, -2.9)
+light_color = Color(1, 0.55, 0.2, 1)
+light_energy = 2.5
+omni_range = 8.0
+script = ExtResource("cv15")
+base_energy = 2.5
+pulse_speed = 4.0
+min_ratio = 0.6
+dropout_chance = 0.0
+follow = NodePath("../../Geometry/Fire/Door")
+
+[node name="ExitGlow" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="1" unique_id=1154976880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7, 1.6, -4.6)
+light_color = Color(1, 0.92, 0.72, 1)
+light_energy = 1.6
+omni_range = 5.5
+
+[node name="Alarm1" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="2" unique_id=1001708213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 2.35, -3.2)
+light_color = Color(1, 0.15, 0.1, 1)
+light_energy = 2.0
+omni_range = 7.0
+script = ExtResource("cv15")
+base_energy = 2.0
+pulse_speed = 5.0
+min_ratio = 0.2
+dropout_chance = 0.0
+
+[node name="Siren" type="AudioStreamPlayer3D" parent="Lights/Alarm1" index="0" unique_id=1297224899]
+stream = ExtResource("12_5n5ks")
+attenuation_model = 1
+volume_db = -8.0
+unit_size = 3.9
+autoplay = true
+max_distance = 11.0
+bus = &"Ambient"
+
+[node name="Alarm2" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="3" unique_id=1243837335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 2.35, -3.2)
+light_color = Color(1, 0.15, 0.1, 1)
+light_energy = 2.0
+omni_range = 7.0
+script = ExtResource("cv15")
+base_energy = 2.0
+pulse_speed = 5.0
+min_ratio = 0.2
+dropout_chance = 0.0
+
+[node name="Siren" type="AudioStreamPlayer3D" parent="Lights/Alarm2" index="0" unique_id=1788307427]
+stream = ExtResource("12_5n5ks")
+attenuation_model = 1
+volume_db = -8.0
+unit_size = 3.9
+autoplay = true
+max_distance = 11.0
+bus = &"Ambient"
+
+[node name="Alarm3" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="4" unique_id=1881730293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6, 2.35, -3.2)
+light_color = Color(1, 0.15, 0.1, 1)
+light_energy = 2.0
+omni_range = 7.0
+script = ExtResource("cv15")
+base_energy = 2.0
+pulse_speed = 5.0
+min_ratio = 0.2
+dropout_chance = 0.0
+
+[node name="Siren" type="AudioStreamPlayer3D" parent="Lights/Alarm3" index="0" unique_id=1617316234]
+stream = ExtResource("12_5n5ks")
+attenuation_model = 1
+volume_db = -8.0
+unit_size = 3.9
+autoplay = true
+max_distance = 11.0
+bus = &"Ambient"
+
+[node name="Scientist" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="0" unique_id=193562276]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9375, 0, -0.017647)
 script = ExtResource("cv1")
 point_id = "scientist"
 
-
-[node name="Records" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "records"
-
-
-[node name="Guard" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.78125, 0, -0.017647)
-script = ExtResource("cv1")
-point_id = "guard"
-
-
-[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "exit"
-
-
-[node name="CartHide" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.84375, 0, 0.264706)
-script = ExtResource("cv1")
-point_id = "cart_hide"
-
-
-[node name="Crates" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, 0.264706)
-script = ExtResource("cv1")
-point_id = "crates"
-
-
-[node name="Vent" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.140625, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "vent"
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Scientist"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Scientist" index="0" unique_id=1830418273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.070588)
 shape = SubResource("BoxShape3D_cv1")
 
-
-[node name="Figure" type="AnimatedSprite3D" parent="Points/Scientist"]
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Scientist" index="1" unique_id=1564046198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84375, 0.75, 0)
 pixel_size = 0.03125
 shaded = true
@@ -105,27 +240,28 @@ sprite_frames = ExtResource("cv2")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="Records" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=1106366879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "records"
 
-[node name="Shape" type="CollisionShape3D" parent="Points/Records"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Records" index="0" unique_id=1260714878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv2")
 
+[node name="Model" type="Node3D" parent="Points/Records" index="1" unique_id=505980816 instance=ExtResource("15_t2esw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4)
 
-[node name="Prop" type="Sprite3D" parent="Points/Records"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15625, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv3")
+[node name="Guard" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="2" unique_id=588644500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.78125, 0, -0.017647)
+script = ExtResource("cv1")
+point_id = "guard"
 
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Guard"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Guard" index="0" unique_id=695843773]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.070588)
 shape = SubResource("BoxShape3D_cv3")
 
-
-[node name="Figure" type="AnimatedSprite3D" parent="Points/Guard"]
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Guard" index="1" unique_id=658946437]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.859375, 0.75, 0)
 pixel_size = 0.03125
 shaded = true
@@ -135,9 +271,7 @@ sprite_frames = ExtResource("cv4")
 animation = &"idle"
 autoplay = "idle"
 
-
-[node name="Torch" type="SpotLight3D" parent="Points/Guard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="Torch" type="SpotLight3D" parent="Points/Guard" index="2" unique_id=140226326]
 light_color = Color(1, 0.92, 0.75, 1)
 light_energy = 2.6
 spot_range = 6.0
@@ -148,160 +282,78 @@ idle_frames = PackedVector3Array(2.6, 29, 22, 3.6, 30.5, 28, 4.7, 31.8, 34, 3.6,
 event_frame = Vector3(1, 22.5, 0)
 floor_reach_px = 266.24
 
+[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="3" unique_id=860290600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "exit"
 
-[node name="Shape" type="CollisionShape3D" parent="Points/Exit"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Exit" index="0" unique_id=1565557332]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv4")
 
+[node name="CartHide" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="4" unique_id=223066556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.84375, 0, 0.264706)
+script = ExtResource("cv1")
+point_id = "cart_hide"
 
-[node name="Prop" type="Sprite3D" parent="Points/Exit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1875, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv6")
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/CartHide"]
+[node name="Shape" type="CollisionShape3D" parent="Points/CartHide" index="0" unique_id=241654184]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.282353)
 shape = SubResource("BoxShape3D_cv5")
 
+[node name="Crates" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="5" unique_id=778792633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, 0.264706)
+script = ExtResource("cv1")
+point_id = "crates"
 
-[node name="Shape" type="CollisionShape3D" parent="Points/Crates"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Crates" index="0" unique_id=1100106914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.282353)
 shape = SubResource("BoxShape3D_cv6")
 
+[node name="Block" type="StaticBody3D" parent="Points/Crates" index="1" unique_id=1555176331]
 
-[node name="Prop" type="Sprite3D" parent="Points/Crates"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv7")
+[node name="Shape" type="CollisionShape3D" parent="Points/Crates/Block" index="0" unique_id=1377371101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_guxx6")
 
+[node name="Model" type="Node3D" parent="Points/Crates" index="2" unique_id=728255184 instance=ExtResource("18_xcuk4")]
 
-[node name="Block" type="StaticBody3D" parent="Points/Crates"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="Vent" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="6" unique_id=365317887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.140625, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "vent"
 
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Crates/Block"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
-shape = SubResource("BoxShape3D_cv7")
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Vent"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Vent" index="0" unique_id=147895254]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv8")
 
+[node name="Environment" parent="." index="5" unique_id=271570906]
+environment = SubResource("Environment_2vgsc")
 
-[node name="Prop" type="Sprite3D" parent="Points/Vent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3125, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv8")
+[node name="Near" type="Node3D" parent="." index="6" unique_id=899430800]
 
-
-[node name="Cart" type="StaticBody3D" parent="Near"]
+[node name="Cart" type="StaticBody3D" parent="Near" index="0" unique_id=1166745206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.84375, 0, 0.264706)
 
+[node name="Shape" type="CollisionShape3D" parent="Near/Cart" index="0" unique_id=1723508149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ureae")
 
-[node name="Vials1" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.15625, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 4)
-texture = ExtResource("cv9")
+[node name="Model" type="Node3D" parent="Near/Cart" index="1" unique_id=1987644048 instance=ExtResource("19_abmdl")]
 
+[node name="Vials1" type="Node3D" parent="Near" index="1" unique_id=1320889200 instance=ExtResource("20_f20oc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 2.3)
 
-[node name="Cable" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.375, 0, 2.452941)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 3.5)
-texture = ExtResource("cv10")
+[node name="Vials2" type="Node3D" parent="Near" index="2" unique_id=1909384689 instance=ExtResource("20_f20oc")]
+transform = Transform3D(0.86602527, 0, 0.50000024, 0, 1, 0, -0.50000024, 0, 0.86602527, 32, 0, 2.3)
 
+[node name="Cable" type="Node3D" parent="Near" index="3" unique_id=270498541 instance=ExtResource("21_cjbfa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 0, 2.3)
 
-[node name="Glass" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.53125, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 2.5)
-texture = ExtResource("cv11")
+[node name="Glass" type="Node3D" parent="Near" index="4" unique_id=137684853 instance=ExtResource("22_2x30e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 2.3)
 
+[node name="Clipboard" type="Node3D" parent="Near" index="5" unique_id=1857397804 instance=ExtResource("23_cjgd1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7, 0, 2.3)
 
-[node name="Clipboard" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.65625, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-offset = Vector2(0, 5)
-texture = ExtResource("cv12")
-
-
-[node name="Papers" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.90625, 0, 2.311765)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-flip_h = true
-offset = Vector2(0, 3)
-texture = ExtResource("cv13")
-
-
-[node name="Vials2" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.03125, 0, 2.382353)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-flip_h = true
-offset = Vector2(0, 4)
-texture = ExtResource("cv9")
-
-
-[node name="VentExit" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.46875, 0, -2.558824)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-flip_h = true
-texture = ExtResource("cv8")
-
-
-[node name="Sprite" type="Sprite3D" parent="Near/Cart"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59375, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv14")
-
-
-[node name="Shape" type="CollisionShape3D" parent="Near/Cart"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
-shape = SubResource("BoxShape3D_cv9")
-
-
-[node name="AlarmLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 7.03125, 0)
-light_color = Color(1, 0.15, 0.1, 1)
-light_energy = 3.0
-omni_range = 16
-script = ExtResource("cv15")
-base_energy = 3.0
-pulse_speed = 5.0
-min_ratio = 0.2
-dropout_chance = 0.0
+[node name="Papers" type="Node3D" parent="Near" index="6" unique_id=401651503 instance=ExtResource("24_y6uw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9, 0, 2.3)

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/lab/floor_cable.gltf" id="1"]
+
+[node name="FloorCable" instance=ExtResource("1")]

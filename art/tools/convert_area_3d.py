@@ -31,7 +31,7 @@ SCRIPTS_3D = {
 root, name = sys.argv[1], sys.argv[2]
 regen_lights = "--lights" in sys.argv[3:]
 # B2 起換成模型、改用 Toolkit 手動維護的區域：重跑會把 2D 時期的道具像素圖加回來，所以預設不轉（要轉加 --force）
-MANUAL = {"ParkingLot", "Street", "Clinic"}
+MANUAL = {"ParkingLot", "Street", "Clinic", "Lab"}
 if name in MANUAL and "--force" not in sys.argv[3:]:
     sys.exit(f"{name} 已經換成模型（B2），改用 Toolkit 手動維護；確定要重新產生互動點與近景時加 --force")
 src = open(f"{root}/scenes/areas/{name}.tscn", encoding="utf-8").read()
