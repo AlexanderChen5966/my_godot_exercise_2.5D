@@ -1,4 +1,6 @@
-# B3-4b 參考用：像素風的天空背景平面（B 版），和漸層天空（A 版）比較用；還沒決定採用，不放進 assets/。
+# B3-4 廢墟的像素天空（B 版，作者 2026-10-28 採用；漸層天空 A 版當備案，見 docs/2.5D_天空與陽光.md）。
+# B3-4c 起是正式素材：Pixelorama 存成 art/textures/ruins/sky.pxo、匯出 assets/textures/ruins/sky.png。
+# 左右無縫（網點 2 格一循環、雲帶用 % W 繞回、太陽與煙不碰兩端），之後改 HD-2D 時可以包成 360° 的地平線帶。
 # 平面 96 × 40 m、放在 z −45，4 像素＝1 m（從鏡頭看過去，一格天空像素和人物的像素差不多大）。
 # 用法：python3 art/design/b3/sky_pixel_test.py 輸出.png
 import math, sys
