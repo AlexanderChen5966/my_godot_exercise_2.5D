@@ -26,6 +26,8 @@ const SCREEN_HEIGHT := 768.0
 @export var camera_distance := 7.2   # 公尺
 @export var camera_look := 1.6       # 鏡頭看的高度（公尺）
 @export var camera_tilt := 5.0       # 往下看的角度
+## 景深：焦點（主角）前後幾公尺內清楚；B3-5c 舊家牆上的字在後牆、離主角 3.6 公尺，設 4 才讀得出來
+@export var dof_focus_range := 2.0
 
 @export_group("光影")
 ## 主角身上的光（手電筒）的亮度與範圍；衝動機制的閃爍以 flashlight_energy 為基準（Main 傳給 impulse_fx）
@@ -58,6 +60,8 @@ func _ready() -> void:
 	if auto_graybox and has_node("Geometry") and $Geometry.get_child_count() == 0:
 		_build_graybox()
 	camera.make_current()
+	if _dof:
+		_dof.set_shader_parameter("focus_range", dof_focus_range)   # 每一區進場時都設（材質是各區共用的）
 	# 位置音效以主角為聽者（和 2D 版的鏡頭在主角身上一樣）；鏡頭離場景十幾公尺，用鏡頭當聽者會超出音效的範圍
 	if has_node("Player/Listener"):
 		$Player/Listener.make_current()

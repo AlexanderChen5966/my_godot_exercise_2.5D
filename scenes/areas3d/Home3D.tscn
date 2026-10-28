@@ -1,29 +1,31 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://crht888dbq0kw"]
 
-[ext_resource type="PackedScene" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
-[ext_resource type="Script" path="res://scripts/interact_point_3d.gd" id="cv1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/home_room_door.png" id="cv2"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/characters/daughter_frames_3d.tres" id="cv3"]
-[ext_resource type="Script" path="res://scripts/idle_variation_3d.gd" id="cv4"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/home_window.png" id="cv5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/home_door.png" id="cv6"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/home_near_crayons.png" id="cv7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/home_near_bear.png" id="cv8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/home_near_frame.png" id="cv9"]
-[ext_resource type="Texture2D" path="res://assets/sprites/layers/parking_near_papers.png" id="cv10"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/home_wardrobe.png" id="cv11"]
-[ext_resource type="Script" path="res://scripts/flicker_light_3d.gd" id="cv12"]
+[ext_resource type="PackedScene" uid="uid://bgv6ssqopi0hj" path="res://scenes/areas3d/AreaBase3D.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/home/shell.tscn" id="2_5qmdo"]
+[ext_resource type="PackedScene" path="res://assets/models/home/outside.tscn" id="3_djogq"]
+[ext_resource type="PackedScene" path="res://assets/models/home/bookshelf.tscn" id="4_5con6"]
+[ext_resource type="PackedScene" path="res://assets/models/home/sofa.tscn" id="5_8hlcl"]
+[ext_resource type="PackedScene" path="res://assets/models/home/floor_lamp.tscn" id="6_hs5po"]
+[ext_resource type="PackedScene" path="res://assets/models/home/coffee_table.tscn" id="7_y0w1b"]
+[ext_resource type="PackedScene" path="res://assets/models/home/dining.tscn" id="8_3dwss"]
+[ext_resource type="PackedScene" path="res://assets/models/home/counter.tscn" id="9_kw5kn"]
+[ext_resource type="PackedScene" path="res://assets/models/home/fridge.tscn" id="10_e6dti"]
+[ext_resource type="PackedScene" path="res://assets/models/home/kid_bed.tscn" id="11_1j0ym"]
+[ext_resource type="PackedScene" path="res://assets/models/home/hanging_board.tscn" id="12_jbvce"]
+[ext_resource type="PackedScene" path="res://assets/models/home/wardrobe.tscn" id="16_0qy61"]
+[ext_resource type="PackedScene" path="res://assets/models/home/doorframe.tscn" id="21_fkuec"]
+[ext_resource type="PackedScene" path="res://assets/models/common/papers.tscn" id="22_m1q8j"]
+[ext_resource type="PackedScene" path="res://assets/models/common/plank.tscn" id="23_bqxkb"]
+[ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
+[ext_resource type="SpriteFrames" uid="uid://cdt2bpboyam0p" path="res://assets/sprites/characters/daughter_frames_3d.tres" id="cv3"]
+[ext_resource type="Script" uid="uid://tgg444jwpwd8" path="res://scripts/idle_variation_3d.gd" id="cv4"]
+[ext_resource type="Texture2D" uid="uid://cxg0rce38g2qd" path="res://assets/sprites/layers/home_near_crayons.png" id="cv7"]
+[ext_resource type="Texture2D" uid="uid://ck0wyqxn23qfc" path="res://assets/sprites/layers/home_near_bear.png" id="cv8"]
+[ext_resource type="Texture2D" uid="uid://002hm5sic82v" path="res://assets/sprites/layers/home_near_frame.png" id="cv9"]
+[ext_resource type="Texture2D" uid="uid://dgcn27mn37xss" path="res://assets/sprites/layers/parking_near_papers.png" id="cv10"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
 size = Vector3(1.875, 2, 1.764706)
-
-[sub_resource type="QuadMesh" id="QuadMesh_cv2"]
-size = Vector2(1.5625, 0.9375)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv3"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.85, 0.6, 0.45, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv4"]
 size = Vector3(1.5625, 2, 1.764706)
@@ -34,82 +36,129 @@ size = Vector3(2.5, 2, 3.529412)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv6"]
 size = Vector3(1.5625, 2, 1.764706)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cv7"]
-size = Vector3(2.34375, 2, 0.352941)
+[sub_resource type="Environment" id="Environment_2lea1"]
+background_mode = 1
+background_color = Color(0.05, 0.04, 0.035, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.42, 0.32, 1)
+ambient_light_energy = 0.45
+tonemap_mode = 2
 
-[node name="Home3D" instance=ExtResource("1")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rd8n6"]
+size = Vector3(1.85, 1.2, 0.55)
 
-[node name="Near" type="Node3D" parent="."]
+[node name="Home3D" unique_id=471103727 instance=ExtResource("1")]
+dof_focus_range = 4.0
 
-[node name="Wall" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+[node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=1215225505 instance=ExtResource("2_5qmdo")]
+
+[node name="Outside" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=2005061472 instance=ExtResource("3_djogq")]
+
+[node name="Bookshelf" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=2142120704 instance=ExtResource("4_5con6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0, -3.25)
+
+[node name="Sofa" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=542391716 instance=ExtResource("5_8hlcl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, -3)
+
+[node name="FloorLamp" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=29739314 instance=ExtResource("6_hs5po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0, -3.25)
+
+[node name="CoffeeTable" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=768556401 instance=ExtResource("7_y0w1b")]
+transform = Transform3D(0.9659257, 0, 0.25881964, 0, 1, 0, -0.25881964, 0, 0.9659257, 11.6, 0, -2.4)
+
+[node name="Dining" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=1841701418 instance=ExtResource("8_3dwss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.9, 0, -2.5)
+
+[node name="Counter" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=331733548 instance=ExtResource("9_kw5kn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -3.28)
+
+[node name="Fridge" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=559480271 instance=ExtResource("10_e6dti")]
+transform = Transform3D(0.99452394, 0, -0.10450882, 0, 1, 0, 0.10450882, 0, 0.99452394, 35.2, 0, -3.2)
+
+[node name="KidBed" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="9" unique_id=620518777 instance=ExtResource("11_1j0ym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, 0, -6.7)
+
+[node name="Board1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="10" unique_id=2009362079 instance=ExtResource("12_jbvce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1.7)
+
+[node name="Board2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="11" unique_id=320750002 instance=ExtResource("12_jbvce")]
+transform = Transform3D(-1, 0, -7.2399803e-06, 0, 1, 0, 7.2399803e-06, 0, -1, 30, 0, 1.7)
+
+[node name="Sunbeam" type="SpotLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=706000631]
+transform = Transform3D(1, 0, 0, 0, 0.42620757, 0.9046254, 0, -0.9046254, 0.42620757, 9.4, 4.5, -2.4)
+light_color = Color(1, 0.72, 0.42, 1)
+light_energy = 2.6
+shadow_enabled = true
+spot_range = 7.0
+spot_angle = 24.0
+
+[node name="WindowLight" type="SpotLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="1" unique_id=1276126929]
+transform = Transform3D(1, 0, 0, 0, -0.8944071, 0.44725382, 0, -0.44725382, -0.8944071, 27.8, 3, -7)
+light_color = Color(1, 0.6, 0.35, 1)
+light_energy = 4.0
+shadow_enabled = true
+spot_range = 13.0
+spot_angle = 28.0
+
+[node name="OutsideGlow" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="2" unique_id=644563194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6, 1.8, -5)
+light_color = Color(1, 0.68, 0.42, 1)
+light_energy = 1.2
+omni_range = 3.5
+
+[node name="KidRoomGlow" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="3" unique_id=172330467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, 1.6, -6.6)
+light_color = Color(0.8, 0.66, 0.55, 1)
+light_energy = 0.5
+omni_range = 4.0
+
+[node name="DoorGlow" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="4" unique_id=632564430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.6, 1.3, -4.4)
+light_color = Color(1, 0.68, 0.42, 1)
+light_energy = 1.5
+omni_range = 3.5
+
+[node name="DaughterLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="5" unique_id=1280577082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6, 1.4, -3.95)
+light_color = Color(1, 0.72, 0.5, 1)
+light_energy = 1.2
+omni_range = 1.6
+
+[node name="StreetGlow" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="6" unique_id=1559110861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, -10)
+light_color = Color(1, 0.6, 0.35, 1)
+light_energy = 1.5
+omni_range = 9.0
+
+[node name="Wall" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="0" unique_id=369759387]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.375, 0, -1.852941)
 script = ExtResource("cv1")
 point_id = "wall"
 
+[node name="Shape" type="CollisionShape3D" parent="Points/Wall" index="0" unique_id=552208511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv1")
 
-[node name="Room" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+[node name="Room" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=1627135410]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 0, -1.852941)
 script = ExtResource("cv1")
 point_id = "room"
 
+[node name="Shape" type="CollisionShape3D" parent="Points/Room" index="0" unique_id=1014942405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
+shape = SubResource("BoxShape3D_cv4")
 
-[node name="Daughter" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
+[node name="Daughter" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="2" unique_id=575872660]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.78125, 0, -1.852941)
 script = ExtResource("cv1")
 point_id = "daughter"
 
-
-[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
-script = ExtResource("cv1")
-point_id = "exit"
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
-shape = SubResource("BoxShape3D_cv1")
-
-
-[node name="Marker" type="MeshInstance3D" parent="Points/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65625, 0.01)
-mesh = SubResource("QuadMesh_cv2")
-material_override = SubResource("StandardMaterial3D_cv3")
-
-
-[node name="Words" type="Label3D" parent="Points/Wall"]
-transform = Transform3D(0.9992, 0.039989, 0, -0.039989, 0.9992, 0, 0, 0, 1, 0, 2.65625, 0.03)
-pixel_size = 0.015625
-modulate = Color(0.48, 0.07, 0.05, 1)
-outline_size = 0
-shaded = true
-text = "Daddy,
-I know it's you."
-font_size = 14
-horizontal_alignment = 1
-vertical_alignment = 1
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
-shape = SubResource("BoxShape3D_cv4")
-
-
-[node name="Prop" type="Sprite3D" parent="Points/Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.328125, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv2")
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Daughter"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Daughter" index="0" unique_id=297125687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.764706)
 shape = SubResource("BoxShape3D_cv5")
 
-
-[node name="Figure" type="AnimatedSprite3D" parent="Points/Daughter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71875, 3.3125, 0)
+[node name="Figure" type="AnimatedSprite3D" parent="Points/Daughter" index="1" unique_id=587058477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82, 1.12, -2.35)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
@@ -122,117 +171,91 @@ variant_animation = "blink"
 interval_min = 2.0
 interval_max = 5.0
 
+[node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="3" unique_id=1350434677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)
+script = ExtResource("cv1")
+point_id = "exit"
 
-[node name="Window" type="Sprite3D" parent="Points/Daughter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71875, 3.9375, 0.01)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv5")
-
-
-[node name="Shape" type="CollisionShape3D" parent="Points/Exit"]
+[node name="Shape" type="CollisionShape3D" parent="Points/Exit" index="0" unique_id=895387115]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv6")
 
+[node name="Environment" parent="." index="5" unique_id=271570906]
+environment = SubResource("Environment_2lea1")
 
-[node name="Prop" type="Sprite3D" parent="Points/Exit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1875, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv6")
+[node name="Near" type="Node3D" parent="." index="6" unique_id=1953800225]
 
-
-[node name="Wardrobe" type="StaticBody3D" parent="Near"]
+[node name="Wardrobe" type="StaticBody3D" parent="Near" index="0" unique_id=1875589192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.75, 0, 0.264706)
 
+[node name="Shape" type="CollisionShape3D" parent="Near/Wardrobe" index="0" unique_id=1118833648]
+transform = Transform3D(0.9848, 0, 0.1736, 0, 1, 0, -0.1736, 0, 0.9848, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_rd8n6")
 
-[node name="Crayons1" type="Sprite3D" parent="Near"]
+[node name="Model" type="Node3D" parent="Near/Wardrobe" index="1" unique_id=1155664666 instance=ExtResource("16_0qy61")]
+transform = Transform3D(0.98481345, 0, 0.17361575, 0, 1, 0, -0.17361575, 0, 0.98481345, 0, 0, 0)
+
+[node name="Crayons1" type="Sprite3D" parent="Near" index="1" unique_id=1154114074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.15625, 0, 2.382353)
+offset = Vector2(0, 3)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-offset = Vector2(0, 3)
 texture = ExtResource("cv7")
 
-
-[node name="Bear" type="Sprite3D" parent="Near"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 2.452941)
+[node name="Bear" type="Sprite3D" parent="Near" index="2" unique_id=1520549780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 0, -3.3)
+offset = Vector2(0, 7)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-offset = Vector2(0, 7)
 texture = ExtResource("cv8")
 
-
-[node name="Frame1" type="Sprite3D" parent="Near"]
+[node name="Frame1" type="Sprite3D" parent="Near" index="3" unique_id=551011419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5625, 0, 2.382353)
+offset = Vector2(0, 4)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-offset = Vector2(0, 4)
 texture = ExtResource("cv9")
 
-
-[node name="Crayons2" type="Sprite3D" parent="Near"]
+[node name="Crayons2" type="Sprite3D" parent="Near" index="4" unique_id=546839867]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.875, 0, 2.382353)
+offset = Vector2(0, 3)
+flip_h = true
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-flip_h = true
-offset = Vector2(0, 3)
 texture = ExtResource("cv7")
 
-
-[node name="Papers" type="Sprite3D" parent="Near"]
+[node name="Papers" type="Sprite3D" parent="Near" index="5" unique_id=157981276]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.90625, 0, 2.311765)
+offset = Vector2(0, 3)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-offset = Vector2(0, 3)
 texture = ExtResource("cv10")
 
-
-[node name="Frame2" type="Sprite3D" parent="Near"]
+[node name="Frame2" type="Sprite3D" parent="Near" index="6" unique_id=1379802920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.03125, 0, 2.382353)
+offset = Vector2(0, 4)
+flip_h = true
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-flip_h = true
-offset = Vector2(0, 4)
 texture = ExtResource("cv9")
 
+[node name="Doorframe" type="Node3D" parent="Near" index="7" unique_id=915745020 instance=ExtResource("21_fkuec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 3.3)
 
-[node name="Sprite" type="Sprite3D" parent="Near/Wardrobe"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5625, 0)
-pixel_size = 0.03125
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("cv11")
+[node name="Papers3D" type="Node3D" parent="Near" index="8" unique_id=2091158284 instance=ExtResource("22_m1q8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 2.3)
 
-
-[node name="Shape" type="CollisionShape3D" parent="Near/Wardrobe"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.176471)
-shape = SubResource("BoxShape3D_cv7")
-
-
-[node name="CeilingLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602)]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.375, 6.25, 0)
-light_color = Color(1, 0.85, 0.6, 1)
-light_energy = 1.5
-omni_range = 12
-script = ExtResource("cv12")
-base_energy = 1.5
-pulse_speed = 0.3
-min_ratio = 0.9
-dropout_chance = 0.0
+[node name="Plank" type="Node3D" parent="Near" index="9" unique_id=592379168 instance=ExtResource("23_bqxkb")]
+transform = Transform3D(0.8660248, 0, 0.5000011, 0, 1, 0, -0.5000011, 0, 0.8660248, 20, 0, 2.4)
