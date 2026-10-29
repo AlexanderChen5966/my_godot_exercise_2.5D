@@ -50,7 +50,7 @@ motion_mode = 1
 script = ExtResource("2_6nvc5")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="Player" unique_id=1482773185]
-offset = Vector2(1.5, 24)
+offset = Vector2(0, 25.5)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1

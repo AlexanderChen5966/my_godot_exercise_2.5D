@@ -6,10 +6,10 @@ extends CharacterBody3D
 const PX_PER_M := 64.0
 const SPEED := 140.0 / PX_PER_M  # 和 2D 版畫面上的速度一樣（140 螢幕像素／秒），步履蹣跚
 const DEPTH_SPEED_RATIO := 0.6  # 前後走得比左右慢，沿用 2D 版
-# 角色在 32px 畫格裡偏左，左右兩套是互相翻轉的，所以兩個方向的位移不同，轉身時身體中心才不會跳動（2D 版的 3／-1 螢幕像素＝1.5／-0.5 貼圖像素）
-const SPRITE_X_RIGHT := 1.5
-const SPRITE_X_LEFT := -0.5
-const SPRITE_Y := 24.0  # 畫格高 48，往上移一半，腳踩在原點
+# B4-2 起 3D 用自己的主角圖（assets/sprites/player3d.png，32×51）：兩腳中間在畫格正中間、左右是鏡射，所以兩個方向都不用位移
+const SPRITE_X_RIGHT := 0.0
+const SPRITE_X_LEFT := 0.0
+const SPRITE_Y := 25.5  # 畫格高 51，往上移一半，腳踩在原點
 ## A4：行走 6 格裡腳著地的兩格（第 0、3 格，正面／背面也一樣）；腳步聲在這兩格播放
 const STEP_FRAMES := [0, 3]
 const STEP_DB := -8.0
