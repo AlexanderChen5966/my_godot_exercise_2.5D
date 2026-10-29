@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/street/bus_stop.tscn" id="5_s3g3f"]
 [ext_resource type="PackedScene" path="res://assets/models/street/utility_pole.tscn" id="6_k4kvk"]
 [ext_resource type="PackedScene" path="res://assets/models/street/street_lamp.tscn" id="7_0xrr4"]
+[ext_resource type="Texture2D" uid="uid://bem83t83mdj16" path="res://assets/textures/ruins/sky.png" id="8_0piwy"]
 [ext_resource type="SpriteFrames" uid="uid://c03p4m87yek3f" path="res://assets/sprites/props/fire_big_frames.tres" id="10_t35j7"]
 [ext_resource type="SpriteFrames" uid="uid://ds4g1dlj3nex1" path="res://assets/sprites/props/fire_small_frames.tres" id="12_yi236"]
 [ext_resource type="PackedScene" path="res://assets/models/street/burnt_car.tscn" id="13_qsau1"]
@@ -21,6 +22,14 @@
 [ext_resource type="Script" uid="uid://cuaj8ffns27l2" path="res://scripts/interact_point_3d.gd" id="cv1"]
 [ext_resource type="AudioStream" uid="uid://de00sk256w1tk" path="res://assets/sfx/loop_fire.ogg" id="cv4"]
 [ext_resource type="Script" uid="uid://40fswadoecy6" path="res://scripts/flicker_light_3d.gd" id="cv13"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_at4iy"]
+shading_mode = 0
+albedo_texture = ExtResource("8_0piwy")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_s3g3f"]
+size = Vector2(96, 40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv1"]
 size = Vector3(0.9375, 2, 1.764706)
@@ -37,21 +46,9 @@ size = Vector3(0.9375, 2, 1.764706)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cv5"]
 size = Vector3(1.25, 2, 1.764706)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6nnt7"]
-sky_top_color = Color(0.43, 0.235, 0.14, 1)
-sky_horizon_color = Color(0.82, 0.5, 0.23, 1)
-sky_curve = 0.25
-ground_bottom_color = Color(0.2, 0.12, 0.08, 1)
-ground_horizon_color = Color(0.82, 0.5, 0.23, 1)
-sun_angle_max = 0.0
-use_debanding = false
-
-[sub_resource type="Sky" id="Sky_u15uo"]
-sky_material = SubResource("ProceduralSkyMaterial_6nnt7")
-
-[sub_resource type="Environment" id="Environment_5nd6u"]
-background_mode = 2
-sky = SubResource("Sky_u15uo")
+[sub_resource type="Environment" id="Environment_k4kvk"]
+background_mode = 1
+background_color = Color(0.16, 0.11, 0.11, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.55, 0.38, 0.3, 1)
 ambient_light_energy = 0.8
@@ -59,30 +56,36 @@ tonemap_mode = 2
 
 [node name="Street3D" unique_id=322634366 instance=ExtResource("1")]
 
-[node name="Shell" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=812284124 instance=ExtResource("2_318qr")]
+[node name="Shell" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="0" unique_id=812284124 instance=ExtResource("2_318qr")]
 
-[node name="Far" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=1901375809 instance=ExtResource("3_0piwy")]
+[node name="Far" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="1" unique_id=1901375809 instance=ExtResource("3_0piwy")]
 
-[node name="Wreck1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=1876888199 instance=ExtResource("4_at4iy")]
+[node name="Wreck1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="2" unique_id=1876888199 instance=ExtResource("4_at4iy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0, -2.6)
 
-[node name="Wreck2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1514941096 instance=ExtResource("4_at4iy")]
+[node name="Wreck2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="3" unique_id=1514941096 instance=ExtResource("4_at4iy")]
 transform = Transform3D(-0.9950034, 0, -0.09984076, 0, 1, 0, 0.09984076, 0, -0.9950034, 26, 0, -2.6)
 
-[node name="BusStop1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=687780432 instance=ExtResource("5_s3g3f")]
+[node name="BusStop1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="4" unique_id=687780432 instance=ExtResource("5_s3g3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0.15, -4.4)
 
-[node name="BusStop2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=1247915219 instance=ExtResource("5_s3g3f")]
+[node name="BusStop2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="5" unique_id=1247915219 instance=ExtResource("5_s3g3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1, 0.15, -4.4)
 
-[node name="PoleTilted" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=1755616614 instance=ExtResource("6_k4kvk")]
+[node name="PoleTilted" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="6" unique_id=1755616614 instance=ExtResource("6_k4kvk")]
 transform = Transform3D(0.990216, -0.13954312, 0, 0.13954312, 0.990216, 0, 0, 0, 1, 7.3, 0.15, -3.5)
 
-[node name="Lamp1" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=1864155048 instance=ExtResource("7_0xrr4")]
+[node name="Lamp1" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="7" unique_id=1864155048 instance=ExtResource("7_0xrr4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0.15, 3.3)
 
-[node name="Lamp2" type="Node3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=1056952662 instance=ExtResource("7_0xrr4")]
+[node name="Lamp2" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="8" unique_id=1056952662 instance=ExtResource("7_0xrr4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0.15, 3.3)
+
+[node name="Sky" type="MeshInstance3D" parent="Geometry" parent_id_path=PackedInt32Array(1849173240) index="9" unique_id=678450297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 20, -45)
+material_override = SubResource("StandardMaterial3D_at4iy")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_s3g3f")
 
 [node name="FireLight" type="OmniLight3D" parent="Lights" parent_id_path=PackedInt32Array(285009602) index="0" unique_id=2048193616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.28125, 0.546875, 0.688235)
@@ -153,7 +156,7 @@ animation = &"burn"
 autoplay = "burn"
 frame = 2
 
-[node name="Wreck" type="Node3D" parent="Points/Car" index="5" unique_id=382285846 instance=ExtResource("13_qsau1")]
+[node name="Wreck" parent="Points/Car" index="5" unique_id=382285846 instance=ExtResource("13_qsau1")]
 transform = Transform3D(0.99820054, 0, 0.059964005, 0, 1, 0, -0.059964005, 0, 0.99820054, 0, 0, 0)
 
 [node name="Poster" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="2" unique_id=223586094]
@@ -165,10 +168,10 @@ point_id = "poster"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015625, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv4")
 
-[node name="Pole" type="Node3D" parent="Points/Poster" index="1" unique_id=58884620 instance=ExtResource("6_k4kvk")]
+[node name="Pole" parent="Points/Poster" index="1" unique_id=58884620 instance=ExtResource("6_k4kvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, 0.15, -1.65)
 
-[node name="Prop" type="Node3D" parent="Points/Poster" index="2" unique_id=381915504 instance=ExtResource("14_076l2")]
+[node name="Prop" parent="Points/Poster" index="2" unique_id=381915504 instance=ExtResource("14_076l2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, 2.15, -1.49)
 
 [node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="3" unique_id=1720561461]
@@ -181,42 +184,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.882353)
 shape = SubResource("BoxShape3D_cv5")
 
 [node name="Environment" parent="." index="5" unique_id=271570906]
-environment = SubResource("Environment_5nd6u")
+environment = SubResource("Environment_k4kvk")
 
 [node name="Near" type="Node3D" parent="." index="6" unique_id=2119926162]
 
-[node name="Bricks1" type="Node3D" parent="Near" index="0" unique_id=134874988 instance=ExtResource("15_w72le")]
+[node name="Bricks1" parent="Near" index="0" unique_id=134874988 instance=ExtResource("15_w72le")]
 transform = Transform3D(0.921061, 0, 0.38941833, 0, 1, 0, -0.38941833, 0, 0.921061, 4.7, 0, 2.2)
 
-[node name="Bricks2" type="Node3D" parent="Near" index="1" unique_id=868280067 instance=ExtResource("15_w72le")]
+[node name="Bricks2" parent="Near" index="1" unique_id=868280067 instance=ExtResource("15_w72le")]
 transform = Transform3D(-0.50484604, 0, 0.8632094, 0, 1, 0, -0.8632094, 0, -0.50484604, 29.7, 0, 2.2)
 
-[node name="Tire" type="Node3D" parent="Near" index="2" unique_id=1885618882 instance=ExtResource("16_ihcvo")]
+[node name="Tire" parent="Near" index="2" unique_id=1885618882 instance=ExtResource("16_ihcvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 2.2)
 
-[node name="Plank" type="Node3D" parent="Near" index="3" unique_id=211900797 instance=ExtResource("17_ph4ut")]
+[node name="Plank" parent="Near" index="3" unique_id=211900797 instance=ExtResource("17_ph4ut")]
 transform = Transform3D(0.9553365, 0, 0.29552022, 0, 1, 0, -0.29552022, 0, 0.9553365, 15.9, 0, 2.2)
 
-[node name="Glass" type="Node3D" parent="Near" index="4" unique_id=130595353 instance=ExtResource("18_eu5e1")]
+[node name="Glass" parent="Near" index="4" unique_id=130595353 instance=ExtResource("18_eu5e1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, 0, 2.2)
 
-[node name="Papers" type="Node3D" parent="Near" index="5" unique_id=361149456 instance=ExtResource("19_ai8vp")]
+[node name="Papers" parent="Near" index="5" unique_id=361149456 instance=ExtResource("19_ai8vp")]
 transform = Transform3D(0.5403023, 0, 0.84147096, 0, 1, 0, -0.84147096, 0, 0.5403023, 26.6, 0, 2.2)
 
-[node name="Rubble1" type="Node3D" parent="Near" index="6" unique_id=2054732964 instance=ExtResource("20_st0oq")]
+[node name="Rubble1" parent="Near" index="6" unique_id=2054732964 instance=ExtResource("20_st0oq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0.15, 3.8)
 
-[node name="Rubble2" type="Node3D" parent="Near" index="7" unique_id=141197537 instance=ExtResource("20_st0oq")]
+[node name="Rubble2" parent="Near" index="7" unique_id=141197537 instance=ExtResource("20_st0oq")]
 transform = Transform3D(-0.12884454, 0, 0.9916648, 0, 1, 0, -0.9916648, 0, -0.12884454, 28, 0.15, 3.8)
 
-[node name="HoleRubble1" type="Node3D" parent="Near" index="8" unique_id=1038827977 instance=ExtResource("20_st0oq")]
+[node name="HoleRubble1" parent="Near" index="8" unique_id=1038827977 instance=ExtResource("20_st0oq")]
 transform = Transform3D(0.87758255, 0, 0.47942555, 0, 1, 0, -0.47942555, 0, 0.87758255, 16.2, 0, -1.65)
 
-[node name="HoleRubble2" type="Node3D" parent="Near" index="9" unique_id=1321798233 instance=ExtResource("20_st0oq")]
+[node name="HoleRubble2" parent="Near" index="9" unique_id=1321798233 instance=ExtResource("20_st0oq")]
 transform = Transform3D(-0.666276, 0, 0.74570525, 0, 1, 0, -0.74570525, 0, -0.666276, 19.3, 0, -1.75)
 
-[node name="Cone1" type="Node3D" parent="Near" index="10" unique_id=1107334972 instance=ExtResource("21_xufts")]
+[node name="Cone1" parent="Near" index="10" unique_id=1107334972 instance=ExtResource("21_xufts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6, 0, -2)
 
-[node name="Cone2" type="Node3D" parent="Near" index="11" unique_id=1152274773 instance=ExtResource("21_xufts")]
+[node name="Cone2" parent="Near" index="11" unique_id=1152274773 instance=ExtResource("21_xufts")]
 transform = Transform3D(0.87758255, 0, 0.47942555, 0, 1, 0, -0.47942555, 0, 0.87758255, 20.3, 0, -2.2)

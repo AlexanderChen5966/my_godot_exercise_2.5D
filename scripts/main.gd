@@ -38,6 +38,8 @@ const RESIST_LOCK_MS := 900
 ## 抵抗的操作（作者 2026-10-16）：true＝按住空白鍵（測試版，量表依資料的 hold 秒數上漲）；false＝連打（正式版，依 presses 次數）。正式版改回 false。
 const RESIST_HOLD := true
 const RESIST_HOLD_TIME := 2.0  # 資料沒寫 hold 時要按住幾秒
+## 量表一開始在一半（作者 2026-10-29：一開始是空的看不出量表的用途）；按住的秒數、連打的次數照舊，每次漲的是剩下那一半
+const RESIST_START := 0.5
 ## A5 躲藏：警衛的巡視（轉身、光錐判定）；被發現時的聲音（Kenney 金屬喀嚓，像槍上膛）；躲起來時的布料聲
 const GuardPatrol := preload("res://scripts/guard_patrol.gd")
 const SPOTTED_SFX := "pickup_2.ogg"
@@ -932,10 +934,10 @@ func _show_continue() -> void:
 func _begin_resist(resist: Dictionary) -> void:
 	state = State.RESIST
 	_resist = resist
-	resist_value = 0.0
+	resist_value = RESIST_START
 	_resist_left = float(resist.get("time", RESIST_TIME))
 	resist_label.text = story.resist_prompt_hold if RESIST_HOLD else story.resist_prompt
-	resist_bar.value = 0.0
+	resist_bar.value = resist_value
 	resist_box.visible = true
 
 
@@ -1404,7 +1406,7 @@ func _process(delta: float) -> void:
 	_check_area_hint()
 	if state == State.RESIST:
 		if RESIST_HOLD and Input.is_action_pressed("interact"):
-			resist_value = minf(resist_value + delta / float(_resist.get("hold", RESIST_HOLD_TIME)), 1.0)
+			resist_value = minf(resist_value + (1.0 - RESIST_START) * delta / float(_resist.get("hold", RESIST_HOLD_TIME)), 1.0)
 		else:
 			resist_value = maxf(resist_value - RESIST_DRAIN * delta, 0.0)
 		if resist_value >= 1.0:
@@ -1488,7 +1490,7 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			if RESIST_HOLD:
 				return  # 按住的量表在 _process 處理
-			resist_value = minf(resist_value + 1.0 / float(_resist.get("presses", 12)), 1.0)
+			resist_value = minf(resist_value + (1.0 - RESIST_START) / float(_resist.get("presses", 12)), 1.0)
 			if resist_value >= 1.0:
 				_finish_resist(true)
 		return

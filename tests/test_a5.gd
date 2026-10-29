@@ -138,6 +138,7 @@ func run_resist() -> void:
 	await walk_to(1460)
 	await wait_resist()
 	ok(main.choices_box.get_child_count() == 0, "抵抗中沒有選項")
+	ok(absf(main.resist_bar.value - main.RESIST_START) < 0.15, "量表一開始在一半（%.2f），看得出它的用途" % main.resist_bar.value)
 	if main.RESIST_HOLD:
 		# 測試版：按住空白鍵（main.gd 的 RESIST_HOLD = true）
 		ok(main.state == RESIST and main.resist_box.visible and main.resist_label.text == "按住【空白鍵】抵抗", "婦人：事件文字後出現「按住【空白鍵】抵抗」與量表，選項還沒出現")
