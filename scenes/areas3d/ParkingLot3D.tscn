@@ -221,7 +221,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1, -0.070588)
 shape = SubResource("BoxShape3D_cv4")
 
 [node name="Figure" type="AnimatedSprite3D" parent="Points/Woman" index="1" unique_id=1807215286]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59375, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59375, 0.796875, 0)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
@@ -247,26 +247,26 @@ environment = SubResource("Environment_jv2wf")
 
 [node name="Near" type="Node3D" parent="." index="6" unique_id=65759552]
 
-[node name="Papers1" type="Node3D" parent="Near" index="0" unique_id=389476669 instance=ExtResource("19_jv2wf")]
+[node name="Papers1" parent="Near" index="0" unique_id=389476669 instance=ExtResource("19_jv2wf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72, 0, 2.1)
 
-[node name="Papers2" type="Node3D" parent="Near" index="1" unique_id=989688631 instance=ExtResource("19_jv2wf")]
+[node name="Papers2" parent="Near" index="1" unique_id=989688631 instance=ExtResource("19_jv2wf")]
 transform = Transform3D(-0.58850116, 0, 0.80849636, 0, 1, 0, -0.80849636, 0, -0.58850116, 21.56, 0, 2.03)
 
-[node name="Glass1" type="Node3D" parent="Near" index="2" unique_id=489793612 instance=ExtResource("20_p67mw")]
+[node name="Glass1" parent="Near" index="2" unique_id=489793612 instance=ExtResource("20_p67mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09, 0, 2.31)
 
-[node name="Glass2" type="Node3D" parent="Near" index="3" unique_id=1050480055 instance=ExtResource("20_p67mw")]
+[node name="Glass2" parent="Near" index="3" unique_id=1050480055 instance=ExtResource("20_p67mw")]
 transform = Transform3D(0.26749888, 0, 0.9635582, 0, 1, 0, -0.9635582, 0, 0.26749888, 28.59, 0, 2.28)
 
-[node name="Rubble1" type="Node3D" parent="Near" index="4" unique_id=1169332827 instance=ExtResource("21_um0eq")]
+[node name="Rubble1" parent="Near" index="4" unique_id=1169332827 instance=ExtResource("21_um0eq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.81, 0, 1.85)
 
-[node name="Rubble2" type="Node3D" parent="Near" index="5" unique_id=575824382 instance=ExtResource("21_um0eq")]
+[node name="Rubble2" parent="Near" index="5" unique_id=575824382 instance=ExtResource("21_um0eq")]
 transform = Transform3D(-0.8568887, 0, 0.51550144, 0, 1, 0, -0.51550144, 0, -0.8568887, 16.31, 0, 2.17)
 
-[node name="Rubble3" type="Node3D" parent="Near" index="6" unique_id=76658950 instance=ExtResource("21_um0eq")]
+[node name="Rubble3" parent="Near" index="6" unique_id=76658950 instance=ExtResource("21_um0eq")]
 transform = Transform3D(0.4535961, 0, 0.8912074, 0, 1, 0, -0.8912074, 0, 0.4535961, 26.88, 0, 1.85)
 
-[node name="Cone" type="Node3D" parent="Near" index="7" unique_id=1828522935 instance=ExtResource("22_aayy4")]
+[node name="Cone" parent="Near" index="7" unique_id=1828522935 instance=ExtResource("22_aayy4")]
 transform = Transform3D(0.921061, 0, 0.38941833, 0, 1, 0, -0.38941833, 0, 0.921061, 12.25, 0, 1.75)
