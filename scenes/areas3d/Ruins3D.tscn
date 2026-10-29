@@ -245,7 +245,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.764706)
 shape = SubResource("BoxShape3D_cv1")
 
 [node name="Figure" type="AnimatedSprite3D" parent="Points/Horde" index="1" unique_id=546514563]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.484375, 0.6875, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.484375, 0.796875, 0)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
@@ -264,7 +264,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.764706)
 shape = SubResource("BoxShape3D_cv2")
 
 [node name="Figure" type="AnimatedSprite3D" parent="Points/Shelter" index="1" unique_id=117719503]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.91, -1.45)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.956875, -1.45)
 pixel_size = 0.03125
 shaded = true
 alpha_cut = 1
