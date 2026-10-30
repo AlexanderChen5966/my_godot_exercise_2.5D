@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ci2qwrhv47jha" path="res://scripts/area_3d.gd" id="1_tepj4"]
 [ext_resource type="Script" uid="uid://d153untxdalpk" path="res://scripts/player_3d.gd" id="2_6nvc5"]
 [ext_resource type="SpriteFrames" uid="uid://cge5ysyymugt4" path="res://assets/sprites/player_frames_3d.tres" id="3_h65p7"]
+[ext_resource type="Script" uid="uid://dalrbxnciww4h" path="res://scripts/sprite_lit_3d.gd" id="4_6nvc5"]
 [ext_resource type="Shader" uid="uid://bmyyq5qx4hwvl" path="res://shaders/dof_3d.gdshader" id="4_xll74"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_814tw"]
@@ -58,6 +59,9 @@ texture_filter = 0
 sprite_frames = ExtResource("3_h65p7")
 animation = &"idle_right"
 autoplay = "idle_right"
+
+[node name="Lit" type="Node" parent="Player/Sprite" unique_id=1471183944]
+script = ExtResource("4_6nvc5")
 
 [node name="Shape" type="CollisionShape3D" parent="Player" unique_id=1672724611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

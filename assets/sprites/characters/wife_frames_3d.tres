@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bw5yr4gqkcgkd"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/wife3d.png" id="1_img"]
+[ext_resource type="Texture2D" uid="uid://dcw2cc2j7ldj7" path="res://assets/sprites/characters/wife3d.png" id="1_img"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0"]
 atlas = ExtResource("1_img")
@@ -33,7 +33,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 2.0
 }]

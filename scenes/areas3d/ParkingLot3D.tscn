@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/parking/photo.tscn" id="13_orsve"]
 [ext_resource type="PackedScene" path="res://assets/models/parking/debris.tscn" id="16_bv0ly"]
 [ext_resource type="PackedScene" path="res://assets/models/parking/door.tscn" id="18_1kpvb"]
+[ext_resource type="Script" uid="uid://dalrbxnciww4h" path="res://scripts/sprite_lit_3d.gd" id="18_p67mw"]
 [ext_resource type="PackedScene" path="res://assets/models/common/papers.tscn" id="19_jv2wf"]
 [ext_resource type="PackedScene" path="res://assets/models/common/glass_shards.tscn" id="20_p67mw"]
 [ext_resource type="PackedScene" path="res://assets/models/common/rubble.tscn" id="21_um0eq"]
@@ -229,6 +230,9 @@ texture_filter = 0
 sprite_frames = ExtResource("cv9")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="Lit" type="Node" parent="Points/Woman/Figure" index="0" unique_id=1690388953]
+script = ExtResource("18_p67mw")
 
 [node name="Exit" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="4" unique_id=1440062781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.59375, 0, -1.852941)

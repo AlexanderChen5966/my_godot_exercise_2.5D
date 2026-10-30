@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bem83t83mdj16" path="res://assets/textures/ruins/sky.png" id="10_khpmb"]
 [ext_resource type="SpriteFrames" uid="uid://ds4g1dlj3nex1" path="res://assets/sprites/props/fire_small_frames.tres" id="11_u1ea2"]
 [ext_resource type="AudioStream" uid="uid://de00sk256w1tk" path="res://assets/sfx/loop_fire.ogg" id="12_52abr"]
+[ext_resource type="Script" uid="uid://dalrbxnciww4h" path="res://scripts/sprite_lit_3d.gd" id="17_sn5do"]
 [ext_resource type="PackedScene" path="res://assets/models/ruins/sign_home.tscn" id="19_4xp7x"]
 [ext_resource type="PackedScene" path="res://assets/models/ruins/barrier.tscn" id="20_errcj"]
 [ext_resource type="PackedScene" path="res://assets/models/ruins/fallen_sign.tscn" id="21_sikf3"]
@@ -254,6 +255,9 @@ sprite_frames = ExtResource("cv2")
 animation = &"eat"
 script = ExtResource("cv3")
 
+[node name="Lit" type="Node" parent="Points/Horde/Figure" index="0" unique_id=754936771]
+script = ExtResource("17_sn5do")
+
 [node name="Shelter" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=1622976839]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -1.852941)
 script = ExtResource("cv1")
@@ -272,6 +276,9 @@ texture_filter = 0
 sprite_frames = ExtResource("cv4")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="Lit" type="Node" parent="Points/Shelter/Figure" index="0" unique_id=765923079]
+script = ExtResource("17_sn5do")
 
 [node name="Voices" type="AudioStreamPlayer3D" parent="Points/Shelter" index="2" unique_id=125749441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

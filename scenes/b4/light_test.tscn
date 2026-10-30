@@ -1,0 +1,168 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/areas3d/ParkingLot3D.tscn" id="1"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/player_frames_3d.tres" id="f"]
+[ext_resource type="Material" path="res://scenes/b4/light/player_lit_flat.tres" id="2"]
+[ext_resource type="Material" path="res://scenes/b4/light/player_lit_normal.tres" id="3"]
+[ext_resource type="Script" path="res://scripts/sprite_lit_3d.gd" id="lit"]
+
+[node name="LightTest" type="Node3D"]
+
+[node name="Area" parent="." instance=ExtResource("1")]
+
+[node name="A_now" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 0, 0)
+offset = Vector2(0, 25.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_right"
+autoplay = "idle_right"
+
+[node name="Label" type="Label3D" parent="A_now"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "現在"
+font_size = 40
+outline_size = 10
+
+[node name="B_flat" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, 0, 0)
+material_override = ExtResource("2")
+offset = Vector2(0, 25.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_right"
+autoplay = "idle_right"
+
+[node name="Label" type="Label3D" parent="B_flat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "材質覆寫"
+font_size = 40
+outline_size = 10
+
+[node name="C_normal" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, 0)
+material_override = ExtResource("3")
+offset = Vector2(0, 25.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_right"
+autoplay = "idle_right"
+
+[node name="Label" type="Label3D" parent="C_normal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "法線"
+font_size = 40
+outline_size = 10
+
+[node name="D_normal_flip" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4, 0, 0)
+material_override = ExtResource("3")
+offset = Vector2(0, 25.5)
+flip_h = true
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_right"
+autoplay = "idle_right"
+
+[node name="Label" type="Label3D" parent="D_normal_flip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "法線翻轉"
+font_size = 40
+outline_size = 10
+
+[node name="E_normal_left" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 0)
+material_override = ExtResource("3")
+offset = Vector2(0, 25.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_left"
+autoplay = "idle_left"
+
+[node name="Label" type="Label3D" parent="E_normal_left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "法線（左向畫格）"
+font_size = 40
+outline_size = 10
+
+[node name="F_side_flat" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 0, 0)
+offset = Vector2(0, 25.5)
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_left"
+autoplay = "idle_left"
+
+[node name="Label" type="Label3D" parent="F_side_flat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "shader：左向畫格"
+font_size = 40
+outline_size = 10
+
+[node name="Fire" type="OmniLight3D" parent="F_side_flat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.9, 0.3)
+light_color = Color(1, 0.6, 0.3, 1)
+light_energy = 2.0
+omni_range = 2.5
+
+[node name="G_side_normal" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6, 0, 0)
+offset = Vector2(0, 25.5)
+flip_h = true
+pixel_size = 0.03125
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("f")
+animation = &"idle_right"
+autoplay = "idle_right"
+
+[node name="Label" type="Label3D" parent="G_side_normal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.004
+billboard = 1
+text = "shader：翻轉"
+font_size = 40
+outline_size = 10
+
+[node name="Fire" type="OmniLight3D" parent="G_side_normal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.9, 0.3)
+light_color = Color(1, 0.6, 0.3, 1)
+light_energy = 2.0
+omni_range = 2.5
+
+[node name="Lit" type="Node" parent="F_side_flat"]
+script = ExtResource("lit")
+
+[node name="Lit" type="Node" parent="G_side_normal"]
+script = ExtResource("lit")

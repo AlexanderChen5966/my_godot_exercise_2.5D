@@ -1,14 +1,18 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://cdt2bpboyam0p"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/daughter3d.png" id="1_img"]
+[ext_resource type="Texture2D" uid="uid://b1tivat2jpnxq" path="res://assets/sprites/characters/daughter3d.png" id="1_img"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1"]
+atlas = ExtResource("1_img")
+region = Rect2(32, 0, 32, 51)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0"]
 atlas = ExtResource("1_img")
 region = Rect2(0, 0, 32, 51)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4"]
 atlas = ExtResource("1_img")
-region = Rect2(32, 0, 32, 51)
+region = Rect2(128, 0, 32, 51)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2"]
 atlas = ExtResource("1_img")
@@ -18,17 +22,13 @@ region = Rect2(64, 0, 32, 51)
 atlas = ExtResource("1_img")
 region = Rect2(96, 0, 32, 51)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f4"]
-atlas = ExtResource("1_img")
-region = Rect2(128, 0, 32, 51)
-
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"blink",
 "speed": 6.0
 }, {
@@ -36,7 +36,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -44,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"leave",
 "speed": 1.0
 }, {
@@ -55,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"wave",
 "speed": 3.0
 }]

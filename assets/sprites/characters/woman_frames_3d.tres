@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://bmi6u0pten16d"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/woman3d.png" id="1_w3d"]
+[ext_resource type="Texture2D" uid="uid://bwbloy8mrmowe" path="res://assets/sprites/characters/woman3d.png" id="1_w3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0"]
 atlas = ExtResource("1_w3d")
@@ -9,14 +9,6 @@ region = Rect2(0, 0, 32, 51)
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1"]
 atlas = ExtResource("1_w3d")
 region = Rect2(32, 0, 32, 51)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w2"]
-atlas = ExtResource("1_w3d")
-region = Rect2(64, 0, 32, 51)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w3"]
-atlas = ExtResource("1_w3d")
-region = Rect2(96, 0, 32, 51)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w4"]
 atlas = ExtResource("1_w3d")
@@ -34,6 +26,14 @@ region = Rect2(192, 0, 32, 51)
 atlas = ExtResource("1_w3d")
 region = Rect2(224, 0, 32, 51)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2"]
+atlas = ExtResource("1_w3d")
+region = Rect2(64, 0, 32, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3"]
+atlas = ExtResource("1_w3d")
+region = Rect2(96, 0, 32, 51)
+
 [resource]
 animations = [{
 "frames": [{
@@ -43,20 +43,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w3")
-}],
-"loop": true,
-"name": &"scream",
-"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -71,7 +60,18 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3")
+}],
+"loop": 1,
+"name": &"scream",
+"speed": 10.0
 }]

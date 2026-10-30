@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://de00sk256w1tk" path="res://assets/sfx/loop_fire.ogg" id="10_pj7u4"]
 [ext_resource type="AudioStream" uid="uid://u4ang0f2boi4" path="res://assets/sfx/loop_alarm.ogg" id="12_5n5ks"]
 [ext_resource type="PackedScene" path="res://assets/models/lab/records.tscn" id="15_t2esw"]
+[ext_resource type="Script" uid="uid://dalrbxnciww4h" path="res://scripts/sprite_lit_3d.gd" id="15_xo73o"]
 [ext_resource type="PackedScene" path="res://assets/models/lab/crates.tscn" id="18_xcuk4"]
 [ext_resource type="PackedScene" path="res://assets/models/lab/cart.tscn" id="19_abmdl"]
 [ext_resource type="PackedScene" path="res://assets/models/lab/vials.tscn" id="20_f20oc"]
@@ -240,6 +241,9 @@ sprite_frames = ExtResource("cv2")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="Lit" type="Node" parent="Points/Scientist/Figure" index="0" unique_id=778653504]
+script = ExtResource("15_xo73o")
+
 [node name="Records" type="Area3D" parent="Points" parent_id_path=PackedInt32Array(2077837389) index="1" unique_id=1106366879]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.96875, 0, -1.852941)
 script = ExtResource("cv1")
@@ -270,6 +274,9 @@ texture_filter = 0
 sprite_frames = ExtResource("cv4")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="Lit" type="Node" parent="Points/Guard/Figure" index="0" unique_id=1052642027]
+script = ExtResource("15_xo73o")
 
 [node name="Torch" type="SpotLight3D" parent="Points/Guard" index="2" unique_id=140226326]
 light_color = Color(1, 0.92, 0.75, 1)
